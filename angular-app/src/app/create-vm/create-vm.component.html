@@ -1,0 +1,134 @@
+<div class="container">
+    <alert type="success" *ngIf="isVmCreated">
+        <strong>VM is created successfully.</strong>
+    </alert>
+    <alert type="info" *ngIf="isVmCreating">
+        <strong>VM is being created.</strong>
+    </alert>
+    <div class="col-lg-6">
+        <form class="form-horizontal" role="form" #vmForm="ngForm">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">* VM Name
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" placeholder="VIRTUAL MACHINE NAME" required *ngIf="!isPreview" [(ngModel)]="machineName" name="name" #name="ngModel">
+                    <div *ngIf="isPreview">{{ machineName }}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">* Region Name</label>
+                <div class="col-sm-8">
+                    <select name="select-region" class="form-control" required (change)="getDataForRegion()" [(ngModel)]="selectedRegion"
+                        *ngIf="!isPreview" name="region" #region="ngModel">
+                        <option value="">SELECT-REGION</option>
+                        <option value="bng">Bangalore</option>
+                        <option value="svl">Sunnyvale</option>
+                        <option value="qnc">QNC</option>
+                    </select>
+                    <div *ngIf="isPreview">{{ selectedRegion ? selectedRegion : '---' }}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">* VC Name</label>
+                <div class="col-sm-8">
+                    <select name="select-vc" class="form-control" required [(ngModel)]="selectedVc" (change)="getDataCenters()"
+                        *ngIf="!isPreview" name="vcName" #vcName="ngModel">
+                        <option value="">SELECT-VC NAME</option>
+                        <option value="create-new-vc">Create VC</option>
+                        <option *ngFor="let vc of vcNameArray" [value]="vc">{{ vc }}</option>
+                    </select>
+                    <div *ngIf="isPreview">{{ selectedVc ? selectedVc : '---' }}</div>
+                    <div class="text-muted" *ngIf="!isPreview && selectedRegion !== '' && vcNameArray?.length === 0">VC not found for selected Region.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">* DC Name</label>
+                <div class="col-sm-8">
+                    <select name="select-dc" class="form-control" required [(ngModel)]="selectedDc" (change)="getBussinessUnits()"
+                        *ngIf="!isPreview" name="dcName" #dcName="ngModel">
+                        <option value="">SELECT-DC NAME</option>
+                        <option *ngFor="let dc of dcNameArray" [value]="dc">{{ dc }}</option>
+                    </select>
+                    <div *ngIf="isPreview">{{ selectedDc ? selectedDc : '---'}}</div>
+                    <div class="text-muted" *ngIf="!isPreview && selectedVc !== '' && dcNameArray?.length === 0">DC not found for selected VC.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-4 control-label">* BU Name</label>
+                <div class="col-sm-8">
+                    <select name="select-bu" class="form-control" required [(ngModel)]="selectedBu" (change)="getClusters()"
+                        *ngIf="!isPreview" name="buName" #buName="ngModel">
+                        <option value="">SELECT-BU NAME</option>
+                        <option *ngFor="let bu of buNameArray" [value]="bu">{{ bu }}</option>
+                    </select>
+                    <div *ngIf="isPreview">{{ selectedBu ? selectedBu : '---' }}</div>
+                    <div class="text-muted" *ngIf="!isPreview && selectedDc !== '' && buNameArray?.length === 0">BU not found for selected DC.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">* Cluster Name</label>
+                <div class="col-sm-8">
+                    <select name="select-cluster" class="form-control" required [(ngModel)]="selectedCluster"
+                        (change)="getResourcePoolAndInterfaceTypes()" *ngIf="!isPreview" name="cluster" #cluster="ngModel">
+                        <option value="">SELECT-CLUSTER</option>
+                        <option *ngFor="let cluster of clusterNameArray" [value]="cluster">{{ cluster }}</option>
+                    </select>
+                    <div *ngIf="isPreview">{{ selectedCluster ? selectedCluster : '---' }}</div>
+                    <div class="text-muted" *ngIf="!isPreview && selectedBu !== '' && clusterNameArray?.length === 0">Cluster not found for selected BU.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">Resource Pool</label>
+                <div class="col-sm-8">
+                    <select name="select-resource" class="form-control" [(ngModel)]="selectedResourcePool" *ngIf="!isPreview" name="resource" #resource="ngModel">
+                        <option value="">SELECT-RESOURCE</option>
+                        <option *ngFor="let rp of resourcePoolArray" [value]="rp">{{ rp }}</option>
+                    </select>
+                    <div *ngIf="isPreview">{{ selectedResourcePool ? selectedResourcePool : '---' }}</div>
+                    <div class="text-muted" *ngIf="!isPreview && selectedCluster !== '' && resourcePoolArray?.length === 0">Cluster not found for selected BU.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">* Interface Type</label>
+                <div class="col-sm-8">
+                    <select name="select-interface-type" class="form-control" required [(ngModel)]="selectedInterfaceType"
+                        *ngIf="!isPreview" name="interfaceType" #interfaceType="ngModel" (change)="getInterface()">
+                        <option value="">SELECT-INTERFACE-TYPE</option>
+                        <option *ngFor="let intType of interfaceTypeArray" [value]="intType">{{ intType }}</option>
+                    </select>
+                    <div *ngIf="isPreview">{{ selectedInterfaceType ? selectedInterfaceType : '---'}}</div>
+                    <div class="text-muted" *ngIf="!isPreview && selectedCluster !== '' && interfaceTypeArray?.length === 0">Interface Type not found for selected Cluster.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">* Interface Details</label>
+                <div class="col-sm-8">
+                    <select name="select-interface" class="form-control" required [(ngModel)]="selectedInterface"
+                        *ngIf="!isPreview" name="interface" #interface="ngModel">
+                        <option value="">SELECT-INTERFACE</option>
+                        <option *ngFor="let int of interfaceArray" [value]="int">{{ int }}</option>
+                    </select>
+                    <div *ngIf="isPreview">{{ selectedInterface ? selectedInterface : '---'}}</div>
+                    <div class="text-muted" *ngIf="!isPreview && selectedInterfaceType !== '' && interfaceArray?.length === 0">Interface not found for selected Cluster.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">* Email Address </label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" placeholder="EMAIL" [(ngModel)]="email" *ngIf="!isPreview" name="emailString" #emailString="ngModel">
+                    <div *ngIf="isPreview">{{ email ? email : '---'}}</div>
+                    <div class="text-muted" *ngIf="!isPreview && email === ''">Email should not be empty.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="button" class="btn btn-default" *ngIf="! isPreview" (click)="isPreview = true" [disabled]="vmForm.invalid">Next</button>
+                </div>
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="button" class="btn btn-default" *ngIf="isPreview && !isVmCreated" (click)="onSubmit()">Submit</button>
+                    <button type="button" class="btn btn-default" style="margin-left: 10px" *ngIf="isPreview && !isVmCreating && !isVmCreated" (click)="isPreview = false">Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
