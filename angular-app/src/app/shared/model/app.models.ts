@@ -1,5 +1,6 @@
 export class VmModel {
-    machineName: string;
+    os: string;
+    vm: string;
     region: string;
     vc: string;
     dc: string;
@@ -8,4 +9,5 @@ export class VmModel {
     resource: string;
     intType: string;
     int: string;
+    email: string;
 }

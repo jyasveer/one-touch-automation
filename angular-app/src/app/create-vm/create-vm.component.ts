@@ -1,11 +1,13 @@
 import {
     Component,
-    OnInit
+    OnInit,
+    TemplateRef
 } from '@angular/core';
 import {
     Router,
     ActivatedRoute
 } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 import {
     AppService
@@ -18,7 +20,9 @@ import { VmModel } from '../shared/model/app.models';
     templateUrl: './create-vm.component.html'
 })
 export class CreateVmComponent implements OnInit {
+    formModalRef: BsModalRef;
     machineName = '';
+    selectedOs = '';
     selectedRegion = '';
     selectedVc = '';
     selectedDc = '';
@@ -27,6 +31,8 @@ export class CreateVmComponent implements OnInit {
     selectedResourcePool = '';
     selectedInterfaceType = '';
     selectedInterface = '';
+    newVcName: '';
+    osNameArray: Array < string > = [];
     vcNameArray: Array < string > = [];
     dcNameArray: Array < string > = [];
     buNameArray: Array < string > = [];
@@ -49,6 +55,7 @@ export class CreateVmComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
+        private modalService: BsModalService,
         private service: AppService) {}
 
     ngOnInit() {
@@ -56,6 +63,13 @@ export class CreateVmComponent implements OnInit {
             .subscribe(params => {
                 this.email = params['email'];
             });
+        this.service.getOsData()
+        .subscribe((response) => {
+            if (response.json()['data']) {
+                const osData = JSON.parse(response.json()['data']);
+                this.osNameArray = osData['os'];
+            }
+        });
     }
 
     getDataForRegion() {
@@ -73,11 +87,11 @@ export class CreateVmComponent implements OnInit {
             });
     }
 
-    getDataCenters() {
+    getDataCenters(formModalRef: TemplateRef<any>) {
         this.resetForVC();
         console.log(this.selectedVc);
         if (this.selectedVc === 'create-new-vc') {
-            console.log('modal to show create vm');
+            this.openModal(formModalRef);
         } else {
             this.extractDcList();
         }
@@ -110,7 +124,8 @@ export class CreateVmComponent implements OnInit {
     onSubmit() {
         this.isVmCreating = true;
         const vm: VmModel = {
-            machineName: this.machineName,
+            os: this.selectedOs,
+            vm: this.machineName,
             region: this.selectedRegion,
             vc: this.selectedVc,
             dc: this.selectedDc,
@@ -118,7 +133,8 @@ export class CreateVmComponent implements OnInit {
             cluster: this.selectedCluster,
             resource: this.selectedResourcePool,
             intType: this.selectedInterfaceType,
-            int: this.selectedInterface
+            int: this.selectedInterface,
+            email: this.email
         };
         this.service.createVm({vm: vm})
         .subscribe((response) => {
@@ -132,6 +148,21 @@ export class CreateVmComponent implements OnInit {
         //     this.isVmCreating = false;
         //     this.isVmCreated = true;
         // }, 5000); // change the time here
+    }
+
+    openModal(template: TemplateRef<any>) {
+        this.formModalRef = this.modalService.show(template);
+    }
+
+    createVc() {
+        this.formModalRef.hide();
+        this.regionData['vcenters'].push(this.newVcName);
+        const regionData = JSON.stringify(this.regionData);
+        this.service.createVc(this.selectedRegion, regionData)
+        .subscribe((response) => {
+            const data = JSON.parse(response.json()['data']['data']);
+            console.log('vc is added successfully', data);
+        });
     }
 
     private resetForRegion() {

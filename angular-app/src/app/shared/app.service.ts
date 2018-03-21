@@ -13,8 +13,8 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class AppService {
     loginEvent = new Subject<boolean>();
-    private host = 'http://bng-infra-automation.juniper.net:8082';
-    // private host = 'http://localhost:8082';
+    // private host = 'http://bng-infra-automation.juniper.net:8082';
+    private host = 'http://localhost:8082';
 
     constructor(private http: Http) {}
 
@@ -24,6 +24,18 @@ export class AppService {
             password: password
         };
         return this.http.post( this.host + '/authenticate', loginObj);
+    }
+
+    getOsData() {
+        return this.http.get(this.host + '/data/os');
+    }
+
+    createVc(location, data): Observable < any > {
+        const obj = {
+            location,
+            data
+        };
+        return this.http.post( this.host + '/create-vc', obj);
     }
 
     getLocationData(location: string    ) {
