@@ -130,11 +130,23 @@ app.post('/authenticate', function (req, res) {
   });
 });
 
+app.get('/data/os', (req, res) => {
+  redisClient.get('supported-os-family', function(err, reply) {
+    if (err) {
+      res.status(400).send(err);
+    }
+    res.send({
+      message: 'os data',
+      data: reply
+    });
+  });
+});
+
 app.get('/data/:location', (req, res) => {
   var location = req.params.location;
   redisClient.get(location, function(err, reply) {
     if (err) {
-      res.status(400).send(error);
+      res.status(400).send(err);
     }
     res.send({
       message: 'data for location: ' + location,
@@ -149,6 +161,20 @@ app.post('/create-vm', (req, res) => {
   res.send({
     message: 'vm created',
     data: vm
+  });
+});
+
+app.post('/create-vc', (req, res) => {
+  var data = req.body.data;
+  var location = req.body.location;
+  redisClient.set(location, data, function(err, reply) {
+    if (err) {
+      res.status(400).send(err);
+    }
+    res.send({
+      message: 'data for `' + location + '` is updated.',
+      data: {reply, data}
+    });
   });
 });
 
