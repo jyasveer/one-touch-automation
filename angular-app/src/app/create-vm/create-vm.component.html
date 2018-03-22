@@ -8,7 +8,7 @@
     <div class="col-lg-6">
         <form class="form-horizontal" role="form" #vmForm="ngForm">
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">* VM Name
+                <label class="col-sm-4 control-label">* VM Name
                 </label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" placeholder="VIRTUAL MACHINE NAME" required *ngIf="!isPreview" [(ngModel)]="machineName"
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">* OS Family</label>
+                <label class="col-sm-4 control-label">* OS Family</label>
                 <div class="col-sm-8">
                     <select name="select-vc" class="form-control" required [(ngModel)]="selectedOs" *ngIf="!isPreview"
                         name="osName" #osName="ngModel">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">* Region Name</label>
+                <label class="col-sm-4 control-label">* Region Name</label>
                 <div class="col-sm-8">
                     <select name="select-region" class="form-control" required (change)="getDataForRegion()" [(ngModel)]="selectedRegion" *ngIf="!isPreview"
                         name="region" #region="ngModel">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">* VC Name</label>
+                <label class="col-sm-4 control-label">* VC Name</label>
                 <div class="col-sm-8">
                     <select name="select-vc" class="form-control" required [(ngModel)]="selectedVc" (change)="getDataCenters(formModal)" *ngIf="!isPreview"
                         name="vcName" #vcName="ngModel" [disabled]="selectedRegion === ''">
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">* DC Name</label>
+                <label class="col-sm-4 control-label">* DC Name</label>
                 <div class="col-sm-8">
                     <select name="select-dc" class="form-control" required [(ngModel)]="selectedDc" (change)="getBussinessUnits()" *ngIf="!isPreview"
                         name="dcName" #dcName="ngModel">
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-4 control-label">* BU Name</label>
+                <label class="col-sm-4 control-label">* BU Name</label>
                 <div class="col-sm-8">
                     <select name="select-bu" class="form-control" required [(ngModel)]="selectedBu" (change)="getClusters()" *ngIf="!isPreview"
                         name="buName" #buName="ngModel">
@@ -79,7 +79,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">* Cluster Name</label>
+                <label class="col-sm-4 control-label">* Cluster Name</label>
                 <div class="col-sm-8">
                     <select name="select-cluster" class="form-control" required [(ngModel)]="selectedCluster" (change)="getResourcePoolAndInterfaceTypes()"
                         *ngIf="!isPreview" name="cluster" #cluster="ngModel">
@@ -91,7 +91,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">Resource Pool</label>
+                <label class="col-sm-4 control-label">Resource Pool</label>
                 <div class="col-sm-8">
                     <select name="select-resource" class="form-control" [(ngModel)]="selectedResourcePool" *ngIf="!isPreview" name="resource"
                         #resource="ngModel">
@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">* Interface Details</label>
+                <label class="col-sm-4 control-label">* Interface Details</label>
                 <div class="col-sm-8">
                     <select name="select-interface" class="form-control" required [(ngModel)]="selectedInterface" *ngIf="!isPreview" name="interface"
                         #interface="ngModel">
@@ -127,11 +127,19 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">* Email Address </label>
+                <label class="col-sm-4 control-label">* Email Address </label>
                 <div class="col-sm-8">
-                    <input type="email" class="form-control" placeholder="EMAIL" [(ngModel)]="email" *ngIf="!isPreview" name="emailString" #emailString="ngModel">
+                    <input type="text" class="form-control" placeholder="EMAIL" [(ngModel)]="email" *ngIf="!isPreview" name="emailString" #emailString="ngModel" required>
                     <div *ngIf="isPreview">{{ email ? email : '---'}}</div>
                     <div class="text-muted" *ngIf="!isPreview && email === ''">Email should not be empty.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">* INC Number </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" placeholder="Enter INC_NUMBER" [(ngModel)]="incNumber" *ngIf="!isPreview" name="incNumberString" #incNumberString="ngModel" required>
+                    <div *ngIf="isPreview">{{ incNumber ? incNumber : '---'}}</div>
+                    <div class="text-muted" *ngIf="!isPreview && incNumber === ''">INC_NUMBER should not be empty.</div>
                 </div>
             </div>
             <div class="form-group">
@@ -159,6 +167,7 @@
                 </div>
                 <div class="form-group">
                     <button class="btn btn-default" (click)="createVc()">Create</button>
+                    <button class="btn btn-default" (click)="formModalRef.hide()">Cancel</button>
                 </div>
             </div>
         </ng-template>

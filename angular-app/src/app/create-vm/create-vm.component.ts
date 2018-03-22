@@ -41,6 +41,7 @@ export class CreateVmComponent implements OnInit {
     interfaceTypeArray: Array < string > = [];
     interfaceArray: Array < string > = [];
     email: string;
+    incNumber: string;
     isPreview = false;
     isVmCreating = false;
     isVmCreated = false;
@@ -124,19 +125,20 @@ export class CreateVmComponent implements OnInit {
     onSubmit() {
         this.isVmCreating = true;
         const vm: VmModel = {
-            os: this.selectedOs,
-            vm: this.machineName,
+            osfamily: this.selectedOs,
+            vmname: this.machineName,
             region: this.selectedRegion,
-            vc: this.selectedVc,
-            dc: this.selectedDc,
-            bu: this.selectedBu,
-            cluster: this.selectedCluster,
-            resource: this.selectedResourcePool,
-            intType: this.selectedInterfaceType,
-            int: this.selectedInterface,
-            email: this.email
+            vc_name: this.selectedVc,
+            datacenter: this.selectedDc,
+            business_unit: this.selectedBu,
+            mapped_cluster_name: this.selectedCluster,
+            resource_pool: this.selectedResourcePool,
+            nic_type: this.selectedInterfaceType,
+            vm_nic: this.selectedInterface,
+            email_address: this.email,
+            inc_number: this.incNumber
         };
-        this.service.createVm({vm: vm})
+        this.service.createVm(vm)
         .subscribe((response) => {
             console.log('response from create vm', response.json());
             this.isVmCreating = false;

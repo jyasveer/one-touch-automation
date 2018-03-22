@@ -16,12 +16,12 @@
                                 <a routerLink="/home">Home</a>
                             </li>
                             <li role="presentation" routerLinkActive="active">
-                                <a routerLink="/create-vm">Create VM</a>
+                                <a routerLink="/create-vm/{{ loginObj?.username }}">Create VM</a>
                             </li>
-                            <li role="presentation" routerLinkActive="active" *ngIf="!isLoggedIn">
+                            <li role="presentation" routerLinkActive="active" *ngIf="!loginObj?.isLoggedIn">
                                 <a routerLink="/login">Login</a>
                             </li>
-                            <li role="presentation" *ngIf="isLoggedIn">
+                            <li role="presentation" *ngIf="loginObj?.isLoggedIn">
                                 <a routerLink="/home" (click)="logout()">Logout</a>
                             </li>
                         </ul>
