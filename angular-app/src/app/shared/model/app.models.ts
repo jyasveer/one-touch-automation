@@ -1,13 +1,19 @@
 export class VmModel {
-    os: string;
-    vm: string;
+    business_unit: string;
+    datacenter: string;
+    email_address: string;
+    inc_number: string;
+    mapped_cluster_name: string;
+    nic_type: string;
+    osfamily: string;
     region: string;
-    vc: string;
-    dc: string;
-    bu: string;
-    cluster: string;
-    resource: string;
-    intType: string;
-    int: string;
-    email: string;
+    resource_pool: string;
+    vc_name: string;
+    vm_nic: string;
+    vmname: string;
+}
+
+export class LoginModel {
+    username: string;
+    isLoggedIn: boolean;
 }

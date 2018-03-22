@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const cors = require('cors');
 const redis = require('redis');
+const exec = require('child_process').exec;
+const curl = require('curlrequest');
 
 const redisClient = redis.createClient();
 redisClient.on('connect', function () {
@@ -50,18 +52,18 @@ app.post('/authenticate', function (req, res) {
   }
   redisClient.llen('usernames', function (err, reply) {
     if (err) {
-      res.status(400).send(error);
+      res.status(400).send({err});
     }
     if (reply > 0) {
       console.log('user list exists');
       redisClient.lrange('usernames', 0, reply, function(err, reply) {
         if (err) {
-          res.status(400).send(error);
+          res.status(400).send({err});
         }
         if (reply.indexOf(username) != -1) {
           redisClient.hget('users', username, function(err, reply) {
             if (err) {
-              res.status(400).send(error);
+              res.status(400).send({err});
             }
             if (reply === password) {
               res.send({
@@ -86,12 +88,12 @@ app.post('/authenticate', function (req, res) {
         } else {
           redisClient.rpush('usernames', username, function(err, reply) {
             if (err) {
-              res.status(400).send(error);
+              res.status(400).send({err});
             }
             console.log(reply);
             redisClient.hset('users', username, password, function(err, reply) {
               if (err) {
-                res.status(400).send(error);
+                res.status(400).send({err});
               }
               res.send({
                 message: 'user created',
@@ -109,12 +111,12 @@ app.post('/authenticate', function (req, res) {
       console.log('user list doesn\'t exist');
       redisClient.rpush('usernames', username, function(err, reply) {
         if (err) {
-          res.status(400).send(error);
+          res.status(400).send({err});
         }
         console.log(reply);
         redisClient.hset('users', username, password, function(err, reply) {
           if (err) {
-            res.status(400).send(error);
+            res.status(400).send({err});
           }
           res.send({
             message: 'user created',
@@ -158,9 +160,28 @@ app.get('/data/:location', (req, res) => {
 app.post('/create-vm', (req, res) => {
   var vm = req.body.vm;
   console.log('vm object', vm);
-  res.send({
-    message: 'vm created',
-    data: vm
+  curl.request({
+    url: 'https://p-ansible-tower01.juniper.net/api/v1/job_templates/32/launch/',
+    data: vm,
+    user: 'admin:f22raptor',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    insecure: true,
+    silent: true,
+    request: 'POST'
+  }, function (err, stdout, stderr) {
+    console.log('/create-vm err', err);
+    console.log('/create-vm stdout', stdout);
+    console.log('/create-vm stderr', stderr);
+    if (err) {
+      res.status(400).send({err});
+    } else {
+      res.send({
+        message: 'vm is created',
+        data: vm
+      });
+    }
   });
 });
 
@@ -169,7 +190,7 @@ app.post('/create-vc', (req, res) => {
   var location = req.body.location;
   redisClient.set(location, data, function(err, reply) {
     if (err) {
-      res.status(400).send(err);
+      res.status(400).send({err});
     }
     res.send({
       message: 'data for `' + location + '` is updated.',

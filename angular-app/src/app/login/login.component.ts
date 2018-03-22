@@ -22,10 +22,16 @@ export class LoginComponent {
             const data = response.json()['data'];
             console.log(data);
             if (data['key'] === 'login-success' || data['key'] === 'user-created') {
-                this.service.loginEvent.next(true);
+                this.service.loginEvent.next({
+                    username: data['username'],
+                    isLoggedIn: true
+                });
                 this.router.navigate(['/create-vm', data['username']]);
             } else {
-                this.service.loginEvent.next(false);
+                this.service.loginEvent.next({
+                    username: data['username'],
+                    isLoggedIn: false
+                });
                 this.router.navigate(['/home']);
             }
         }, (error: Response) => {

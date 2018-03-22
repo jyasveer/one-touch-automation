@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../shared/app.service';
+import { LoginModel } from '../shared/model/app.models';
 
 @Component({
     selector: 'app-header',
     templateUrl: 'header.component.html'
 })
 export class HeaderComponent implements OnInit {
-    isLoggedIn = false;
+    loginObj: LoginModel;
 
     constructor(private service: AppService) {}
 
     ngOnInit() {
         this.service.loginEvent
-        .subscribe((isLoggedIn: boolean) => {
-            this.isLoggedIn = isLoggedIn;
+        .subscribe((loginObj: LoginModel) => {
+            this.loginObj = loginObj;
         });
     }
 
     logout() {
-        this.service.loginEvent.next(false);
+        this.service.loginEvent.next({
+            username: '', isLoggedIn: false
+        });
     }
 }

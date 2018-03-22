@@ -9,10 +9,11 @@ import {
 } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { Subject } from 'rxjs/Subject';
+import { LoginModel, VmModel } from './model/app.models';
 
 @Injectable()
 export class AppService {
-    loginEvent = new Subject<boolean>();
+    loginEvent = new Subject<LoginModel>();
     private host = 'http://bng-infra-automation.juniper.net:8082';
     // private host = 'http://localhost:8082';
 
@@ -42,8 +43,10 @@ export class AppService {
         return this.http.get(this.host + '/data/' + location);
     }
 
-    createVm(vm: any) {
-        return this.http.post(this.host + '/create-vm', vm);
+    createVm(vm: VmModel) {
+        const payload = JSON.stringify({extra_vars: vm});
+        console.log('payload in create vm', payload);
+        return this.http.post(this.host + '/create-vm', {vm: payload});
     }
 
     private extractData(response: Response): any {
