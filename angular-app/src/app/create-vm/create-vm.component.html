@@ -163,10 +163,11 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Please enter a VC name:</label>
-                    <input type="text" class="form-control" [(ngModel)]="newVcName">
+                    <input type="text" class="form-control" [(ngModel)]="newVcName" (ngModelChange)="checkIfVcNameExists()">
+                    <div class="text-muted" *ngIf="isVcNamePresent">VC name already present. Please enter a different name</div>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-default" (click)="createVc()">Create</button>
+                    <button class="btn btn-default" [disabled]="isVcNamePresent || newVcName === ''" (click)="createVc()">Create</button>
                     <button class="btn btn-default" (click)="formModalRef.hide()">Cancel</button>
                 </div>
             </div>
