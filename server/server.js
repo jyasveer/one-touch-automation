@@ -157,7 +157,7 @@ app.get('/data/:location', (req, res) => {
   });
 });
 
-app.post('/create-vm', (req, res) => {
+app.post('/create-vm2', (req, res) => {
   var vm = req.body.vm;
   console.log('vm object', vm);
   curl.request({
@@ -171,6 +171,30 @@ app.post('/create-vm', (req, res) => {
     silent: true,
     request: 'POST'
   }, function (err, stdout, stderr) {
+    console.log('/create-vm err', err);
+    console.log('/create-vm stdout', stdout);
+    console.log('/create-vm stderr', stderr);
+    if (err) {
+      res.status(400).send({err});
+    } else {
+      res.send({
+        message: 'vm is created',
+        data: vm
+      });
+    }
+  });
+});
+
+app.post('/create-vm', (req, res) => {
+  var vm = req.body.vm;
+  var curl_username = process.env.ansibletower_userid;
+  var curl_password = process.env.ansibletower_password;
+  // var curl_cmd_post = "curl -s -k -u " + curl_username + ":" + curl_password + " -X POST -H \'Content-Type: application/json\'";
+  var curl_cmd_post = "curl -s -k -u " + "admin:f22raptor" + " -X POST -H \'Content-Type: application/json\'";
+  var url = " https://p-ansible-tower01.juniper.net/api/v1/job_templates/32/launch/";
+  var obj = ' -d  \'' + vm + '\'';
+  var curl_req = curl_cmd_post + obj + url;
+  exec(curl_req, function(err, stdout, stderr){
     console.log('/create-vm err', err);
     console.log('/create-vm stdout', stdout);
     console.log('/create-vm stderr', stderr);

@@ -45,6 +45,7 @@ export class CreateVmComponent implements OnInit {
     isPreview = false;
     isVmCreating = false;
     isVmCreated = false;
+    isVcNamePresent = false;
 
     private regionData: any = null;
     private vcData: any = null;
@@ -153,18 +154,36 @@ export class CreateVmComponent implements OnInit {
     }
 
     openModal(template: TemplateRef<any>) {
-        this.formModalRef = this.modalService.show(template);
+        this.newVcName = '';
+        if (this.selectedVc === 'create-new-vc') {
+            this.formModalRef = this.modalService.show(template);
+        }
+    }
+
+    checkIfVcNameExists() {
+        if (this.newVcName) {
+            this.isVcNamePresent = false;
+            if ((this.regionData['vcenters'] as Array<string>).indexOf(this.newVcName) !== -1) {
+                this.isVcNamePresent = true;
+            }
+        } else {
+            this.isVcNamePresent = false;
+        }
     }
 
     createVc() {
         this.formModalRef.hide();
-        this.regionData['vcenters'].push(this.newVcName);
-        const regionData = JSON.stringify(this.regionData);
-        this.service.createVc(this.selectedRegion, regionData)
-        .subscribe((response) => {
-            const data = JSON.parse(response.json()['data']['data']);
-            console.log('vc is added successfully', data);
-        });
+        if ((this.regionData['vcenters'] as Array<string>).indexOf(this.newVcName) !== -1) {
+            this.regionData['vcenters'].push(this.newVcName);
+            const regionData = JSON.stringify(this.regionData);
+            this.service.createVc(this.selectedRegion, regionData)
+                .subscribe((response) => {
+                    const data = JSON.parse(response.json()['data']['data']);
+                    console.log('vc is added successfully', data);
+                });
+        } else {
+            this.isVcNamePresent = true;
+        }
     }
 
     private resetForRegion() {
