@@ -1,0 +1,53 @@
+<div class="container">
+  <alert type="success" *ngIf="isVmDeleted">
+      <strong>VM is deleted successfully.</strong>
+  </alert>
+  <alert type="info" *ngIf="isVmDeleting">
+      <strong>VM is being deleted.</strong>
+  </alert>
+  <alert type="danger" *ngIf="isVmDeleteError">
+      <strong>Error in deleting VM.</strong>
+  </alert>
+  <div class="col-lg-6">
+      <form class="form-horizontal" role="form" #vmForm="ngForm">
+          <div class="form-group">
+              <label class="col-sm-4 control-label">* VM Name
+              </label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" placeholder="VIRTUAL MACHINE NAME" required *ngIf="!isPreview" [(ngModel)]="machineName"
+                      name="name" #name="ngModel">
+                  <div *ngIf="isPreview">{{ machineName || '---' }}</div>
+                  <div class="text-muted" *ngIf="!isPreview && machineName === ''">VM Name should not be empty.</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label class="col-sm-4 control-label">* VC Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="VIRTUAL CENTER NAME" required *ngIf="!isPreview" [(ngModel)]="vcName"
+                    name="vcNameInput" #vcNameInput="ngModel">
+                <div *ngIf="isPreview">{{ vcName || '---' }}</div>
+                <div class="text-muted" *ngIf="!isPreview && vcName === ''">VC Name should not be empty.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <label class="col-sm-4 control-label">* Email Address </label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" placeholder="EMAIL" [(ngModel)]="email" *ngIf="!isPreview" name="emailString" #emailString="ngModel" required>
+                  <div *ngIf="isPreview">{{ email ? email : '---'}}</div>
+                  <div class="text-muted" *ngIf="!isPreview && email === ''">Email should not be empty.</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="col-sm-offset-4 col-sm-8">
+                  <button type="button" class="btn btn-default" *ngIf="! isPreview" (click)="isPreview = true" [disabled]="vmForm.invalid">Next</button>
+              </div>
+              <div class="col-sm-offset-4 col-sm-8">
+                  <button type="button" class="btn btn-default" *ngIf="isPreview && !isVmCreated" (click)="onSubmit()">Submit</button>
+                  <button type="button" class="btn btn-default" style="margin-left: 10px" *ngIf="isPreview && !isVmCreating && !isVmCreated"
+                      (click)="isPreview = false">Back</button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>

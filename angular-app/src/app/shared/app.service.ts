@@ -49,6 +49,12 @@ export class AppService {
         return this.http.post(this.host + '/create-vm', {vm: payload});
     }
 
+    deleteVm(vm: VmModel) {
+        const payload = JSON.stringify({extra_vars: vm});
+        console.log('payload in delete vm', payload);
+        return this.http.post(this.host + '/delete-vm', {vm: payload});
+    }
+
     private extractData(response: Response): any {
         const body = response.json() || {};
         body['statusCode'] = response.status;
