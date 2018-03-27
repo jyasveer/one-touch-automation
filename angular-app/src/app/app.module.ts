@@ -10,6 +10,7 @@ import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
 import { AppService } from './shared/app.service';
 import { CreateVmModule } from './create-vm/create-vm.module';
+import { DeleteVmModule } from './delete-vm/delete-vm.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CreateVmModule } from './create-vm/create-vm.module';
     HomeModule,
     LoginModule,
     HeaderModule,
-    CreateVmModule
+    CreateVmModule,
+    DeleteVmModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

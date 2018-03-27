@@ -45,6 +45,7 @@ export class CreateVmComponent implements OnInit {
     isPreview = false;
     isVmCreating = false;
     isVmCreated = false;
+    isVmCreateError = false;
     isVcNamePresent = false;
 
     private regionData: any = null;
@@ -132,7 +133,7 @@ export class CreateVmComponent implements OnInit {
             vc_name: this.selectedVc,
             datacenter: this.selectedDc,
             business_unit: this.selectedBu,
-            mapped_cluster_name: this.selectedCluster,
+            cluster_name: this.selectedCluster,
             resource_pool: this.selectedResourcePool,
             nic_type: this.selectedInterfaceType,
             vm_nic: this.selectedInterface,
@@ -146,11 +147,9 @@ export class CreateVmComponent implements OnInit {
             this.isVmCreated = true;
         }, (error: Response) => {
             console.log('error in create vm', error.json());
+            this.isVmCreating = false;
+            this.isVmCreateError = true;
         });
-        // setTimeout(() => {
-        //     this.isVmCreating = false;
-        //     this.isVmCreated = true;
-        // }, 5000); // change the time here
     }
 
     openModal(template: TemplateRef<any>) {
