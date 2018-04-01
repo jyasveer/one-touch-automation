@@ -17,7 +17,6 @@
                     <input type="text" class="form-control" placeholder="VIRTUAL MACHINE NAME" required *ngIf="!isPreview" [(ngModel)]="machineName"
                         name="vmName" #vmName="ngModel">
                     <div *ngIf="isPreview">{{ machineName || '---' }}</div>
-                    <div class="text-muted" *ngIf="!isPreview && machineName === ''">VM Name should not be empty.</div>
                 </div>
             </div>
             <div class="form-group">
@@ -131,11 +130,16 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-4 control-label">* Email Address </label>
+                <label class="col-sm-4 control-label">Email Address </label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" placeholder="EMAIL" [(ngModel)]="email" *ngIf="!isPreview" name="emailString" #emailString="ngModel" required>
-                    <div *ngIf="isPreview">{{ email ? email : '---'}}</div>
-                    <div class="text-muted" *ngIf="!isPreview && email === ''">Email should not be empty.</div>
+                    <input type="text" class="form-control" placeholder="EMAIL" [(ngModel)]="email" *ngIf="!isPreview" name="emailString" #emailString="ngModel">
+                    <div *ngIf="isPreview">
+                        {{ userEmail }}
+                        <span *ngIf="email !== ''">
+                            , {{ this.email }}
+                        </span>
+                    </div>
+                    <div class="text-muted" *ngIf="!isPreview">User's email :- {{ userEmail }}</div>
                 </div>
             </div>
             <div class="form-group">
@@ -143,7 +147,6 @@
                 <div class="col-sm-8">
                     <input type="text" class="form-control" placeholder="Enter INC_NUMBER" [(ngModel)]="incNumber" *ngIf="!isPreview" name="incNumberString" #incNumberString="ngModel" required>
                     <div *ngIf="isPreview">{{ incNumber ? incNumber : '---'}}</div>
-                    <div class="text-muted" *ngIf="!isPreview && incNumber === ''">INC_NUMBER should not be empty.</div>
                 </div>
             </div>
             <div class="form-group">

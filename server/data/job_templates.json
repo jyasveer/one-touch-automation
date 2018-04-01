@@ -1,0 +1,194 @@
+{
+    "id": 32,
+    "type": "job_template",
+    "url": "/api/v1/job_templates/32/",
+    "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/32/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/31/",
+        "credential": "/api/v1/credentials/10/",
+        "last_job": "/api/v1/jobs/14979/",
+        "notification_templates_error": "/api/v1/job_templates/32/notification_templates_error/",
+
+        "notification_templates_success": "/api/v1/job_templates/32/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/32/jobs/",
+        "object_roles": "/api/v1/job_templates/32/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/32/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/32/access_list/",
+        "launch": "/api/v1/job_templates/32/launch/",
+        "schedules": "/api/v1/job_templates/32/schedules/",
+        "activity_stream": "/api/v1/job_templates/32/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/32/survey_spec/"
+    },
+    "summary_fields": {
+        "last_job": {
+            "id": 14979,
+            "name": "One Touch Automation - Provision - feature-Ubuntu16",
+            "description": "",
+            "finished": "2018-03- 28T05:09:42.847Z",
+            "status": "failed",
+            "failed": true
+        },
+        "last_update": {
+            "id": 14979,
+            "name": "One Touch Automation - Provision - feature-Ubuntu16",
+            "description": "",
+            "status": "failed",
+            "failed": true
+        },
+        "inventory": {
+            "id": 2,
+            "name": "localhost",
+            "description": "",
+            "has_active_failures": false,
+            "total_hosts": 1,
+            "hosts_with_active_failures": 0,
+            "total_groups": 1,
+            "groups_with_active_failures": 0,
+            "has_inventory_sources": false,
+            "total_inventory_sources": 0,
+            "inventory_sources_with_failures": 0
+        },
+        "credential": {
+            "id": 10,
+            "name": "ssh-creds",
+            "description": "",
+            "kind": "ssh",
+            "cloud": false
+        },
+        "project": {
+            "id": 31,
+            "name": "Onetouch Automation - feature-ubuntu16",
+            "description": "One touch Automation - feature branch Ubuntu 16",
+
+            "status": "successful",
+            "scm_type": "git"
+        },
+        "created_by": {
+            "id": 2,
+            "username": "ashukaul",
+            "first_name": "Ashutosh",
+            "last_name": "Kaul"
+        },
+        "object_roles": {
+            "admin_role": {
+                "id": 206,
+                "description": "Can manage all aspects of the job template",
+                "name": "Admin"
+            },
+            "execute_role": {
+                "id": 208,
+                "description": "May run the job template",
+                "name": "Execute"
+            },
+            "read_role": {
+                "id": 207,
+                "description": "May view settings for the job template",
+                "name": "Read"
+            }
+        },
+        "user_capabilities": {
+            "edit": true,
+            "start": true,
+            "copy": true,
+            "schedule": true,
+            "delete": true
+        },
+        "labels": {
+            "count": 0,
+            "results": []
+        },
+        "survey": {
+            "description": "",
+            "title": ""
+        },
+        "recent_jobs": [{
+                "status": "failed",
+                "finished": "2018-03- 28T05:09:42.847Z",
+                "id": 14979
+            },
+            {
+                "status": "failed",
+                "finished": "2018-03- 28T04:14:39.215Z",
+                "id": 14968
+
+            },
+            {
+                "status": "successful",
+                "finished": "2018-03- 27T09:20:34.168Z",
+                "id": 14896
+            },
+            {
+                "status": "successful",
+                "finished": "2018-03- 27T07:23:13.477Z",
+                "id": 14880
+            },
+            {
+                "status": "successful",
+                "finished": "2018-03- 27T06:43:26.092Z",
+                "id": 14859
+            },
+            {
+                "status": "successful",
+                "finished": "2018-03- 27T06:33:05.572Z",
+                "id": 14856
+            },
+            {
+                "status": "failed",
+                "finished": "2018-03- 27T05:46:24.760Z",
+                "id": 14846
+            },
+            {
+                "status": "failed",
+                "finished": "2018-03- 27T04:23:26.000Z",
+                "id": 14837
+            },
+            {
+                "status": "failed",
+                "finished": "2018-03- 27T04:05:54.430Z",
+                "id": 14825
+            },
+            {
+                "status": "failed",
+                "finished": "2018-03- 26T10:17:02.701Z",
+                "id": 14760
+            }
+        ]
+    },
+    "created": "2018-01- 08T07:37:10.477Z",
+    "modified": "2018-03- 28T05:02:58.155Z",
+    "name": "One Touch Automation - Provision - feature - Ubuntu16 ",
+    "description": "",
+    "job_type": "run",
+    "inventory": 2,
+    "project": 31,
+    "playbook": "deploy.yml",
+    "credential": 10,
+    "cloud_credential": null,
+    "network_credential": null,
+    "forks": 0,
+    "limit": "",
+    "verbosity": 0,
+    "extra_vars": "",
+    "job_tags": "",
+    "force_handlers": false,
+    "skip_tags": "",
+    "start_at_task": "",
+    "timeout": 0,
+    "last_job_run": "2018-03- 28T05:09:42.847524Z",
+    "last_job_failed": true,
+    "next_job_run": null,
+    "status": "failed",
+    "host_config_key": "",
+    "ask_variables_on_launch": false,
+    "ask_limit_on_launch": false,
+    "ask_tags_on_launch": false,
+    "ask_skip_tags_on_launch": false,
+    "ask_job_type_on_launch": false,
+    "ask_inventory_on_launch": false,
+    "ask_credential_on_launch": false,
+    "survey_enabled": true,
+    "become_enabled": false,
+    "allow_simultaneous": false
+}

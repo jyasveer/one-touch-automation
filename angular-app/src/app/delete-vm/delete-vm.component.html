@@ -17,7 +17,6 @@
                   <input type="text" class="form-control" placeholder="VIRTUAL MACHINE NAME" required *ngIf="!isPreview" [(ngModel)]="machineName"
                       name="name" #name="ngModel">
                   <div *ngIf="isPreview">{{ machineName || '---' }}</div>
-                  <div class="text-muted" *ngIf="!isPreview && machineName === ''">VM Name should not be empty.</div>
               </div>
           </div>
           <div class="form-group">
@@ -26,16 +25,20 @@
                 <input type="text" class="form-control" placeholder="VIRTUAL CENTER NAME" required *ngIf="!isPreview" [(ngModel)]="vcName"
                     name="vcNameInput" #vcNameInput="ngModel">
                 <div *ngIf="isPreview">{{ vcName || '---' }}</div>
-                <div class="text-muted" *ngIf="!isPreview && vcName === ''">VC Name should not be empty.</div>
             </div>
           </div>
 
           <div class="form-group">
               <label class="col-sm-4 control-label">* Email Address </label>
               <div class="col-sm-8">
-                  <input type="text" class="form-control" placeholder="EMAIL" [(ngModel)]="email" *ngIf="!isPreview" name="emailString" #emailString="ngModel" required>
-                  <div *ngIf="isPreview">{{ email ? email : '---'}}</div>
-                  <div class="text-muted" *ngIf="!isPreview && email === ''">Email should not be empty.</div>
+                  <input type="text" class="form-control" placeholder="EMAIL" [(ngModel)]="email" *ngIf="!isPreview" name="emailString" #emailString="ngModel">
+                  <div *ngIf="isPreview">
+                    {{ userEmail }}
+                    <span *ngIf="email !== ''">
+                        , {{ this.email }}
+                    </span>
+                </div>
+                <div class="text-muted" *ngIf="!isPreview">User's email :- {{ userEmail }}</div>
               </div>
           </div>
           <div class="form-group">

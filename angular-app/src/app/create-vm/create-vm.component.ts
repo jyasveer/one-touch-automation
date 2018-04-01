@@ -41,6 +41,7 @@ export class CreateVmComponent implements OnInit {
     interfaceTypeArray: Array < string > = [];
     interfaceArray: Array < string > = [];
     email: string;
+    userEmail: string;
     incNumber: string;
     isPreview = false;
     isVmCreating = false;
@@ -64,7 +65,7 @@ export class CreateVmComponent implements OnInit {
     ngOnInit() {
         this.route.params
             .subscribe(params => {
-                this.email = params['email'];
+                this.userEmail = params['email'];
             });
         this.service.getOsData()
         .subscribe((response) => {
@@ -126,6 +127,12 @@ export class CreateVmComponent implements OnInit {
 
     onSubmit() {
         this.isVmCreating = true;
+        let emails = '';
+        if (this.email) {
+            emails = this.userEmail + ',' + this.email;
+        } else {
+            emails = this.userEmail;
+        }
         const vm: VmModel = {
             osfamily: this.selectedOs,
             vmname: this.machineName,
@@ -137,7 +144,7 @@ export class CreateVmComponent implements OnInit {
             resource_pool: this.selectedResourcePool,
             nic_type: this.selectedInterfaceType,
             vm_nic: this.selectedInterface,
-            email_address: this.email,
+            email_address: emails,
             inc_number: this.incNumber
         };
         this.service.createVm(vm)
@@ -162,7 +169,7 @@ export class CreateVmComponent implements OnInit {
     checkIfVcNameExists() {
         if (this.newVcName) {
             this.isVcNamePresent = false;
-            if ((this.regionData['vcenters'] as Array<string>).indexOf(this.newVcName) !== -1) {
+            if (this.regionData && (this.regionData['vcenters'] as Array<string>).indexOf(this.newVcName) !== -1) {
                 this.isVcNamePresent = true;
             }
         } else {
@@ -172,17 +179,29 @@ export class CreateVmComponent implements OnInit {
 
     createVc() {
         this.formModalRef.hide();
-        if ((this.regionData['vcenters'] as Array<string>).indexOf(this.newVcName) !== -1) {
-            this.regionData['vcenters'].push(this.newVcName);
-            const regionData = JSON.stringify(this.regionData);
-            this.service.createVc(this.selectedRegion, regionData)
-                .subscribe((response) => {
-                    const data = JSON.parse(response.json()['data']['data']);
-                    console.log('vc is added successfully', data);
-                });
+        let regionData = this.regionData;
+        if (regionData) {
+            regionData['vcenters'].push(this.newVcName);
         } else {
-            this.isVcNamePresent = true;
+            regionData = {
+                vcenters: []
+            };
+            regionData.vcenters.push(this.newVcName);
         }
+        const payload = JSON.stringify(regionData);
+        this.service.createVc(this.selectedRegion, payload)
+            .subscribe((response) => {
+                const data = JSON.parse(response.json()['data']['data']);
+                if (this.regionData) {
+                    this.regionData['vcenters'] = data['vcenters'];
+                } else {
+                    this.regionData = {
+                        vcenters: []
+                    };
+                    this.regionData.vcenters.push(this.newVcName);
+                }
+                this.selectedVc = this.newVcName;
+            });
     }
 
     private resetForRegion() {

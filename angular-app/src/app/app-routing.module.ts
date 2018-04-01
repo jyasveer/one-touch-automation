@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'create-vm/:email', component: CreateVmComponent},
-  { path: 'delete-vm', component: DeleteVmComponent}
+  { path: 'delete-vm/:email', component: DeleteVmComponent}
 ];
 
 @NgModule({
