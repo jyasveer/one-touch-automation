@@ -52,18 +52,24 @@ app.post('/authenticate', function (req, res) {
   }
   redisClient.llen('usernames', function (err, reply) {
     if (err) {
-      res.status(400).send({err});
+      res.status(400).send({
+        err
+      });
     }
     if (reply > 0) {
       console.log('user list exists');
-      redisClient.lrange('usernames', 0, reply, function(err, reply) {
+      redisClient.lrange('usernames', 0, reply, function (err, reply) {
         if (err) {
-          res.status(400).send({err});
+          res.status(400).send({
+            err
+          });
         }
         if (reply.indexOf(username) != -1) {
-          redisClient.hget('users', username, function(err, reply) {
+          redisClient.hget('users', username, function (err, reply) {
             if (err) {
-              res.status(400).send({err});
+              res.status(400).send({
+                err
+              });
             }
             if (reply === password) {
               res.send({
@@ -86,14 +92,18 @@ app.post('/authenticate', function (req, res) {
             }
           });
         } else {
-          redisClient.rpush('usernames', username, function(err, reply) {
+          redisClient.rpush('usernames', username, function (err, reply) {
             if (err) {
-              res.status(400).send({err});
+              res.status(400).send({
+                err
+              });
             }
             console.log(reply);
-            redisClient.hset('users', username, password, function(err, reply) {
+            redisClient.hset('users', username, password, function (err, reply) {
               if (err) {
-                res.status(400).send({err});
+                res.status(400).send({
+                  err
+                });
               }
               res.send({
                 message: 'user created',
@@ -109,14 +119,18 @@ app.post('/authenticate', function (req, res) {
       });
     } else {
       console.log('user list doesn\'t exist');
-      redisClient.rpush('usernames', username, function(err, reply) {
+      redisClient.rpush('usernames', username, function (err, reply) {
         if (err) {
-          res.status(400).send({err});
+          res.status(400).send({
+            err
+          });
         }
         console.log(reply);
-        redisClient.hset('users', username, password, function(err, reply) {
+        redisClient.hset('users', username, password, function (err, reply) {
           if (err) {
-            res.status(400).send({err});
+            res.status(400).send({
+              err
+            });
           }
           res.send({
             message: 'user created',
@@ -133,7 +147,7 @@ app.post('/authenticate', function (req, res) {
 });
 
 app.get('/data/os', (req, res) => {
-  redisClient.get('supported-os-family', function(err, reply) {
+  redisClient.get('supported-os-family', function (err, reply) {
     if (err) {
       res.status(400).send(err);
     }
@@ -146,7 +160,7 @@ app.get('/data/os', (req, res) => {
 
 app.get('/data/:location', (req, res) => {
   var location = req.params.location;
-  redisClient.get(location, function(err, reply) {
+  redisClient.get(location, function (err, reply) {
     if (err) {
       res.status(400).send(err);
     }
@@ -157,49 +171,85 @@ app.get('/data/:location', (req, res) => {
   });
 });
 
-app.post('/create-vm2', (req, res) => {
-  var vm = req.body.vm;
-  console.log('vm object', vm);
-  curl.request({
-    url: 'https://p-ansible-tower01.juniper.net/api/v1/job_templates/32/launch/',
-    data: vm,
-    user: 'admin:f22raptor',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    insecure: true,
-    silent: true,
-    request: 'POST'
-  }, function (err, stdout, stderr) {
-    console.log('/create-vm err', err);
-    console.log('/create-vm stdout', stdout);
-    console.log('/create-vm stderr', stderr);
+// app.post('/create-vm2', (req, res) => {
+//   var vm = req.body.vm;
+//   console.log('vm object', vm);
+//   curl.request({
+//     url: 'https://p-ansible-tower01.juniper.net/api/v1/job_templates/32/launch/',
+//     data: vm,
+//     user: 'admin:f22raptor',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     insecure: true,
+//     silent: true,
+//     request: 'POST'
+//   }, function (err, stdout, stderr) {
+//     console.log('/create-vm err', err);
+//     console.log('/create-vm stdout', stdout);
+//     console.log('/create-vm stderr', stderr);
+//     if (err) {
+//       res.status(400).send({err});
+//     } else {
+//       res.send({
+//         message: 'vm is created',
+//         data: vm
+//       });
+//     }
+//   });
+// });
+
+app.get('create-vm/id', (req, res) => {
+  var cmd = "curl -s -k -u admin:f22raptor -X GET -H \'Content-Type: application/json\'";
+  var url = " https://p-ansible-tower01.juniper.net/";
+  var api = "api/v1/job_templates/";
+  var str = "One Touch Automation - Provision - feature-Ubuntu16";
+  var res = cmd + url + api;
+
+  exec(res, function (err, reply) {
     if (err) {
-      res.status(400).send({err});
-    } else {
-      res.send({
-        message: 'vm is created',
-        data: vm
+      res.status(400).send({
+        err
       });
     }
+    reply.forEach((item) => {
+      if (item.name === str && item.type === 'job_template') {
+        res.send({
+          message: 'job id for creating vm',
+          data: {
+            id: item.id,
+            url: item.url
+          }
+        });
+      }
+    });
+    res.send({
+      message: 'job id for creating vm not found',
+      err: true
+    });
   });
+});
+
+app.get('delete-vm/id', (req, res) => {
+
 });
 
 app.post('/create-vm', (req, res) => {
   var vm = req.body.vm;
   var curl_username = process.env.ansibletower_userid;
   var curl_password = process.env.ansibletower_password;
-  // var curl_cmd_post = "curl -s -k -u " + curl_username + ":" + curl_password + " -X POST -H \'Content-Type: application/json\'";
-  var curl_cmd_post = "curl -s -k -u " + "admin:f22raptor" + " -X POST -H \'Content-Type: application/json\'";
+  var curl_cmd_post = "curl -s -k -u " + curl_username + ":" + curl_password + " -X POST -H \'Content-Type: application/json\'";
   var url = " https://p-ansible-tower01.juniper.net/api/v1/job_templates/32/launch/";
   var obj = ' -d  \'' + vm + '\'';
   var curl_req = curl_cmd_post + obj + url;
-  exec(curl_req, function(err, stdout, stderr){
+  exec(curl_req, function (err, stdout, stderr) {
     console.log('/create-vm err', err);
     console.log('/create-vm stdout', stdout);
     console.log('/create-vm stderr', stderr);
     if (err) {
-      res.status(400).send({err});
+      res.status(400).send({
+        err
+      });
     } else {
       res.send({
         message: 'vm is created',
@@ -218,12 +268,14 @@ app.post('/delete-vm', (req, res) => {
   var url = " https://p-ansible-tower01.juniper.net/api/v1/job_templates/34/launch/";
   var obj = ' -d  \'' + vm + '\'';
   var curl_req = curl_cmd_post + obj + url;
-  exec(curl_req, function(err, stdout, stderr){
+  exec(curl_req, function (err, stdout, stderr) {
     console.log('/delete-vm err', err);
     console.log('/delete-vm stdout', stdout);
     console.log('/delete-vm stderr', stderr);
     if (err) {
-      res.status(400).send({err});
+      res.status(400).send({
+        err
+      });
     } else {
       res.send({
         message: 'vm is deleted',
@@ -236,13 +288,18 @@ app.post('/delete-vm', (req, res) => {
 app.post('/create-vc', (req, res) => {
   var data = req.body.data;
   var location = req.body.location;
-  redisClient.set(location, data, function(err, reply) {
+  redisClient.set(location, data, function (err, reply) {
     if (err) {
-      res.status(400).send({err});
+      res.status(400).send({
+        err
+      });
     }
     res.send({
       message: 'data for `' + location + '` is updated.',
-      data: {reply, data}
+      data: {
+        reply,
+        data
+      }
     });
   });
 });

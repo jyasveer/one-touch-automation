@@ -19,7 +19,7 @@
                                 <a routerLink="/create-vm/{{ loginObj?.username }}">Create VM</a>
                             </li>
                             <li role="presentation" routerLinkActive="active">
-                                <a routerLink="/delete-vm">Delete VM</a>
+                                <a routerLink="/delete-vm/{{ loginObj?.username }}">Delete VM</a>
                             </li>
                             <li role="presentation" routerLinkActive="active" *ngIf="!loginObj?.isLoggedIn">
                                 <a routerLink="/login">Login</a>
