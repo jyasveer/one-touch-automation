@@ -337,6 +337,20 @@ var CreateVmComponent = (function () {
         var _this = this;
         this.showSubmit = false;
         this.isVmCreating = true;
+        this.service.getCreateVmId()
+            .subscribe(function (response) {
+            if (response) {
+                var resJson = response.json();
+                var data = resJson['data'];
+                if (data) {
+                    _this.createVmId = data['id'];
+                    _this.createVm();
+                }
+            }
+        });
+    };
+    CreateVmComponent.prototype.createVm = function () {
+        var _this = this;
         var emails = '';
         if (this.email) {
             emails = this.userEmail + ',' + this.email;
@@ -358,7 +372,7 @@ var CreateVmComponent = (function () {
             email_address: emails,
             inc_number: this.incNumber
         };
-        this.service.createVm(vm)
+        this.service.createVm(this.createVmId, vm)
             .subscribe(function (response) {
             console.log('response from create vm', response.json());
             _this.isVmCreating = false;
@@ -677,6 +691,20 @@ var DeleteVmComponent = (function () {
         var _this = this;
         this.showSubmit = false;
         this.isVmDeleting = true;
+        this.service.getCreateVmId()
+            .subscribe(function (response) {
+            if (response) {
+                var resJson = response.json();
+                var data = resJson['data'];
+                if (data) {
+                    _this.deleteVmId = data['id'];
+                    _this.deleteVm();
+                }
+            }
+        });
+    };
+    DeleteVmComponent.prototype.deleteVm = function () {
+        var _this = this;
         var emails = '';
         if (this.email) {
             emails = this.userEmail + ',' + this.email;
@@ -689,7 +717,7 @@ var DeleteVmComponent = (function () {
             vc_name: this.vcName,
             email_address: emails,
         };
-        this.service.deleteVm(vmToDelete)
+        this.service.deleteVm(this.deleteVmId, vmToDelete)
             .subscribe(function (response) {
             console.log('response from delete vm', response.json());
             _this.isVmDeleting = false;
@@ -1126,15 +1154,27 @@ var AppService = (function () {
     AppService.prototype.getLocationData = function (location) {
         return this.http.get(this.host + '/data/' + location);
     };
-    AppService.prototype.createVm = function (vm) {
-        var payload = JSON.stringify({ extra_vars: vm });
-        console.log('payload in create vm', payload);
-        return this.http.post(this.host + '/create-vm', { vm: payload });
+    AppService.prototype.getCreateVmId = function () {
+        return this.http.get(this.host + '/create-vm/id');
     };
-    AppService.prototype.deleteVm = function (vm) {
-        var payload = JSON.stringify({ extra_vars: vm });
-        console.log('payload in delete vm', payload);
-        return this.http.post(this.host + '/delete-vm', { vm: payload });
+    AppService.prototype.createVm = function (id, vm) {
+        var vmString = JSON.stringify({ extra_vars: vm });
+        var payload = {
+            id: id,
+            vm: vmString
+        };
+        return this.http.post(this.host + '/create-vm', payload);
+    };
+    AppService.prototype.getDeleteVmId = function () {
+        return this.http.get(this.host + '/delete-vm/id');
+    };
+    AppService.prototype.deleteVm = function (id, vm) {
+        var vmString = JSON.stringify({ extra_vars: vm });
+        var payload = {
+            id: id,
+            vm: vmString
+        };
+        return this.http.post(this.host + '/delete-vm', payload);
     };
     AppService.prototype.extractData = function (response) {
         var body = response.json() || {};

@@ -55,6 +55,7 @@ export class CreateVmComponent implements OnInit {
     private buData: any = null;
     private clusterData: any = null;
     private interfaceTypeData: any = null;
+    private createVmId: string;
 
     constructor(
         private router: Router,
@@ -128,6 +129,20 @@ export class CreateVmComponent implements OnInit {
     onSubmit() {
         this.showSubmit = false;
         this.isVmCreating = true;
+        this.service.getCreateVmId()
+        .subscribe((response) => {
+            if (response) {
+                const resJson = response.json();
+                const data = resJson['data'];
+                if (data) {
+                    this.createVmId = data['id'];
+                    this.createVm();
+                }
+            }
+        });
+    }
+
+    createVm() {
         let emails = '';
         if (this.email) {
             emails = this.userEmail + ',' + this.email;
@@ -148,7 +163,7 @@ export class CreateVmComponent implements OnInit {
             email_address: emails,
             inc_number: this.incNumber
         };
-        this.service.createVm(vm)
+        this.service.createVm(this.createVmId, vm)
         .subscribe((response) => {
             console.log('response from create vm', response.json());
             this.isVmCreating = false;
