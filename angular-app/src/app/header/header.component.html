@@ -12,20 +12,20 @@
                     </div>
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" routerLinkActive="active">
+                            <!--<li role="presentation" routerLinkActive="active">
                                 <a routerLink="/home">Home</a>
+                            </li>-->
+                            <li role="presentation" routerLinkActive="active">
+                                <a routerLink="create-vm">Create VM</a>
                             </li>
                             <li role="presentation" routerLinkActive="active">
-                                <a routerLink="/create-vm/{{ loginObj?.username }}">Create VM</a>
+                                <a routerLink="delete-vm">Delete VM</a>
                             </li>
-                            <li role="presentation" routerLinkActive="active">
-                                <a routerLink="/delete-vm/{{ loginObj?.username }}">Delete VM</a>
-                            </li>
-                            <li role="presentation" routerLinkActive="active" *ngIf="!loginObj?.isLoggedIn">
+                            <!--<li role="presentation" routerLinkActive="active" *ngIf="!loginObj?.isLoggedIn">
                                 <a routerLink="/login">Login</a>
-                            </li>
+                            </li>-->
                             <li role="presentation" *ngIf="loginObj?.isLoggedIn">
-                                <a routerLink="/home" (click)="logout()">Logout</a>
+                                <a routerLink="/login" (click)="logout()">Logout</a>
                             </li>
                         </ul>
                     </div>

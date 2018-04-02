@@ -41,11 +41,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var appRoutes = [
-    { path: '', pathMatch: 'full', redirectTo: '/home' },
-    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_3__home_home_component__["a" /* HomeComponent */] },
+    { path: '', pathMatch: 'full', redirectTo: '/login' },
     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_2__login_login_component__["a" /* LoginComponent */] },
-    { path: 'create-vm/:email', component: __WEBPACK_IMPORTED_MODULE_4__create_vm_create_vm_component__["a" /* CreateVmComponent */] },
-    { path: 'delete-vm/:email', component: __WEBPACK_IMPORTED_MODULE_5__delete_vm_delete_vm_component__["a" /* DeleteVmComponent */] }
+    {
+        path: 'home', component: __WEBPACK_IMPORTED_MODULE_3__home_home_component__["a" /* HomeComponent */], children: [
+            { path: '', component: __WEBPACK_IMPORTED_MODULE_4__create_vm_create_vm_component__["a" /* CreateVmComponent */] },
+            { path: 'create-vm', component: __WEBPACK_IMPORTED_MODULE_4__create_vm_create_vm_component__["a" /* CreateVmComponent */] },
+            { path: 'delete-vm', component: __WEBPACK_IMPORTED_MODULE_5__delete_vm_delete_vm_component__["a" /* DeleteVmComponent */] }
+        ]
+    }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
@@ -54,8 +58,8 @@ var AppRoutingModule = (function () {
 }());
 AppRoutingModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgModule */])({
-        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forRoot(appRoutes)],
-        exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]]
+        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(appRoutes)],
+        exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
     })
 ], AppRoutingModule);
 
@@ -84,7 +88,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header></app-header>\n<router-outlet></router-outlet>\n"
+module.exports = "<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -134,18 +138,16 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login_module__ = __webpack_require__("../../../../../src/app/login/login.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__header_header_module__ = __webpack_require__("../../../../../src/app/header/header.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home_module__ = __webpack_require__("../../../../../src/app/home/home.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_app_service__ = __webpack_require__("../../../../../src/app/shared/app.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__create_vm_create_vm_module__ = __webpack_require__("../../../../../src/app/create-vm/create-vm.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__delete_vm_delete_vm_module__ = __webpack_require__("../../../../../src/app/delete-vm/delete-vm.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__home_home_module__ = __webpack_require__("../../../../../src/app/home/home.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_app_service__ = __webpack_require__("../../../../../src/app/shared/app.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__create_vm_create_vm_module__ = __webpack_require__("../../../../../src/app/create-vm/create-vm.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__delete_vm_delete_vm_module__ = __webpack_require__("../../../../../src/app/delete-vm/delete-vm.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -173,13 +175,12 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* ReactiveFormsModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_5__app_routing_module__["a" /* AppRoutingModule */],
-            __WEBPACK_IMPORTED_MODULE_8__home_home_module__["a" /* HomeModule */],
+            __WEBPACK_IMPORTED_MODULE_7__home_home_module__["a" /* HomeModule */],
             __WEBPACK_IMPORTED_MODULE_6__login_login_module__["a" /* LoginModule */],
-            __WEBPACK_IMPORTED_MODULE_7__header_header_module__["a" /* HeaderModule */],
-            __WEBPACK_IMPORTED_MODULE_10__create_vm_create_vm_module__["a" /* CreateVmModule */],
-            __WEBPACK_IMPORTED_MODULE_11__delete_vm_delete_vm_module__["a" /* DeleteVmModule */]
+            __WEBPACK_IMPORTED_MODULE_9__create_vm_create_vm_module__["a" /* CreateVmModule */],
+            __WEBPACK_IMPORTED_MODULE_10__delete_vm_delete_vm_module__["a" /* DeleteVmModule */]
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_9__shared_app_service__["a" /* AppService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_8__shared_app_service__["a" /* AppService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -191,7 +192,7 @@ AppModule = __decorate([
 /***/ "../../../../../src/app/create-vm/create-vm.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <alert type=\"success\" *ngIf=\"isVmCreated\">\n        <strong>VM is created successfully.</strong>\n    </alert>\n    <alert type=\"info\" *ngIf=\"isVmCreating\">\n        <strong>VM is being created.</strong>\n    </alert>\n    <alert type=\"danger\" *ngIf=\"isVmCreateError\">\n        <strong>Error in creating VM.</strong>\n    </alert>\n    <div class=\"col-lg-6\">\n        <form class=\"form-horizontal\" role=\"form\" #vmForm=\"ngForm\">\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* VM Name\n                </label>\n                <div class=\"col-sm-8\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL MACHINE NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"machineName\"\n                        name=\"vmName\" #vmName=\"ngModel\">\n                    <div *ngIf=\"isPreview\">{{ machineName || '---' }}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* OS Family</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-vc\" class=\"form-control\" required [(ngModel)]=\"selectedOs\" *ngIf=\"!isPreview\"\n                        name=\"osName\" #osName=\"ngModel\">\n                        <option value=\"\">SELECT-OS</option>\n                        <option *ngFor=\"let os of osNameArray\" [value]=\"os\">{{ os }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedOs ? selectedOs : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && osNameArray?.length === 0\">OS data not found.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* Region Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-region\" class=\"form-control\" required (change)=\"getDataForRegion()\" [(ngModel)]=\"selectedRegion\" *ngIf=\"!isPreview\"\n                        name=\"region\" #region=\"ngModel\">\n                        <option value=\"\">SELECT-REGION</option>\n                        <option value=\"bng\">Bangalore</option>\n                        <option value=\"svl\">Sunnyvale</option>\n                        <option value=\"qnc\">QNC</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedRegion ? selectedRegion : '---' }}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* VC Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-vc\" class=\"form-control\" required [(ngModel)]=\"selectedVc\" (change)=\"getDataCenters(formModal)\" *ngIf=\"!isPreview\"\n                        name=\"vcName\" #vcName=\"ngModel\" [disabled]=\"selectedRegion === ''\">\n                        <option value=\"\">SELECT-VC NAME</option>\n                        <option value=\"create-new-vc\">Create VC</option>\n                        <option *ngFor=\"let vc of vcNameArray\" [value]=\"vc\">{{ vc }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedVc ? selectedVc : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedRegion !== '' && vcNameArray?.length === 0\">VC not found for selected Region.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* DC Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-dc\" class=\"form-control\" required [(ngModel)]=\"selectedDc\" (change)=\"getBussinessUnits()\" *ngIf=\"!isPreview\"\n                        name=\"dcName\" #dcName=\"ngModel\">\n                        <option value=\"\">SELECT-DC NAME</option>\n                        <option *ngFor=\"let dc of dcNameArray\" [value]=\"dc\">{{ dc }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedDc ? selectedDc : '---'}}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedVc !== '' && selectedVc !== 'create-new-vc' && dcNameArray?.length === 0\">DC not found for selected VC.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* BU Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-bu\" class=\"form-control\" required [(ngModel)]=\"selectedBu\" (change)=\"getClusters()\" *ngIf=\"!isPreview\"\n                        name=\"buName\" #buName=\"ngModel\">\n                        <option value=\"\">SELECT-BU NAME</option>\n                        <option *ngFor=\"let bu of buNameArray\" [value]=\"bu\">{{ bu }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedBu ? selectedBu : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedDc !== '' && buNameArray?.length === 0\">BU not found for selected DC.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* Cluster Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-cluster\" class=\"form-control\" required [(ngModel)]=\"selectedCluster\" (change)=\"getResourcePoolAndInterfaceTypes()\"\n                        *ngIf=\"!isPreview\" name=\"cluster\" #cluster=\"ngModel\">\n                        <option value=\"\">SELECT-CLUSTER</option>\n                        <option *ngFor=\"let cluster of clusterNameArray\" [value]=\"cluster\">{{ cluster }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedCluster ? selectedCluster : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedBu !== '' && clusterNameArray?.length === 0\">Cluster not found for selected BU.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">Resource Pool</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-resource\" class=\"form-control\" [(ngModel)]=\"selectedResourcePool\" *ngIf=\"!isPreview\" name=\"resource\"\n                        #resource=\"ngModel\">\n                        <option value=\"\">SELECT-RESOURCE</option>\n                        <option *ngFor=\"let rp of resourcePoolArray\" [value]=\"rp\">{{ rp }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedResourcePool ? selectedResourcePool : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedCluster !== '' && resourcePoolArray?.length === 0\">Resource Pool not found for selected Cluster.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* Interface Type</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-interface-type\" class=\"form-control\" required [(ngModel)]=\"selectedInterfaceType\" *ngIf=\"!isPreview\"\n                        name=\"interfaceType\" #interfaceType=\"ngModel\" (change)=\"getInterface()\">\n                        <option value=\"\">SELECT-INTERFACE-TYPE</option>\n                        <option *ngFor=\"let intType of interfaceTypeArray\" [value]=\"intType\">{{ intType }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedInterfaceType ? selectedInterfaceType : '---'}}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedCluster !== '' && interfaceTypeArray?.length === 0\">Interface Type not found for selected Cluster.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* Interface Details</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-interface\" class=\"form-control\" required [(ngModel)]=\"selectedInterface\" *ngIf=\"!isPreview\" name=\"interface\"\n                        #interface=\"ngModel\">\n                        <option value=\"\">SELECT-INTERFACE</option>\n                        <option *ngFor=\"let int of interfaceArray\" [value]=\"int\">{{ int }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedInterface ? selectedInterface : '---'}}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedInterfaceType !== '' && interfaceArray?.length === 0\">Interface not found for selected Interface type.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">Email Address </label>\n                <div class=\"col-sm-8\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"EMAIL\" [(ngModel)]=\"email\" *ngIf=\"!isPreview\" name=\"emailString\" #emailString=\"ngModel\">\n                    <div *ngIf=\"isPreview\">\n                        {{ userEmail }}\n                        <span *ngIf=\"email !== ''\">\n                            , {{ this.email }}\n                        </span>\n                    </div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview\">User's email :- {{ userEmail }}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* INC Number </label>\n                <div class=\"col-sm-8\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"Enter INC_NUMBER\" [(ngModel)]=\"incNumber\" *ngIf=\"!isPreview\" name=\"incNumberString\" #incNumberString=\"ngModel\" required>\n                    <div *ngIf=\"isPreview\">{{ incNumber ? incNumber : '---'}}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-4 col-sm-8\">\n                    <button type=\"button\" class=\"btn btn-default\" *ngIf=\"! isPreview\" (click)=\"isPreview = true\" [disabled]=\"vmForm.invalid\">Next</button>\n                </div>\n                <div class=\"col-sm-offset-4 col-sm-8\">\n                    <button type=\"button\" class=\"btn btn-default\" *ngIf=\"isPreview && !isVmCreated\" (click)=\"onSubmit()\">Submit</button>\n                    <button type=\"button\" class=\"btn btn-default\" style=\"margin-left: 10px\" *ngIf=\"isPreview && !isVmCreating && !isVmCreated\"\n                        (click)=\"isPreview = false\">Back</button>\n                </div>\n            </div>\n        </form>\n        <ng-template #formModal>\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title pull-left\">Create VC</h4>\n                <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"formModalRef.hide()\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <div class=\"form-group\">\n                    <label>Please enter a VC name:</label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"newVcName\" (ngModelChange)=\"checkIfVcNameExists()\">\n                    <div class=\"text-muted\" *ngIf=\"isVcNamePresent\">VC name already present. Please enter a different name</div>\n                </div>\n                <div class=\"form-group\">\n                    <button class=\"btn btn-default\" [disabled]=\"isVcNamePresent || newVcName === ''\" (click)=\"createVc()\">Create</button>\n                    <button class=\"btn btn-default\" (click)=\"formModalRef.hide()\">Cancel</button>\n                </div>\n            </div>\n        </ng-template>\n    </div>\n</div>"
+module.exports = "<div class=\"container\">\n    <alert type=\"success\" *ngIf=\"isVmCreated\">\n        <strong>VM is created successfully.</strong>\n    </alert>\n    <alert type=\"info\" *ngIf=\"isVmCreating\">\n        <strong>VM is being created.</strong>\n    </alert>\n    <alert type=\"danger\" *ngIf=\"isVmCreateError\">\n        <strong>Error in creating VM.</strong>\n    </alert>\n    <div class=\"col-lg-6\">\n        <form class=\"form-horizontal\" role=\"form\" #vmForm=\"ngForm\">\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* VM Name\n                </label>\n                <div class=\"col-sm-8\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL MACHINE NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"machineName\"\n                        name=\"vmName\" #vmName=\"ngModel\">\n                    <div *ngIf=\"isPreview\">{{ machineName || '---' }}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* OS Family</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-vc\" class=\"form-control\" required [(ngModel)]=\"selectedOs\" *ngIf=\"!isPreview\"\n                        name=\"osName\" #osName=\"ngModel\">\n                        <option value=\"\">SELECT-OS</option>\n                        <option *ngFor=\"let os of osNameArray\" [value]=\"os\">{{ os }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedOs ? selectedOs : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && osNameArray?.length === 0\">OS data not found.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* Region Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-region\" class=\"form-control\" required (change)=\"getDataForRegion()\" [(ngModel)]=\"selectedRegion\" *ngIf=\"!isPreview\"\n                        name=\"region\" #region=\"ngModel\">\n                        <option value=\"\">SELECT-REGION</option>\n                        <option value=\"bng\">Bangalore</option>\n                        <option value=\"svl\">Sunnyvale</option>\n                        <option value=\"qnc\">QNC</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedRegion ? selectedRegion : '---' }}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* VC Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-vc\" class=\"form-control\" required [(ngModel)]=\"selectedVc\" (change)=\"getDataCenters(formModal)\" *ngIf=\"!isPreview\"\n                        name=\"vcName\" #vcName=\"ngModel\" [disabled]=\"selectedRegion === ''\">\n                        <option value=\"\">SELECT-VC NAME</option>\n                        <option value=\"create-new-vc\">Create VC</option>\n                        <option *ngFor=\"let vc of vcNameArray\" [value]=\"vc\">{{ vc }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedVc ? selectedVc : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedRegion !== '' && vcNameArray?.length === 0\">VC not found for selected Region.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* DC Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-dc\" class=\"form-control\" required [(ngModel)]=\"selectedDc\" (change)=\"getBussinessUnits()\" *ngIf=\"!isPreview\"\n                        name=\"dcName\" #dcName=\"ngModel\">\n                        <option value=\"\">SELECT-DC NAME</option>\n                        <option *ngFor=\"let dc of dcNameArray\" [value]=\"dc\">{{ dc }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedDc ? selectedDc : '---'}}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedVc !== '' && selectedVc !== 'create-new-vc' && dcNameArray?.length === 0\">DC not found for selected VC.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* BU Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-bu\" class=\"form-control\" required [(ngModel)]=\"selectedBu\" (change)=\"getClusters()\" *ngIf=\"!isPreview\"\n                        name=\"buName\" #buName=\"ngModel\">\n                        <option value=\"\">SELECT-BU NAME</option>\n                        <option *ngFor=\"let bu of buNameArray\" [value]=\"bu\">{{ bu }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedBu ? selectedBu : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedDc !== '' && buNameArray?.length === 0\">BU not found for selected DC.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* Cluster Name</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-cluster\" class=\"form-control\" required [(ngModel)]=\"selectedCluster\" (change)=\"getResourcePoolAndInterfaceTypes()\"\n                        *ngIf=\"!isPreview\" name=\"cluster\" #cluster=\"ngModel\">\n                        <option value=\"\">SELECT-CLUSTER</option>\n                        <option *ngFor=\"let cluster of clusterNameArray\" [value]=\"cluster\">{{ cluster }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedCluster ? selectedCluster : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedBu !== '' && clusterNameArray?.length === 0\">Cluster not found for selected BU.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">Resource Pool</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-resource\" class=\"form-control\" [(ngModel)]=\"selectedResourcePool\" *ngIf=\"!isPreview\" name=\"resource\"\n                        #resource=\"ngModel\">\n                        <option value=\"\">SELECT-RESOURCE</option>\n                        <option *ngFor=\"let rp of resourcePoolArray\" [value]=\"rp\">{{ rp }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedResourcePool ? selectedResourcePool : '---' }}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedCluster !== '' && resourcePoolArray?.length === 0\">Resource Pool not found for selected Cluster.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* Interface Type</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-interface-type\" class=\"form-control\" required [(ngModel)]=\"selectedInterfaceType\" *ngIf=\"!isPreview\"\n                        name=\"interfaceType\" #interfaceType=\"ngModel\" (change)=\"getInterface()\">\n                        <option value=\"\">SELECT-INTERFACE-TYPE</option>\n                        <option *ngFor=\"let intType of interfaceTypeArray\" [value]=\"intType\">{{ intType }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedInterfaceType ? selectedInterfaceType : '---'}}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedCluster !== '' && interfaceTypeArray?.length === 0\">Interface Type not found for selected Cluster.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* Interface Details</label>\n                <div class=\"col-sm-8\">\n                    <select name=\"select-interface\" class=\"form-control\" required [(ngModel)]=\"selectedInterface\" *ngIf=\"!isPreview\" name=\"interface\"\n                        #interface=\"ngModel\">\n                        <option value=\"\">SELECT-INTERFACE</option>\n                        <option *ngFor=\"let int of interfaceArray\" [value]=\"int\">{{ int }}</option>\n                    </select>\n                    <div *ngIf=\"isPreview\">{{ selectedInterface ? selectedInterface : '---'}}</div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview && selectedInterfaceType !== '' && interfaceArray?.length === 0\">Interface not found for selected Interface type.</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">Email Address </label>\n                <div class=\"col-sm-8\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"EMAIL\" [(ngModel)]=\"email\" *ngIf=\"!isPreview\" name=\"emailString\" #emailString=\"ngModel\">\n                    <div *ngIf=\"isPreview\">\n                        {{ userEmail }}\n                        <span *ngIf=\"email !== ''\">\n                            , {{ this.email }}\n                        </span>\n                    </div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview\">User's email :- {{ userEmail }}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* INC Number </label>\n                <div class=\"col-sm-8\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"Enter INC_NUMBER\" [(ngModel)]=\"incNumber\" *ngIf=\"!isPreview\" name=\"incNumberString\" #incNumberString=\"ngModel\" required>\n                    <div *ngIf=\"isPreview\">{{ incNumber ? incNumber : '---'}}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-4 col-sm-8\">\n                    <button type=\"button\" class=\"btn btn-default\" *ngIf=\"! isPreview\" (click)=\"isPreview = true\" [disabled]=\"vmForm.invalid\">Next</button>\n                </div>\n                <div class=\"col-sm-offset-4 col-sm-8\">\n                    <button type=\"button\" class=\"btn btn-default\" *ngIf=\"isPreview && showSubmit\" (click)=\"onSubmit()\">Submit</button>\n                    <button type=\"button\" class=\"btn btn-default\" style=\"margin-left: 10px\" *ngIf=\"isPreview && showSubmit\"\n                        (click)=\"isPreview = false\">Back</button>\n                </div>\n            </div>\n        </form>\n        <ng-template #formModal>\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title pull-left\">Create VC</h4>\n                <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"formModalRef.hide()\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <div class=\"form-group\">\n                    <label>Please enter a VC name:</label>\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"newVcName\" (ngModelChange)=\"checkIfVcNameExists()\">\n                    <div class=\"text-muted\" *ngIf=\"isVcNamePresent\">VC name already present. Please enter a different name</div>\n                </div>\n                <div class=\"form-group\">\n                    <button class=\"btn btn-default\" [disabled]=\"isVcNamePresent || newVcName === ''\" (click)=\"createVc()\">Create</button>\n                    <button class=\"btn btn-default\" (click)=\"formModalRef.hide()\">Cancel</button>\n                </div>\n            </div>\n        </ng-template>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -236,8 +237,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var CreateVmComponent = (function () {
-    function CreateVmComponent(route, router, modalService, service) {
-        this.route = route;
+    function CreateVmComponent(router, modalService, service) {
         this.router = router;
         this.modalService = modalService;
         this.service = service;
@@ -264,6 +264,7 @@ var CreateVmComponent = (function () {
         this.isVmCreated = false;
         this.isVmCreateError = false;
         this.isVcNamePresent = false;
+        this.showSubmit = true;
         this.regionData = null;
         this.vcData = null;
         this.dcData = null;
@@ -273,10 +274,12 @@ var CreateVmComponent = (function () {
     }
     CreateVmComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.route.params
-            .subscribe(function (params) {
-            _this.userEmail = params['email'];
-        });
+        if (this.service.loggedInUser && this.service.loggedInUser.username) {
+            this.userEmail = this.service.loggedInUser.username;
+        }
+        else {
+            this.router.navigate(['login']);
+        }
         this.service.getOsData()
             .subscribe(function (response) {
             if (response.json()['data']) {
@@ -332,6 +335,7 @@ var CreateVmComponent = (function () {
     };
     CreateVmComponent.prototype.onSubmit = function () {
         var _this = this;
+        this.showSubmit = false;
         this.isVmCreating = true;
         var emails = '';
         if (this.email) {
@@ -545,10 +549,10 @@ CreateVmComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/create-vm/create-vm.component.scss")],
         template: __webpack_require__("../../../../../src/app/create-vm/create-vm.component.html")
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_modal__["a" /* BsModalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_modal__["a" /* BsModalService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__shared_app_service__["a" /* AppService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_app_service__["a" /* AppService */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_modal__["a" /* BsModalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_modal__["a" /* BsModalService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_app_service__["a" /* AppService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_app_service__["a" /* AppService */]) === "function" && _c || Object])
 ], CreateVmComponent);
 
-var _a, _b, _c, _d;
+var _a, _b, _c;
 //# sourceMappingURL=/Users/jgotta/training/redis-nodejs/one-touch-automation/angular-app/src/create-vm.component.js.map
 
 /***/ }),
@@ -605,7 +609,7 @@ CreateVmModule = __decorate([
 /***/ "../../../../../src/app/delete-vm/delete-vm.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <alert type=\"success\" *ngIf=\"isVmDeleted\">\n      <strong>VM is deleted successfully.</strong>\n  </alert>\n  <alert type=\"info\" *ngIf=\"isVmDeleting\">\n      <strong>VM is being deleted.</strong>\n  </alert>\n  <alert type=\"danger\" *ngIf=\"isVmDeleteError\">\n      <strong>Error in deleting VM.</strong>\n  </alert>\n  <div class=\"col-lg-6\">\n      <form class=\"form-horizontal\" role=\"form\" #vmForm=\"ngForm\">\n          <div class=\"form-group\">\n              <label class=\"col-sm-4 control-label\">* VM Name\n              </label>\n              <div class=\"col-sm-8\">\n                  <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL MACHINE NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"machineName\"\n                      name=\"name\" #name=\"ngModel\">\n                  <div *ngIf=\"isPreview\">{{ machineName || '---' }}</div>\n              </div>\n          </div>\n          <div class=\"form-group\">\n              <label class=\"col-sm-4 control-label\">* VC Name</label>\n              <div class=\"col-sm-8\">\n                <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL CENTER NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"vcName\"\n                    name=\"vcNameInput\" #vcNameInput=\"ngModel\">\n                <div *ngIf=\"isPreview\">{{ vcName || '---' }}</div>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n              <label class=\"col-sm-4 control-label\">* Email Address </label>\n              <div class=\"col-sm-8\">\n                  <input type=\"text\" class=\"form-control\" placeholder=\"EMAIL\" [(ngModel)]=\"email\" *ngIf=\"!isPreview\" name=\"emailString\" #emailString=\"ngModel\">\n                  <div *ngIf=\"isPreview\">\n                    {{ userEmail }}\n                    <span *ngIf=\"email !== ''\">\n                        , {{ this.email }}\n                    </span>\n                </div>\n                <div class=\"text-muted\" *ngIf=\"!isPreview\">User's email :- {{ userEmail }}</div>\n              </div>\n          </div>\n          <div class=\"form-group\">\n              <div class=\"col-sm-offset-4 col-sm-8\">\n                  <button type=\"button\" class=\"btn btn-default\" *ngIf=\"! isPreview\" (click)=\"isPreview = true\" [disabled]=\"vmForm.invalid\">Next</button>\n              </div>\n              <div class=\"col-sm-offset-4 col-sm-8\">\n                  <button type=\"button\" class=\"btn btn-default\" *ngIf=\"isPreview && !isVmCreated\" (click)=\"onSubmit()\">Submit</button>\n                  <button type=\"button\" class=\"btn btn-default\" style=\"margin-left: 10px\" *ngIf=\"isPreview && !isVmCreating && !isVmCreated\"\n                      (click)=\"isPreview = false\">Back</button>\n              </div>\n          </div>\n      </form>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <alert type=\"success\" *ngIf=\"isVmDeleted\">\n      <strong>VM is deleted successfully.</strong>\n  </alert>\n  <alert type=\"info\" *ngIf=\"isVmDeleting\">\n      <strong>VM is being deleted.</strong>\n  </alert>\n  <alert type=\"danger\" *ngIf=\"isVmDeleteError\">\n      <strong>Error in deleting VM.</strong>\n  </alert>\n  <div class=\"col-lg-6\">\n      <form class=\"form-horizontal\" role=\"form\" #vmForm=\"ngForm\">\n          <div class=\"form-group\">\n              <label class=\"col-sm-4 control-label\">* VM Name\n              </label>\n              <div class=\"col-sm-8\">\n                  <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL MACHINE NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"machineName\"\n                      name=\"name\" #name=\"ngModel\">\n                  <div *ngIf=\"isPreview\">{{ machineName || '---' }}</div>\n              </div>\n          </div>\n          <div class=\"form-group\">\n              <label class=\"col-sm-4 control-label\">* VC Name</label>\n              <div class=\"col-sm-8\">\n                <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL CENTER NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"vcName\"\n                    name=\"vcNameInput\" #vcNameInput=\"ngModel\">\n                <div *ngIf=\"isPreview\">{{ vcName || '---' }}</div>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n              <label class=\"col-sm-4 control-label\">Email Address </label>\n              <div class=\"col-sm-8\">\n                  <input type=\"text\" class=\"form-control\" placeholder=\"EMAIL\" [(ngModel)]=\"email\" *ngIf=\"!isPreview\" name=\"emailString\" #emailString=\"ngModel\">\n                  <div *ngIf=\"isPreview\">\n                    {{ userEmail }}\n                    <span *ngIf=\"email !== ''\">\n                        , {{ this.email }}\n                    </span>\n                </div>\n                <div class=\"text-muted\" *ngIf=\"!isPreview\">User's email :- {{ userEmail }}</div>\n              </div>\n          </div>\n          <div class=\"form-group\">\n              <div class=\"col-sm-offset-4 col-sm-8\">\n                  <button type=\"button\" class=\"btn btn-default\" *ngIf=\"! isPreview\" (click)=\"isPreview = true\" [disabled]=\"vmForm.invalid\">Next</button>\n              </div>\n              <div class=\"col-sm-offset-4 col-sm-8\">\n                  <button type=\"button\" class=\"btn btn-default\" *ngIf=\"isPreview && showSubmit\" (click)=\"onSubmit()\">Submit</button>\n                  <button type=\"button\" class=\"btn btn-default\" style=\"margin-left: 10px\" *ngIf=\"isPreview && showSubmit\"\n                      (click)=\"isPreview = false\">Back</button>\n              </div>\n          </div>\n      </form>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -648,8 +652,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var DeleteVmComponent = (function () {
-    function DeleteVmComponent(route, service) {
-        this.route = route;
+    function DeleteVmComponent(router, service) {
+        this.router = router;
         this.service = service;
         this.machineName = '';
         this.vcName = '';
@@ -659,16 +663,19 @@ var DeleteVmComponent = (function () {
         this.isVmDeleting = false;
         this.isVmDeleted = false;
         this.isVmDeleteError = false;
+        this.showSubmit = true;
     }
     DeleteVmComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.params
-            .subscribe(function (params) {
-            _this.userEmail = params['email'];
-        });
+        if (this.service.loggedInUser && this.service.loggedInUser.username) {
+            this.userEmail = this.service.loggedInUser.username;
+        }
+        else {
+            this.router.navigate(['login']);
+        }
     };
     DeleteVmComponent.prototype.onSubmit = function () {
         var _this = this;
+        this.showSubmit = false;
         this.isVmDeleting = true;
         var emails = '';
         if (this.email) {
@@ -701,7 +708,7 @@ DeleteVmComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/delete-vm/delete-vm.component.scss")],
         template: __webpack_require__("../../../../../src/app/delete-vm/delete-vm.component.html"),
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_app_service__["a" /* AppService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_app_service__["a" /* AppService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_app_service__["a" /* AppService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_app_service__["a" /* AppService */]) === "function" && _b || Object])
 ], DeleteVmComponent);
 
 var _a, _b;
@@ -754,7 +761,7 @@ DeleteVmModule = __decorate([
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header>\n    <div class=\"container\">\n        <div class=\"row\">\n            <nav class=\"navbar navbar-default\" role=\"navigation\">\n                <div class=\"container-fluid\">\n                    <div class=\"navbar-header\">\n                        <div class=\"navbar-brand\">\n                            <a routerLink=\"/home\">\n                                <h1>ONE-TOUCH-AUTOMATION</h1>\n                            </a>\n                        </div>\n                    </div>\n                    <div class=\"menu\">\n                        <ul class=\"nav nav-tabs\" role=\"tablist\">\n                            <li role=\"presentation\" routerLinkActive=\"active\">\n                                <a routerLink=\"/home\">Home</a>\n                            </li>\n                            <li role=\"presentation\" routerLinkActive=\"active\">\n                                <a routerLink=\"/create-vm/{{ loginObj?.username }}\">Create VM</a>\n                            </li>\n                            <li role=\"presentation\" routerLinkActive=\"active\">\n                                <a routerLink=\"/delete-vm/{{ loginObj?.username }}\">Delete VM</a>\n                            </li>\n                            <li role=\"presentation\" routerLinkActive=\"active\" *ngIf=\"!loginObj?.isLoggedIn\">\n                                <a routerLink=\"/login\">Login</a>\n                            </li>\n                            <li role=\"presentation\" *ngIf=\"loginObj?.isLoggedIn\">\n                                <a routerLink=\"/home\" (click)=\"logout()\">Logout</a>\n                            </li>\n                        </ul>\n                    </div>\n                </div>\n            </nav>\n        </div>\n    </div>\n</header>"
+module.exports = "<header>\n    <div class=\"container\">\n        <div class=\"row\">\n            <nav class=\"navbar navbar-default\" role=\"navigation\">\n                <div class=\"container-fluid\">\n                    <div class=\"navbar-header\">\n                        <div class=\"navbar-brand\">\n                            <a routerLink=\"/home\">\n                                <h1>ONE-TOUCH-AUTOMATION</h1>\n                            </a>\n                        </div>\n                    </div>\n                    <div class=\"menu\">\n                        <ul class=\"nav nav-tabs\" role=\"tablist\">\n                            <!--<li role=\"presentation\" routerLinkActive=\"active\">\n                                <a routerLink=\"/home\">Home</a>\n                            </li>-->\n                            <li role=\"presentation\" routerLinkActive=\"active\">\n                                <a routerLink=\"create-vm\">Create VM</a>\n                            </li>\n                            <li role=\"presentation\" routerLinkActive=\"active\">\n                                <a routerLink=\"delete-vm\">Delete VM</a>\n                            </li>\n                            <!--<li role=\"presentation\" routerLinkActive=\"active\" *ngIf=\"!loginObj?.isLoggedIn\">\n                                <a routerLink=\"/login\">Login</a>\n                            </li>-->\n                            <li role=\"presentation\" *ngIf=\"loginObj?.isLoggedIn\">\n                                <a routerLink=\"/login\" (click)=\"logout()\">Logout</a>\n                            </li>\n                        </ul>\n                    </div>\n                </div>\n            </nav>\n        </div>\n    </div>\n</header>"
 
 /***/ }),
 
@@ -781,16 +788,17 @@ var HeaderComponent = (function () {
         this.service = service;
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.service.loginEvent
-            .subscribe(function (loginObj) {
-            _this.loginObj = loginObj;
-        });
+        // this.service.loginEvent
+        // .subscribe((loginObj: LoginModel) => {
+        //     this.loginObj = loginObj;
+        // });
+        this.loginObj = this.service.loggedInUser;
     };
     HeaderComponent.prototype.logout = function () {
-        this.service.loginEvent.next({
-            username: '', isLoggedIn: false
-        });
+        // this.service.loginEvent.next({
+        //     username: '', isLoggedIn: false
+        // });
+        this.service.loggedInUser.isLoggedIn = false;
     };
     return HeaderComponent;
 }());
@@ -835,7 +843,7 @@ HeaderModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgModule */])({
         imports: [
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */]
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */]
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_3__header_component__["a" /* HeaderComponent */]
@@ -853,7 +861,7 @@ HeaderModule = __decorate([
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<carousel>\n    <slide>\n        <img src=\"http://res.cloudinary.com/jyasveer/image/upload/v1520773135/img3.jpg\" alt=\"First slide\" style=\"display: block; width: 100%;\">\n    </slide>\n    <slide>\n        <img src=\"http://res.cloudinary.com/jyasveer/image/upload/v1520773564/img.jpg\" alt=\"Second slide\" style=\"display: block; width: 100%;\">\n    </slide>\n</carousel>\n<!-- Responsive slider - END -->"
+module.exports = "<app-header></app-header>\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -893,14 +901,16 @@ HomeComponent = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_carousel__ = __webpack_require__("../../../../ngx-bootstrap/carousel/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_component__ = __webpack_require__("../../../../../src/app/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__header_header_module__ = __webpack_require__("../../../../../src/app/header/header.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -914,7 +924,8 @@ HomeModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgModule */])({
         imports: [
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-            __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_carousel__["a" /* CarouselModule */].forRoot()
+            __WEBPACK_IMPORTED_MODULE_4__header_header_module__["a" /* HeaderModule */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */]
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_3__home_component__["a" /* HomeComponent */]
@@ -932,7 +943,25 @@ HomeModule = __decorate([
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <div class=\"col-lg-6\">\n        <div class=\"form-horizontal\" role=\"form\">\n            <div class=\"form-group\">\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">Email</label>\n                <div class=\"col-sm-10\">\n                    <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Email\" [(ngModel)]=\"username\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label for=\"inputPassword3\" class=\"col-sm-2 control-label\">Password</label>\n                <div class=\"col-sm-10\">\n                    <input type=\"password\" class=\"form-control\" id=\"inputPassword3\" placeholder=\"Password\" [(ngModel)]=\"password\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-2 col-sm-10\">\n                    <div class=\"checkbox\">\n                        <label>\n                            <input type=\"checkbox\"> Remember me\n                        </label>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-2 col-sm-10\">\n                    <button type=\"button\" (click)=\"submit()\" class=\"btn btn-default\">Submit</button>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<carousel>\n    <!--<slide>\n        <img src=\"http://res.cloudinary.com/jyasveer/image/upload/v1520773135/img3.jpg\" alt=\"First slide\" style=\"display: block; width: 100%;\">\n    </slide>-->\n    <slide>\n        <img src=\"http://res.cloudinary.com/jyasveer/image/upload/v1520773564/img.jpg\" alt=\"Second slide\" style=\"display: block; width: 100%;\">\n    </slide>\n</carousel>\n<div class=\"container login\">\n    <div class=\"col-lg-6\">\n        <div class=\"form-horizontal\" role=\"form\">\n            <div class=\"form-group\">\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">Email</label>\n                <div class=\"col-sm-10\">\n                    <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Email\" [(ngModel)]=\"username\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label for=\"inputPassword3\" class=\"col-sm-2 control-label\">Password</label>\n                <div class=\"col-sm-10\">\n                    <input type=\"password\" class=\"form-control\" id=\"inputPassword3\" placeholder=\"Password\" [(ngModel)]=\"password\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-2 col-sm-10\">\n                    <div class=\"checkbox\">\n                        <label>\n                            <input type=\"checkbox\"> Remember me\n                        </label>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-2 col-sm-10\">\n                    <button type=\"button\" (click)=\"submit()\" class=\"btn btn-default\">Submit</button>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/login/login.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".login {\n  position: absolute;\n  top: 150px;\n  left: 50px; }\n  .login label {\n    color: white; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 
@@ -967,20 +996,21 @@ var LoginComponent = (function () {
         this.service.authenticate(this.username, this.password)
             .subscribe(function (response) {
             var data = response.json()['data'];
-            console.log(data);
             if (data['key'] === 'login-success' || data['key'] === 'user-created') {
-                _this.service.loginEvent.next({
+                var user = {
                     username: data['username'],
                     isLoggedIn: true
-                });
-                _this.router.navigate(['/create-vm', data['username']]);
+                };
+                _this.service.loggedInUser = user;
+                _this.router.navigate(['home/create-vm']);
             }
             else {
-                _this.service.loginEvent.next({
+                var user = {
                     username: data['username'],
                     isLoggedIn: false
-                });
-                _this.router.navigate(['/home']);
+                };
+                _this.service.loggedInUser = user;
+                _this.router.navigate(['/login']);
             }
         }, function (error) {
             console.log(error.json());
@@ -991,10 +1021,10 @@ var LoginComponent = (function () {
 LoginComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-login',
-        styleUrls: [],
+        styles: [__webpack_require__("../../../../../src/app/login/login.component.scss")],
         template: __webpack_require__("../../../../../src/app/login/login.component.html")
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_app_service__["a" /* AppService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_app_service__["a" /* AppService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_app_service__["a" /* AppService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_app_service__["a" /* AppService */]) === "function" && _b || Object])
 ], LoginComponent);
 
 var _a, _b;
@@ -1010,13 +1040,15 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_carousel__ = __webpack_require__("../../../../ngx-bootstrap/carousel/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1030,13 +1062,14 @@ LoginModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgModule */])({
         imports: [
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */]
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_carousel__["a" /* CarouselModule */].forRoot()
         ],
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_3__login_component__["a" /* LoginComponent */]
+            __WEBPACK_IMPORTED_MODULE_4__login_component__["a" /* LoginComponent */]
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_3__login_component__["a" /* LoginComponent */]
+            __WEBPACK_IMPORTED_MODULE_4__login_component__["a" /* LoginComponent */]
         ]
     })
 ], LoginModule);
@@ -1054,7 +1087,6 @@ LoginModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/catch.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Subject__ = __webpack_require__("../../../../rxjs/_esm5/Subject.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1068,11 +1100,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var AppService = (function () {
     function AppService(http) {
         this.http = http;
-        this.loginEvent = new __WEBPACK_IMPORTED_MODULE_4_rxjs_Subject__["a" /* Subject */]();
         // private host = 'http://bng-infra-automation.juniper.net:8082';
         this.host = 'http://localhost:8082';
     }

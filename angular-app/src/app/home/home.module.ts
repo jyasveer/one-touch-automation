@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
+import { HeaderModule } from '../header/header.module';
 
 @NgModule({
     imports: [
         CommonModule,
-        CarouselModule.forRoot()
+        HeaderModule,
+        RouterModule
     ],
     declarations: [
         HomeComponent

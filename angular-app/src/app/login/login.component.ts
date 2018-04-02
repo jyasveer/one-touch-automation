@@ -5,7 +5,7 @@ import { AppService } from '../shared/app.service';
 
 @Component({
     selector: 'app-login',
-    styleUrls: [],
+    styleUrls: ['./login.component.scss'],
     templateUrl: './login.component.html'
 })
 export class LoginComponent {
@@ -20,19 +20,20 @@ export class LoginComponent {
         this.service.authenticate(this.username, this.password)
         .subscribe((response: Response) => {
             const data = response.json()['data'];
-            console.log(data);
             if (data['key'] === 'login-success' || data['key'] === 'user-created') {
-                this.service.loginEvent.next({
+                const user = {
                     username: data['username'],
                     isLoggedIn: true
-                });
-                this.router.navigate(['/create-vm', data['username']]);
+                };
+                this.service.loggedInUser = user;
+                this.router.navigate(['home/create-vm']);
             } else {
-                this.service.loginEvent.next({
+                const user = {
                     username: data['username'],
                     isLoggedIn: false
-                });
-                this.router.navigate(['/home']);
+                };
+                this.service.loggedInUser = user;
+                this.router.navigate(['/login']);
             }
         }, (error: Response) => {
             console.log(error.json());

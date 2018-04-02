@@ -13,7 +13,7 @@ import { LoginModel, VmModel } from './model/app.models';
 
 @Injectable()
 export class AppService {
-    loginEvent = new Subject<LoginModel>();
+    loggedInUser: LoginModel;
     // private host = 'http://bng-infra-automation.juniper.net:8082';
     private host = 'http://localhost:8082';
 

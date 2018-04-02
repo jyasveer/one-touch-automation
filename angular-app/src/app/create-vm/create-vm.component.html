@@ -154,8 +154,8 @@
                     <button type="button" class="btn btn-default" *ngIf="! isPreview" (click)="isPreview = true" [disabled]="vmForm.invalid">Next</button>
                 </div>
                 <div class="col-sm-offset-4 col-sm-8">
-                    <button type="button" class="btn btn-default" *ngIf="isPreview && !isVmCreated" (click)="onSubmit()">Submit</button>
-                    <button type="button" class="btn btn-default" style="margin-left: 10px" *ngIf="isPreview && !isVmCreating && !isVmCreated"
+                    <button type="button" class="btn btn-default" *ngIf="isPreview && showSubmit" (click)="onSubmit()">Submit</button>
+                    <button type="button" class="btn btn-default" style="margin-left: 10px" *ngIf="isPreview && showSubmit"
                         (click)="isPreview = false">Back</button>
                 </div>
             </div>
