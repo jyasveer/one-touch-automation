@@ -4,8 +4,7 @@ import {
     TemplateRef
 } from '@angular/core';
 import {
-    Router,
-    ActivatedRoute
+    Router
 } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
@@ -48,6 +47,7 @@ export class CreateVmComponent implements OnInit {
     isVmCreated = false;
     isVmCreateError = false;
     isVcNamePresent = false;
+    showSubmit = true;
 
     private regionData: any = null;
     private vcData: any = null;
@@ -57,16 +57,16 @@ export class CreateVmComponent implements OnInit {
     private interfaceTypeData: any = null;
 
     constructor(
-        private route: ActivatedRoute,
         private router: Router,
         private modalService: BsModalService,
         private service: AppService) {}
 
     ngOnInit() {
-        this.route.params
-            .subscribe(params => {
-                this.userEmail = params['email'];
-            });
+        if (this.service.loggedInUser && this.service.loggedInUser.username) {
+            this.userEmail = this.service.loggedInUser.username;    
+        } else {
+            this.router.navigate(['login']);
+        }
         this.service.getOsData()
         .subscribe((response) => {
             if (response.json()['data']) {
@@ -126,6 +126,7 @@ export class CreateVmComponent implements OnInit {
     }
 
     onSubmit() {
+        this.showSubmit = false;
         this.isVmCreating = true;
         let emails = '';
         if (this.email) {

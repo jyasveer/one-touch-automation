@@ -2,7 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import {
   VmModel
@@ -25,19 +25,22 @@ export class DeleteVmComponent implements OnInit {
   isVmDeleting = false;
   isVmDeleted = false;
   isVmDeleteError = false;
+  showSubmit = true;
 
   constructor(
-    private route: ActivatedRoute,
+    private router: Router,
     private service: AppService) {}
 
   ngOnInit() {
-    this.route.params
-      .subscribe(params => {
-        this.userEmail = params['email'];
-      });
+    if (this.service.loggedInUser && this.service.loggedInUser.username) {
+      this.userEmail = this.service.loggedInUser.username;    
+  } else {
+      this.router.navigate(['login']);
+  }
   }
 
   onSubmit() {
+    this.showSubmit = false;
     this.isVmDeleting = true;
     let emails = '';
     if (this.email) {

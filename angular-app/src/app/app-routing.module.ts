@@ -7,11 +7,15 @@ import { CreateVmComponent } from './create-vm/create-vm.component';
 import { DeleteVmComponent } from './delete-vm/delete-vm.component';
 
 const appRoutes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/home' },
-  { path: 'home', component: HomeComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'create-vm/:email', component: CreateVmComponent},
-  { path: 'delete-vm/:email', component: DeleteVmComponent}
+  { path: '', pathMatch: 'full', redirectTo: '/login' },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'home', component: HomeComponent, children: [
+      { path: '', component: CreateVmComponent },
+      { path: 'create-vm', component: CreateVmComponent },
+      { path: 'delete-vm', component: DeleteVmComponent }
+    ]
+  }
 ];
 
 @NgModule({

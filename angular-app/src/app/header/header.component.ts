@@ -12,15 +12,17 @@ export class HeaderComponent implements OnInit {
     constructor(private service: AppService) {}
 
     ngOnInit() {
-        this.service.loginEvent
-        .subscribe((loginObj: LoginModel) => {
-            this.loginObj = loginObj;
-        });
+        // this.service.loginEvent
+        // .subscribe((loginObj: LoginModel) => {
+        //     this.loginObj = loginObj;
+        // });
+        this.loginObj = this.service.loggedInUser;
     }
 
     logout() {
-        this.service.loginEvent.next({
-            username: '', isLoggedIn: false
-        });
+        // this.service.loginEvent.next({
+        //     username: '', isLoggedIn: false
+        // });
+        this.service.loggedInUser.isLoggedIn = false;
     }
 }
