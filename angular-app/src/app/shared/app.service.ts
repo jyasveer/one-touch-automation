@@ -43,16 +43,30 @@ export class AppService {
         return this.http.get(this.host + '/data/' + location);
     }
 
-    createVm(vm: VmModel) {
-        const payload = JSON.stringify({extra_vars: vm});
-        console.log('payload in create vm', payload);
-        return this.http.post(this.host + '/create-vm', {vm: payload});
+    getCreateVmId() {
+        return this.http.get(this.host + '/create-vm/id');
     }
 
-    deleteVm(vm: VmModel) {
-        const payload = JSON.stringify({extra_vars: vm});
-        console.log('payload in delete vm', payload);
-        return this.http.post(this.host + '/delete-vm', {vm: payload});
+    createVm(id: string, vm: VmModel) {
+        const vmString = JSON.stringify({extra_vars: vm});
+        const payload = {
+            id: id,
+            vm: vmString
+        };
+        return this.http.post(this.host + '/create-vm', payload);
+    }
+
+    getDeleteVmId() {
+        return this.http.get(this.host + '/delete-vm/id');
+    }
+
+    deleteVm(id: string, vm: VmModel) {
+        const vmString = JSON.stringify({extra_vars: vm});
+        const payload = {
+            id: id,
+            vm: vmString
+        };
+        return this.http.post(this.host + '/delete-vm', payload);
     }
 
     private extractData(response: Response): any {
