@@ -55,7 +55,8 @@ export class CreateVmComponent implements OnInit {
     private buData: any = null;
     private clusterData: any = null;
     private interfaceTypeData: any = null;
-    private createVmId: string;
+    private createVmLaunchId: string;
+    private createVmJobId: string;
 
     constructor(
         private router: Router,
@@ -128,17 +129,24 @@ export class CreateVmComponent implements OnInit {
 
     onSubmit() {
         this.showSubmit = false;
+        this.isVmCreated = false;
         this.isVmCreating = true;
-        this.service.getCreateVmId()
+        this.isVmCreateError = false;
+        this.service.getCreateVmLaunchId()
         .subscribe((response) => {
             if (response) {
                 const resJson = response.json();
                 const data = resJson['data'];
                 if (data) {
-                    this.createVmId = data['id'];
+                    this.createVmLaunchId = data['id'];
                     this.createVm();
                 }
             }
+        }, (error: Response) => {
+            console.log('error in fetching create vm launch id', error.json());
+            this.isVmCreating = false;
+            this.isVmCreated = false;
+            this.isVmCreateError = true;
         });
     }
 
@@ -163,14 +171,59 @@ export class CreateVmComponent implements OnInit {
             email_address: emails,
             inc_number: this.incNumber
         };
-        this.service.createVm(this.createVmId, vm)
+        this.service.createVm(this.createVmLaunchId, vm)
         .subscribe((response) => {
-            console.log('response from create vm', response.json());
-            this.isVmCreating = false;
-            this.isVmCreated = true;
+            if (response) {
+                const resJson = response.json();
+                const data = resJson['data'];
+                if (data) {
+                    this.createVmJobId = data['job'];
+                    this.pollForJobStatus();
+                }
+            }
+            this.isVmCreating = true;
         }, (error: Response) => {
             console.log('error in create vm', error.json());
             this.isVmCreating = false;
+            this.isVmCreated = false;
+            this.isVmCreateError = true;
+        });
+    }
+
+    pollForJobStatus() {
+        setInterval(this.getJobStatus, 10000);
+    }
+
+    getJobStatus() {
+        this.service.getJobStatus(this.createVmJobId)
+        .subscribe((response) => {
+            if (response) {
+                const resJson = response.json();
+                const data = resJson['data'];
+                if (data) {
+                    let status: string = data['status'];
+                    if (status) {
+                        status = status.toLowerCase();
+                        if (status === 'successful') {
+                            this.isVmCreated = true;
+                            this.isVmCreating = false;
+                            this.isVmCreateError = false;
+                        } else if (status === 'pending' || status === 'running') {
+                            this.isVmCreated = false;
+                            this.isVmCreating = true;
+                            this.isVmCreateError = false;
+                        } else if (status === 'failed') {
+                            this.isVmCreated = false;
+                            this.isVmCreating = false;
+                            this.isVmCreateError = true;
+                        }
+                    }
+                }
+            }
+        }, (error: Response) => {
+            console.log('error in fetch job status for create vm', error.json());
+            this.isVmCreating = false;
+            this.isVmCreated = false;
             this.isVmCreateError = true;
         });
     }

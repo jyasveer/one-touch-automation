@@ -336,17 +336,24 @@ var CreateVmComponent = (function () {
     CreateVmComponent.prototype.onSubmit = function () {
         var _this = this;
         this.showSubmit = false;
+        this.isVmCreated = false;
         this.isVmCreating = true;
-        this.service.getCreateVmId()
+        this.isVmCreateError = false;
+        this.service.getCreateVmLaunchId()
             .subscribe(function (response) {
             if (response) {
                 var resJson = response.json();
                 var data = resJson['data'];
                 if (data) {
-                    _this.createVmId = data['id'];
+                    _this.createVmLaunchId = data['id'];
                     _this.createVm();
                 }
             }
+        }, function (error) {
+            console.log('error in fetching create vm launch id', error.json());
+            _this.isVmCreating = false;
+            _this.isVmCreated = false;
+            _this.isVmCreateError = true;
         });
     };
     CreateVmComponent.prototype.createVm = function () {
@@ -372,14 +379,60 @@ var CreateVmComponent = (function () {
             email_address: emails,
             inc_number: this.incNumber
         };
-        this.service.createVm(this.createVmId, vm)
+        this.service.createVm(this.createVmLaunchId, vm)
             .subscribe(function (response) {
-            console.log('response from create vm', response.json());
-            _this.isVmCreating = false;
-            _this.isVmCreated = true;
+            if (response) {
+                var resJson = response.json();
+                var data = resJson['data'];
+                if (data) {
+                    _this.createVmJobId = data['job'];
+                    _this.pollForJobStatus();
+                }
+            }
+            _this.isVmCreating = true;
         }, function (error) {
             console.log('error in create vm', error.json());
             _this.isVmCreating = false;
+            _this.isVmCreated = false;
+            _this.isVmCreateError = true;
+        });
+    };
+    CreateVmComponent.prototype.pollForJobStatus = function () {
+        setInterval(this.getJobStatus, 10000);
+    };
+    CreateVmComponent.prototype.getJobStatus = function () {
+        var _this = this;
+        this.service.getJobStatus(this.createVmJobId)
+            .subscribe(function (response) {
+            if (response) {
+                var resJson = response.json();
+                var data = resJson['data'];
+                if (data) {
+                    var status = data['status'];
+                    if (status) {
+                        status = status.toLowerCase();
+                        if (status === 'successful') {
+                            _this.isVmCreated = true;
+                            _this.isVmCreating = false;
+                            _this.isVmCreateError = false;
+                        }
+                        else if (status === 'pending' || status === 'running') {
+                            _this.isVmCreated = false;
+                            _this.isVmCreating = true;
+                            _this.isVmCreateError = false;
+                        }
+                        else if (status === 'failed') {
+                            _this.isVmCreated = false;
+                            _this.isVmCreating = false;
+                            _this.isVmCreateError = true;
+                        }
+                    }
+                }
+            }
+        }, function (error) {
+            console.log('error in fetch job status for create vm', error.json());
+            _this.isVmCreating = false;
+            _this.isVmCreated = false;
             _this.isVmCreateError = true;
         });
     };
@@ -691,16 +744,23 @@ var DeleteVmComponent = (function () {
         var _this = this;
         this.showSubmit = false;
         this.isVmDeleting = true;
-        this.service.getCreateVmId()
+        this.isVmDeleted = false;
+        this.isVmDeleteError = false;
+        this.service.getDeleteVmLaunchId()
             .subscribe(function (response) {
             if (response) {
                 var resJson = response.json();
                 var data = resJson['data'];
                 if (data) {
-                    _this.deleteVmId = data['id'];
+                    _this.deleteVmLaunchId = data['id'];
                     _this.deleteVm();
                 }
             }
+        }, function (error) {
+            console.log('error in fetch delete launch id', error.json());
+            _this.isVmDeleted = false;
+            _this.isVmDeleting = false;
+            _this.isVmDeleteError = true;
         });
     };
     DeleteVmComponent.prototype.deleteVm = function () {
@@ -717,14 +777,60 @@ var DeleteVmComponent = (function () {
             vc_name: this.vcName,
             email_address: emails,
         };
-        this.service.deleteVm(this.deleteVmId, vmToDelete)
+        this.service.deleteVm(this.deleteVmLaunchId, vmToDelete)
             .subscribe(function (response) {
-            console.log('response from delete vm', response.json());
-            _this.isVmDeleting = false;
-            _this.isVmDeleted = true;
+            if (response) {
+                var resJson = response.json();
+                var data = resJson['data'];
+                if (data) {
+                    _this.deleteVmJobId = data['job'];
+                    _this.pollForJobStatus();
+                }
+            }
+            _this.isVmDeleting = true;
         }, function (error) {
             console.log('error in delete vm', error.json());
+            _this.isVmDeleted = false;
             _this.isVmDeleting = false;
+            _this.isVmDeleteError = true;
+        });
+    };
+    DeleteVmComponent.prototype.pollForJobStatus = function () {
+        setInterval(this.getJobStatus, 10000);
+    };
+    DeleteVmComponent.prototype.getJobStatus = function () {
+        var _this = this;
+        this.service.getJobStatus(this.deleteVmJobId)
+            .subscribe(function (response) {
+            if (response) {
+                var resJson = response.json();
+                var data = resJson['data'];
+                if (data) {
+                    var status = data['status'];
+                    if (status) {
+                        status = status.toLowerCase();
+                        if (status === 'successful') {
+                            _this.isVmDeleted = true;
+                            _this.isVmDeleting = false;
+                            _this.isVmDeleteError = false;
+                        }
+                        else if (status === 'pending' || status === 'running') {
+                            _this.isVmDeleted = false;
+                            _this.isVmDeleting = true;
+                            _this.isVmDeleteError = false;
+                        }
+                        else if (status === 'failed') {
+                            _this.isVmDeleted = false;
+                            _this.isVmDeleting = false;
+                            _this.isVmDeleteError = true;
+                        }
+                    }
+                }
+            }
+        }, function (error) {
+            console.log('error in fetch job status for create vm', error.json());
+            _this.isVmDeleting = false;
+            _this.isVmDeleted = false;
             _this.isVmDeleteError = true;
         });
     };
@@ -971,7 +1077,7 @@ HomeModule = __decorate([
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<carousel>\n    <!--<slide>\n        <img src=\"http://res.cloudinary.com/jyasveer/image/upload/v1520773135/img3.jpg\" alt=\"First slide\" style=\"display: block; width: 100%;\">\n    </slide>-->\n    <slide>\n        <img src=\"http://res.cloudinary.com/jyasveer/image/upload/v1520773564/img.jpg\" alt=\"Second slide\" style=\"display: block; width: 100%;\">\n    </slide>\n</carousel>\n<div class=\"container login\">\n    <div class=\"col-lg-6\">\n        <div class=\"form-horizontal\" role=\"form\">\n            <div class=\"form-group\">\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">Email</label>\n                <div class=\"col-sm-10\">\n                    <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Email\" [(ngModel)]=\"username\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label for=\"inputPassword3\" class=\"col-sm-2 control-label\">Password</label>\n                <div class=\"col-sm-10\">\n                    <input type=\"password\" class=\"form-control\" id=\"inputPassword3\" placeholder=\"Password\" [(ngModel)]=\"password\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-2 col-sm-10\">\n                    <div class=\"checkbox\">\n                        <label>\n                            <input type=\"checkbox\"> Remember me\n                        </label>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-2 col-sm-10\">\n                    <button type=\"button\" (click)=\"submit()\" class=\"btn btn-default\">Submit</button>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<carousel>\n    <!--<slide>\n        <img src=\"http://res.cloudinary.com/jyasveer/image/upload/v1520773135/img3.jpg\" alt=\"First slide\" style=\"display: block; width: 100%;\">\n    </slide>-->\n    <slide>\n        <img src=\"http://res.cloudinary.com/jyasveer/image/upload/v1520773564/img.jpg\" alt=\"Second slide\" style=\"display: block; width: 100%;\">\n    </slide>\n</carousel>\n<div class=\"container login\">\n    <alert type=\"danger\" *ngIf=\"isCredentialsWrong\">\n        <strong>Please enter correct credentials.</strong>\n    </alert>\n    <alert type=\"danger\" *ngIf=\"isLoginError\">\n        <strong>Internal server error. Please try again.</strong>\n    </alert>\n    <div class=\"col-lg-6\">\n        <div class=\"form-horizontal\" role=\"form\">\n            <div class=\"form-group\">\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">Email</label>\n                <div class=\"col-sm-10\">\n                    <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Email\" [(ngModel)]=\"username\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label for=\"inputPassword3\" class=\"col-sm-2 control-label\">Password</label>\n                <div class=\"col-sm-10\">\n                    <input type=\"password\" class=\"form-control\" id=\"inputPassword3\" placeholder=\"Password\" [(ngModel)]=\"password\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-2 col-sm-10\">\n                    <div class=\"checkbox\">\n                        <label>\n                            <input type=\"checkbox\"> Remember me\n                        </label>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-2 col-sm-10\">\n                    <button type=\"button\" (click)=\"submit()\" class=\"btn btn-default\">Submit</button>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -1017,10 +1123,11 @@ var LoginComponent = (function () {
     function LoginComponent(router, service) {
         this.router = router;
         this.service = service;
+        this.isCredentialsWrong = false;
+        this.isLoginError = false;
     }
     LoginComponent.prototype.submit = function () {
         var _this = this;
-        console.log(this.username, this.password);
         this.service.authenticate(this.username, this.password)
             .subscribe(function (response) {
             var data = response.json()['data'];
@@ -1038,10 +1145,11 @@ var LoginComponent = (function () {
                     isLoggedIn: false
                 };
                 _this.service.loggedInUser = user;
-                _this.router.navigate(['/login']);
+                _this.isCredentialsWrong = true;
             }
         }, function (error) {
             console.log(error.json());
+            _this.isLoginError = true;
         });
     };
     return LoginComponent;
@@ -1069,13 +1177,15 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_carousel__ = __webpack_require__("../../../../ngx-bootstrap/carousel/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_alert__ = __webpack_require__("../../../../ngx-bootstrap/alert/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1091,13 +1201,14 @@ LoginModule = __decorate([
         imports: [
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_carousel__["a" /* CarouselModule */].forRoot()
+            __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_carousel__["a" /* CarouselModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_alert__["a" /* AlertModule */].forRoot()
         ],
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_4__login_component__["a" /* LoginComponent */]
+            __WEBPACK_IMPORTED_MODULE_5__login_component__["a" /* LoginComponent */]
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_4__login_component__["a" /* LoginComponent */]
+            __WEBPACK_IMPORTED_MODULE_5__login_component__["a" /* LoginComponent */]
         ]
     })
 ], LoginModule);
@@ -1129,10 +1240,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var AppService = (function () {
+    // private host = 'http://localhost:8082';
     function AppService(http) {
         this.http = http;
-        // private host = 'http://bng-infra-automation.juniper.net:8082';
-        this.host = 'http://localhost:8082';
+        this.host = 'http://bng-infra-automation.juniper.net:8082';
     }
     AppService.prototype.authenticate = function (username, password) {
         var loginObj = {
@@ -1154,7 +1265,7 @@ var AppService = (function () {
     AppService.prototype.getLocationData = function (location) {
         return this.http.get(this.host + '/data/' + location);
     };
-    AppService.prototype.getCreateVmId = function () {
+    AppService.prototype.getCreateVmLaunchId = function () {
         return this.http.get(this.host + '/create-vm/id');
     };
     AppService.prototype.createVm = function (id, vm) {
@@ -1165,7 +1276,7 @@ var AppService = (function () {
         };
         return this.http.post(this.host + '/create-vm', payload);
     };
-    AppService.prototype.getDeleteVmId = function () {
+    AppService.prototype.getDeleteVmLaunchId = function () {
         return this.http.get(this.host + '/delete-vm/id');
     };
     AppService.prototype.deleteVm = function (id, vm) {
@@ -1175,6 +1286,9 @@ var AppService = (function () {
             vm: vmString
         };
         return this.http.post(this.host + '/delete-vm', payload);
+    };
+    AppService.prototype.getJobStatus = function (jobId) {
+        return this.http.get(this.host + 'job/status/' + jobId);
     };
     AppService.prototype.extractData = function (response) {
         var body = response.json() || {};
