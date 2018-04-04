@@ -26,11 +26,12 @@ export class DeleteVmComponent implements OnInit {
   isVmDeleted = false;
   isVmDeleteError = false;
   showSubmit = true;
-  private deleteVmId: string;
+  private deleteVmLaunchId: string;
+  private deleteVmJobId: string;
 
   constructor(
     private router: Router,
-    private service: AppService) {}
+    private service: AppService) { }
 
   ngOnInit() {
     if (this.service.loggedInUser && this.service.loggedInUser.username) {
@@ -43,16 +44,23 @@ export class DeleteVmComponent implements OnInit {
   onSubmit() {
     this.showSubmit = false;
     this.isVmDeleting = true;
-    this.service.getCreateVmId()
+    this.isVmDeleted = false;
+    this.isVmDeleteError = false;
+    this.service.getDeleteVmLaunchId()
       .subscribe((response) => {
         if (response) {
           const resJson = response.json();
           const data = resJson['data'];
           if (data) {
-            this.deleteVmId = data['id'];
+            this.deleteVmLaunchId = data['id'];
             this.deleteVm();
           }
         }
+      }, (error: Response) => {
+        console.log('error in fetch delete launch id', error.json());
+        this.isVmDeleted = false;
+        this.isVmDeleting = false;
+        this.isVmDeleteError = true;
       });
   }
 
@@ -68,14 +76,59 @@ export class DeleteVmComponent implements OnInit {
       vc_name: this.vcName,
       email_address: emails,
     };
-    this.service.deleteVm(this.deleteVmId, vmToDelete)
+    this.service.deleteVm(this.deleteVmLaunchId, vmToDelete)
       .subscribe((response) => {
-        console.log('response from delete vm', response.json());
-        this.isVmDeleting = false;
-        this.isVmDeleted = true;
+        if (response) {
+          const resJson = response.json();
+          const data = resJson['data'];
+          if (data) {
+            this.deleteVmJobId = data['job'];
+            this.pollForJobStatus();
+          }
+        }
+        this.isVmDeleting = true;
       }, (error: Response) => {
         console.log('error in delete vm', error.json());
+        this.isVmDeleted = false;
         this.isVmDeleting = false;
+        this.isVmDeleteError = true;
+      });
+  }
+
+  pollForJobStatus() {
+    setInterval(this.getJobStatus, 10000);
+  }
+
+  getJobStatus() {
+    this.service.getJobStatus(this.deleteVmJobId)
+      .subscribe((response) => {
+        if (response) {
+          const resJson = response.json();
+          const data = resJson['data'];
+          if (data) {
+            let status: string = data['status'];
+            if (status) {
+              status = status.toLowerCase();
+              if (status === 'successful') {
+                this.isVmDeleted = true;
+                this.isVmDeleting = false;
+                this.isVmDeleteError = false;
+              } else if (status === 'pending' || status === 'running') {
+                this.isVmDeleted = false;
+                this.isVmDeleting = true;
+                this.isVmDeleteError = false;
+              } else if (status === 'failed') {
+                this.isVmDeleted = false;
+                this.isVmDeleting = false;
+                this.isVmDeleteError = true;
+              }
+            }
+          }
+        }
+      }, (error: Response) => {
+        console.log('error in fetch job status for create vm', error.json());
+        this.isVmDeleting = false;
+        this.isVmDeleted = false;
         this.isVmDeleteError = true;
       });
   }

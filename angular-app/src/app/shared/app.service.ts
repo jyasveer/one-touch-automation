@@ -43,7 +43,7 @@ export class AppService {
         return this.http.get(this.host + '/data/' + location);
     }
 
-    getCreateVmId() {
+    getCreateVmLaunchId() {
         return this.http.get(this.host + '/create-vm/id');
     }
 
@@ -56,7 +56,7 @@ export class AppService {
         return this.http.post(this.host + '/create-vm', payload);
     }
 
-    getDeleteVmId() {
+    getDeleteVmLaunchId() {
         return this.http.get(this.host + '/delete-vm/id');
     }
 
@@ -67,6 +67,10 @@ export class AppService {
             vm: vmString
         };
         return this.http.post(this.host + '/delete-vm', payload);
+    }
+
+    getJobStatus(jobId: string) {
+        return this.http.get(this.host + 'job/status/' + jobId);
     }
 
     private extractData(response: Response): any {

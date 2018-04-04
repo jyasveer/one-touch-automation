@@ -11,12 +11,13 @@ import { AppService } from '../shared/app.service';
 export class LoginComponent {
     username: string;
     password: string;
+    isCredentialsWrong = false;
+    isLoginError = false;
 
     constructor(private router: Router,
         private service: AppService) {}
 
     submit() {
-        console.log(this.username, this.password);
         this.service.authenticate(this.username, this.password)
         .subscribe((response: Response) => {
             const data = response.json()['data'];
@@ -33,10 +34,11 @@ export class LoginComponent {
                     isLoggedIn: false
                 };
                 this.service.loggedInUser = user;
-                this.router.navigate(['/login']);
+                this.isCredentialsWrong = true;
             }
         }, (error: Response) => {
             console.log(error.json());
+            this.isLoginError = true;
         });
     }
 }

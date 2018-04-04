@@ -1,0 +1,4362 @@
+// curl -s -k -u admin:f22raptor -X GET  -H \'Content-Type: application/json\' https://p-ansible-tower01.juniper.net/api/v1/job_templates/ .
+
+{
+  "count": 25,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 40,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/40/",
+      "related": {
+        "created_by": "/api/v1/users/1/",
+        "labels": "/api/v1/job_templates/40/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/39/",
+        "credential": "/api/v1/credentials/6/",
+        "cloud_credential": "/api/v1/credentials/12/",
+        "last_job": "/api/v1/jobs/12262/",
+        "notification_templates_error": "/api/v1/job_templates/40/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/40/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/40/jobs/",
+        "object_roles": "/api/v1/job_templates/40/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/40/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/40/access_list/",
+        "launch": "/api/v1/job_templates/40/launch/",
+        "schedules": "/api/v1/job_templates/40/schedules/",
+        "activity_stream": "/api/v1/job_templates/40/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/40/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 12262,
+          "name": "app-netscreen-sus - feature-sus-to-awx - Bake AMI (jnpr-it-dev)",
+          "description": "Bake AMI (jnpr-it-dev)",
+          "finished": "2018-02-28T09:58:51.244Z",
+          "status": "failed",
+          "failed": true
+        },
+        "last_update": {
+          "id": 12262,
+          "name": "app-netscreen-sus - feature-sus-to-awx - Bake AMI (jnpr-it-dev)",
+          "description": "Bake AMI (jnpr-it-dev)",
+          "status": "failed",
+          "failed": true
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "cloud_credential": {
+          "id": 12,
+          "name": "aws - devops_deploy (dev)",
+          "description": "",
+          "kind": "aws",
+          "cloud": true
+        },
+        "credential": {
+          "id": 6,
+          "name": "ssh-cns",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 39,
+          "name": "app-netscreen-sus - feature-sus-to-awx",
+          "description": "feature-sus-to-awx",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "System",
+          "last_name": "Administrator"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 253,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 255,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 254,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [
+          {
+            "status": "failed",
+            "finished": "2018-02-28T09:58:51.244Z",
+            "id": 12262
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-28T08:20:07.231Z",
+            "id": 12259
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-28T07:53:33.683Z",
+            "id": 12253
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-28T07:20:08.132Z",
+            "id": 12250
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-28T06:54:08.735Z",
+            "id": 12241
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-27T11:44:44.220Z",
+            "id": 12173
+          }
+        ]
+      },
+      "created": "2018-02-27T11:42:56.664Z",
+      "modified": "2018-02-28T09:35:29.082Z",
+      "name": "app-netscreen-sus - feature-sus-to-awx - Bake AMI (jnpr-it-dev)",
+      "description": "Bake AMI (jnpr-it-dev)",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 39,
+      "playbook": "bake_ami.yml",
+      "credential": 6,
+      "cloud_credential": 12,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 4,
+      "extra_vars": "---\nBAKE_AMI: DEV\naccount: awsplayground\napp_env: development",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-02-28T09:58:51.244684Z",
+      "last_job_failed": true,
+      "next_job_run": null,
+      "status": "failed",
+      "host_config_key": "",
+      "ask_variables_on_launch": true,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 18,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/18/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/18/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/17/",
+        "credential": "/api/v1/credentials/6/",
+        "cloud_credential": "/api/v1/credentials/5/",
+        "current_job": "/api/v1/jobs/15592/",
+        "last_job": "/api/v1/jobs/15583/",
+        "next_schedule": "/api/v1/schedules/4/",
+        "notification_templates_error": "/api/v1/job_templates/18/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/18/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/18/jobs/",
+        "object_roles": "/api/v1/job_templates/18/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/18/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/18/access_list/",
+        "launch": "/api/v1/job_templates/18/launch/",
+        "schedules": "/api/v1/job_templates/18/schedules/",
+        "activity_stream": "/api/v1/job_templates/18/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/18/survey_spec/"
+      },
+      "summary_fields": {
+        "current_update": {
+          "id": 15592,
+          "name": "aws vpc create security groups (jnpr-it-dev)",
+          "description": "creates security groups in AWS account jnpr-it-dev",
+          "status": "running",
+          "failed": false
+        },
+        "last_job": {
+          "id": 15583,
+          "name": "aws vpc create security groups (jnpr-it-dev)",
+          "description": "creates security groups in AWS account jnpr-it-dev",
+          "finished": "2018-04-03T01:19:55.765Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 15583,
+          "name": "aws vpc create security groups (jnpr-it-dev)",
+          "description": "creates security groups in AWS account jnpr-it-dev",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "cloud_credential": {
+          "id": 5,
+          "name": "aws-cns-deploy (jnpr-it-dev)",
+          "description": "CNS Deploy - AWS - Key created 09-18-2017",
+          "kind": "aws",
+          "cloud": true
+        },
+        "current_job": {
+          "id": 15592,
+          "name": "aws vpc create security groups (jnpr-it-dev)",
+          "description": "creates security groups in AWS account jnpr-it-dev",
+          "status": "running",
+          "failed": false
+        },
+        "credential": {
+          "id": 6,
+          "name": "ssh-cns",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 17,
+          "name": "AWS - VPC",
+          "description": "",
+          "status": "pending",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 103,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 105,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 104,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [
+          {
+            "status": "running",
+            "finished": null,
+            "id": 15592
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-03T01:19:55.765Z",
+            "id": 15583
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T22:19:33.593Z",
+            "id": 15576
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T19:19:52.406Z",
+            "id": 15566
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T16:19:27.215Z",
+            "id": 15560
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T13:19:41.364Z",
+            "id": 15548
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T10:19:24.366Z",
+            "id": 15518
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T07:19:48.420Z",
+            "id": 15503
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T04:19:32.501Z",
+            "id": 15419
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T01:20:25.489Z",
+            "id": 15402
+          }
+        ]
+      },
+      "created": "2017-09-18T16:12:59.795Z",
+      "modified": "2018-04-03T04:00:05.799Z",
+      "name": "aws vpc create security groups (jnpr-it-dev)",
+      "description": "creates security groups in AWS account jnpr-it-dev",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 17,
+      "playbook": "security_group_create.yml",
+      "credential": 6,
+      "cloud_credential": 5,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "account: jnpr-it-dev",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-04-03T01:19:55.765859Z",
+      "last_job_failed": false,
+      "next_job_run": "2018-04-03T04:00:00Z",
+      "status": "running",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 35,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/35/",
+      "related": {
+        "created_by": "/api/v1/users/1/",
+        "modified_by": "/api/v1/users/1/",
+        "labels": "/api/v1/job_templates/35/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/17/",
+        "credential": "/api/v1/credentials/6/",
+        "cloud_credential": "/api/v1/credentials/5/",
+        "notification_templates_error": "/api/v1/job_templates/35/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/35/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/35/jobs/",
+        "object_roles": "/api/v1/job_templates/35/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/35/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/35/access_list/",
+        "launch": "/api/v1/job_templates/35/launch/",
+        "schedules": "/api/v1/job_templates/35/schedules/",
+        "activity_stream": "/api/v1/job_templates/35/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/35/survey_spec/"
+      },
+      "summary_fields": {
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "cloud_credential": {
+          "id": 5,
+          "name": "aws-cns-deploy (jnpr-it-dev)",
+          "description": "CNS Deploy - AWS - Key created 09-18-2017",
+          "kind": "aws",
+          "cloud": true
+        },
+        "credential": {
+          "id": 6,
+          "name": "ssh-cns",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 17,
+          "name": "AWS - VPC",
+          "description": "",
+          "status": "pending",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "System",
+          "last_name": "Administrator"
+        },
+        "modified_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "System",
+          "last_name": "Administrator"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 225,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 227,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 226,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": []
+      },
+      "created": "2018-02-05T10:43:07.316Z",
+      "modified": "2018-02-05T10:43:07.316Z",
+      "name": "aws vpc create security groups (jnpr-it-dev) @ 4:15:59 pm",
+      "description": "creates security groups in AWS account jnpr-it-dev",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 17,
+      "playbook": "security_group_create.yml",
+      "credential": 6,
+      "cloud_credential": 5,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "account: jnpr-it-dev",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": null,
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "never updated",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 20,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/20/",
+      "related": {
+        "created_by": "/api/v1/users/17/",
+        "labels": "/api/v1/job_templates/20/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/17/",
+        "credential": "/api/v1/credentials/6/",
+        "cloud_credential": "/api/v1/credentials/8/",
+        "current_job": "/api/v1/jobs/15591/",
+        "last_job": "/api/v1/jobs/15588/",
+        "next_schedule": "/api/v1/schedules/5/",
+        "notification_templates_error": "/api/v1/job_templates/20/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/20/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/20/jobs/",
+        "object_roles": "/api/v1/job_templates/20/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/20/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/20/access_list/",
+        "launch": "/api/v1/job_templates/20/launch/",
+        "schedules": "/api/v1/job_templates/20/schedules/",
+        "activity_stream": "/api/v1/job_templates/20/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/20/survey_spec/"
+      },
+      "summary_fields": {
+        "current_update": {
+          "id": 15591,
+          "name": "aws vpc create security groups (jnpr-it-prod)",
+          "description": "creates security groups in AWS account jnpr-it-prod",
+          "status": "running",
+          "failed": false
+        },
+        "last_job": {
+          "id": 15588,
+          "name": "aws vpc create security groups (jnpr-it-prod)",
+          "description": "creates security groups in AWS account jnpr-it-prod",
+          "finished": "2018-04-03T03:40:38.956Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 15588,
+          "name": "aws vpc create security groups (jnpr-it-prod)",
+          "description": "creates security groups in AWS account jnpr-it-prod",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "cloud_credential": {
+          "id": 8,
+          "name": "aws-cns-deploy (jnpr-it-prod)",
+          "description": "CNS Deploy - AWS - Key created 09-21-2017",
+          "kind": "aws",
+          "cloud": true
+        },
+        "current_job": {
+          "id": 15591,
+          "name": "aws vpc create security groups (jnpr-it-prod)",
+          "description": "creates security groups in AWS account jnpr-it-prod",
+          "status": "running",
+          "failed": false
+        },
+        "credential": {
+          "id": 6,
+          "name": "ssh-cns",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 17,
+          "name": "AWS - VPC",
+          "description": "",
+          "status": "pending",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 17,
+          "username": "mly",
+          "first_name": "Michael",
+          "last_name": "Ly"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 126,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 128,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 127,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [
+          {
+            "status": "running",
+            "finished": null,
+            "id": 15591
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-03T03:40:38.956Z",
+            "id": 15588
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-03T00:17:45.698Z",
+            "id": 15579
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T20:17:44.428Z",
+            "id": 15571
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T16:17:09.147Z",
+            "id": 15559
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T12:18:05.215Z",
+            "id": 15542
+          },
+          {
+            "status": "failed",
+            "finished": "2018-04-02T08:15:20.131Z",
+            "id": 15511
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T04:17:35.547Z",
+            "id": 15418
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T01:49:39.097Z",
+            "id": 15407
+          },
+          {
+            "status": "failed",
+            "finished": "2018-04-02T00:14:33.611Z",
+            "id": 15398
+          }
+        ]
+      },
+      "created": "2017-09-21T22:21:01.359Z",
+      "modified": "2018-04-03T04:00:57.662Z",
+      "name": "aws vpc create security groups (jnpr-it-prod)",
+      "description": "creates security groups in AWS account jnpr-it-prod",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 17,
+      "playbook": "security_group_create.yml",
+      "credential": 6,
+      "cloud_credential": 8,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 2,
+      "extra_vars": "account: jnpr-it-prod",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-04-03T03:40:38.956863Z",
+      "last_job_failed": false,
+      "next_job_run": "2018-04-03T04:00:00Z",
+      "status": "running",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 21,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/21/",
+      "related": {
+        "created_by": "/api/v1/users/17/",
+        "labels": "/api/v1/job_templates/21/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/17/",
+        "credential": "/api/v1/credentials/6/",
+        "cloud_credential": "/api/v1/credentials/9/",
+        "last_job": "/api/v1/jobs/15582/",
+        "next_schedule": "/api/v1/schedules/6/",
+        "notification_templates_error": "/api/v1/job_templates/21/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/21/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/21/jobs/",
+        "object_roles": "/api/v1/job_templates/21/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/21/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/21/access_list/",
+        "launch": "/api/v1/job_templates/21/launch/",
+        "schedules": "/api/v1/job_templates/21/schedules/",
+        "activity_stream": "/api/v1/job_templates/21/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/21/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 15582,
+          "name": "aws vpc create security groups (jnpr-it-shared-master)",
+          "description": "creates security groups in the AWS account jnpr-it-shared-master",
+          "finished": "2018-04-03T01:03:49.563Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 15582,
+          "name": "aws vpc create security groups (jnpr-it-shared-master)",
+          "description": "creates security groups in the AWS account jnpr-it-shared-master",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "cloud_credential": {
+          "id": 9,
+          "name": "aws-cns-deploy (jnpr-it-shared-master)",
+          "description": "CNS Deploy - AWS - Key created 09-21-2017",
+          "kind": "aws",
+          "cloud": true
+        },
+        "credential": {
+          "id": 6,
+          "name": "ssh-cns",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 17,
+          "name": "AWS - VPC",
+          "description": "",
+          "status": "pending",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 17,
+          "username": "mly",
+          "first_name": "Michael",
+          "last_name": "Ly"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 129,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 131,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 130,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-04-03T01:03:49.563Z",
+            "id": 15582
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T19:03:54.255Z",
+            "id": 15565
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T13:03:42.286Z",
+            "id": 15547
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T07:04:14.944Z",
+            "id": 15502
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T01:04:14.545Z",
+            "id": 15401
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-01T19:04:16.785Z",
+            "id": 15386
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-01T13:05:13.541Z",
+            "id": 15374
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-01T07:04:19.378Z",
+            "id": 15356
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-01T01:04:14.166Z",
+            "id": 15342
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-31T19:03:53.706Z",
+            "id": 15325
+          }
+        ]
+      },
+      "created": "2017-09-21T22:23:56.136Z",
+      "modified": "2018-04-03T01:00:04.543Z",
+      "name": "aws vpc create security groups (jnpr-it-shared-master)",
+      "description": "creates security groups in the AWS account jnpr-it-shared-master",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 17,
+      "playbook": "security_group_create.yml",
+      "credential": 6,
+      "cloud_credential": 9,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 2,
+      "extra_vars": "account: jnpr-it-shared-master",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-04-03T01:03:49.563550Z",
+      "last_job_failed": false,
+      "next_job_run": "2018-04-03T01:00:00Z",
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 19,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/19/",
+      "related": {
+        "created_by": "/api/v1/users/17/",
+        "labels": "/api/v1/job_templates/19/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/17/",
+        "credential": "/api/v1/credentials/6/",
+        "cloud_credential": "/api/v1/credentials/7/",
+        "last_job": "/api/v1/jobs/10035/",
+        "notification_templates_error": "/api/v1/job_templates/19/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/19/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/19/jobs/",
+        "object_roles": "/api/v1/job_templates/19/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/19/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/19/access_list/",
+        "launch": "/api/v1/job_templates/19/launch/",
+        "schedules": "/api/v1/job_templates/19/schedules/",
+        "activity_stream": "/api/v1/job_templates/19/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/19/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 10035,
+          "name": "aws vpc create security groups (jnprx)",
+          "description": "creates security groups in AWS account jnprx",
+          "finished": "2018-02-01T23:17:12.935Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 10035,
+          "name": "aws vpc create security groups (jnprx)",
+          "description": "creates security groups in AWS account jnprx",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "cloud_credential": {
+          "id": 7,
+          "name": "aws-cns-deploy (jnprx)",
+          "description": "CNS Deploy - AWS - Key created 09-21-2017",
+          "kind": "aws",
+          "cloud": true
+        },
+        "credential": {
+          "id": 6,
+          "name": "ssh-cns",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 17,
+          "name": "AWS - VPC",
+          "description": "",
+          "status": "pending",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 17,
+          "username": "mly",
+          "first_name": "Michael",
+          "last_name": "Ly"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 117,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 119,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 118,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-02-01T23:17:12.935Z",
+            "id": 10035
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-01T23:12:42.181Z",
+            "id": 10032
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-01T23:09:07.356Z",
+            "id": 10029
+          }
+        ]
+      },
+      "created": "2017-09-21T20:33:03.908Z",
+      "modified": "2018-02-01T23:08:52.257Z",
+      "name": "aws vpc create security groups (jnprx)",
+      "description": "creates security groups in AWS account jnprx",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 17,
+      "playbook": "security_group_create.yml",
+      "credential": 6,
+      "cloud_credential": 7,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 2,
+      "extra_vars": "account: jnprx",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-02-01T23:17:12.935365Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 46,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/46/",
+      "related": {
+        "created_by": "/api/v1/users/64/",
+        "labels": "/api/v1/job_templates/46/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/45/",
+        "credential": "/api/v1/credentials/6/",
+        "cloud_credential": "/api/v1/credentials/12/",
+        "notification_templates_error": "/api/v1/job_templates/46/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/46/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/46/jobs/",
+        "object_roles": "/api/v1/job_templates/46/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/46/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/46/access_list/",
+        "launch": "/api/v1/job_templates/46/launch/",
+        "schedules": "/api/v1/job_templates/46/schedules/",
+        "activity_stream": "/api/v1/job_templates/46/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/46/survey_spec/"
+      },
+      "summary_fields": {
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "cloud_credential": {
+          "id": 12,
+          "name": "aws - devops_deploy (dev)",
+          "description": "",
+          "kind": "aws",
+          "cloud": true
+        },
+        "credential": {
+          "id": 6,
+          "name": "ssh-cns",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 45,
+          "name": "create_rds",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 64,
+          "username": "vgavini",
+          "first_name": "Vijay",
+          "last_name": "Gavani"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 281,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 283,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 282,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-03-29T08:53:17.578Z",
+            "id": 15093
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-25T14:52:03.427Z",
+            "id": 14662
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-24T16:46:05.190Z",
+            "id": 14417
+          }
+        ]
+      },
+      "created": "2018-03-24T16:45:20.984Z",
+      "modified": "2018-04-02T11:13:24.636Z",
+      "name": "create-rds-template",
+      "description": "",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 45,
+      "playbook": "modify_db.yml",
+      "credential": 6,
+      "cloud_credential": 12,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "---\naccount: \"jnpr-it-dev\"\napp_env: \"dev\"",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-04-02T11:13:36.970274Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 5,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/5/",
+      "related": {
+        "created_by": "/api/v1/users/1/",
+        "labels": "/api/v1/job_templates/5/labels/",
+        "inventory": "/api/v1/inventories/1/",
+        "project": "/api/v1/projects/4/",
+        "credential": "/api/v1/credentials/1/",
+        "last_job": "/api/v1/jobs/9151/",
+        "notification_templates_error": "/api/v1/job_templates/5/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/5/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/5/jobs/",
+        "object_roles": "/api/v1/job_templates/5/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/5/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/5/access_list/",
+        "launch": "/api/v1/job_templates/5/launch/",
+        "schedules": "/api/v1/job_templates/5/schedules/",
+        "activity_stream": "/api/v1/job_templates/5/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/5/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 9151,
+          "name": "Demo Job Template",
+          "description": "",
+          "finished": "2018-01-21T11:24:13.331Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 9151,
+          "name": "Demo Job Template",
+          "description": "",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 1,
+          "name": "Demo Inventory",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 0,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 1,
+          "name": "Demo Credential",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 4,
+          "name": "Demo Project",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "System",
+          "last_name": "Administrator"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 20,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 22,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 21,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-01-21T11:24:13.331Z",
+            "id": 9151
+          }
+        ]
+      },
+      "created": "2017-07-17T05:41:37.071Z",
+      "modified": "2017-07-17T05:41:37.071Z",
+      "name": "Demo Job Template",
+      "description": "",
+      "job_type": "run",
+      "inventory": 1,
+      "project": 4,
+      "playbook": "hello_world.yml",
+      "credential": 1,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-01-21T11:24:13.331327Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": false,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 34,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/34/",
+      "related": {
+        "created_by": "/api/v1/users/1/",
+        "labels": "/api/v1/job_templates/34/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/31/",
+        "credential": "/api/v1/credentials/10/",
+        "notification_templates_error": "/api/v1/job_templates/34/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/34/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/34/jobs/",
+        "object_roles": "/api/v1/job_templates/34/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/34/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/34/access_list/",
+        "launch": "/api/v1/job_templates/34/launch/",
+        "schedules": "/api/v1/job_templates/34/schedules/",
+        "activity_stream": "/api/v1/job_templates/34/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/34/survey_spec/"
+      },
+      "summary_fields": {
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 10,
+          "name": "ssh-creds",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 31,
+          "name": "Onetouch Automation - feature-ubuntu16",
+          "description": "One touch Automation - feature branch Ubuntu 16",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "System",
+          "last_name": "Administrator"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 217,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 219,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 218,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:58:00.932Z",
+            "id": 15475
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:52:11.168Z",
+            "id": 15472
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:46:44.916Z",
+            "id": 15469
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:41:39.451Z",
+            "id": 15466
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:38:19.137Z",
+            "id": 15460
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:12:16.027Z",
+            "id": 15449
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T04:14:39.761Z",
+            "id": 15429
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T03:55:10.980Z",
+            "id": 15413
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-29T09:35:50.296Z",
+            "id": 15108
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-29T09:23:26.731Z",
+            "id": 15105
+          }
+        ]
+      },
+      "created": "2018-01-21T11:02:29.500Z",
+      "modified": "2018-04-02T05:57:08.045Z",
+      "name": "One Touch Automation - Delete Instance - feature-Ubuntu16",
+      "description": "",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 31,
+      "playbook": "deletevm.yml",
+      "credential": 10,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-04-02T10:43:01.214963Z",
+      "last_job_failed": true,
+      "next_job_run": null,
+      "status": "failed",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },// This is the value of deletion  One Touch Automation - Delete Instance - feature-Ubuntu16
+    {
+      "id": 32,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/32/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/32/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/31/",
+        "credential": "/api/v1/credentials/10/",
+        "notification_templates_error": "/api/v1/job_templates/32/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/32/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/32/jobs/",
+        "object_roles": "/api/v1/job_templates/32/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/32/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/32/access_list/",
+        "launch": "/api/v1/job_templates/32/launch/",
+        "schedules": "/api/v1/job_templates/32/schedules/",
+        "activity_stream": "/api/v1/job_templates/32/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/32/survey_spec/"
+      },
+      "summary_fields": {
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 10,
+          "name": "ssh-creds",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 31,
+          "name": "Onetouch Automation - feature-ubuntu16",
+          "description": "One touch Automation - feature branch Ubuntu 16",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 206,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 208,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 207,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "failed",
+            "finished": "2018-04-02T05:44:24.469Z",
+            "id": 15463
+          },
+          {
+            "status": "failed",
+            "finished": "2018-04-02T05:28:09.276Z",
+            "id": 15457
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:25:16.268Z",
+            "id": 15452
+          },
+          {
+            "status": "failed",
+            "finished": "2018-04-02T04:24:48.200Z",
+            "id": 15434
+          },
+          {
+            "status": "failed",
+            "finished": "2018-04-02T04:10:29.013Z",
+            "id": 15424
+          },
+          {
+            "status": "failed",
+            "finished": "2018-04-02T03:50:34.960Z",
+            "id": 15410
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-28T05:09:42.847Z",
+            "id": 14979
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-28T04:14:39.215Z",
+            "id": 14968
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-27T09:20:34.168Z",
+            "id": 14896
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-27T07:23:13.477Z",
+            "id": 14880
+          }
+        ]
+      },
+      "created": "2018-01-08T07:37:10.477Z",
+      "modified": "2018-04-02T10:30:32.231Z",
+      "name": "One Touch Automation - Provision - feature-Ubuntu16",
+      "description": "",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 31,
+      "playbook": "deploy.yml",
+      "credential": 10,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-04-02T10:40:19.352820Z",
+      "last_job_failed": true,
+      "next_job_run": null,
+      "status": "failed",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },// This is the value of create instance One Touch Automation - Provision - feature-Ubuntu16
+    {
+      "id": 23,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/23/",
+      "related": {
+        "created_by": "/api/v1/users/1/",
+        "labels": "/api/v1/job_templates/23/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/22/",
+        "credential": "/api/v1/credentials/3/",
+        "notification_templates_error": "/api/v1/job_templates/23/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/23/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/23/jobs/",
+        "object_roles": "/api/v1/job_templates/23/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/23/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/23/access_list/",
+        "launch": "/api/v1/job_templates/23/launch/",
+        "schedules": "/api/v1/job_templates/23/schedules/",
+        "activity_stream": "/api/v1/job_templates/23/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/23/survey_spec/"
+      },
+      "summary_fields": {
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 22,
+          "name": "Zaas-Uri-Testing",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "System",
+          "last_name": "Administrator"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 142,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 144,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 143,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": []
+      },
+      "created": "2017-09-27T06:16:06.403Z",
+      "modified": "2017-10-04T09:57:33.241Z",
+      "name": "Zaas-URI-Test",
+      "description": "",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 22,
+      "playbook": "Network_Availability_Only_Ping.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 2,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2017-10-04T10:00:34.417760Z",
+      "last_job_failed": true,
+      "next_job_run": null,
+      "status": "failed",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 9,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/9/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "modified_by": "/api/v1/users/3/",
+        "labels": "/api/v1/job_templates/9/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/6/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/14140/",
+        "notification_templates_error": "/api/v1/job_templates/9/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/9/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/9/jobs/",
+        "object_roles": "/api/v1/job_templates/9/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/9/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/9/access_list/",
+        "launch": "/api/v1/job_templates/9/launch/",
+        "schedules": "/api/v1/job_templates/9/schedules/",
+        "activity_stream": "/api/v1/job_templates/9/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/9/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 14140,
+          "name": "Zenoss As a Service - Add Device - Network and System Availability (Ping and SSH only)",
+          "description": "ZaaS - Ping and SSH Only - Production",
+          "finished": "2018-03-21T18:08:22.490Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 14140,
+          "name": "Zenoss As a Service - Add Device - Network and System Availability (Ping and SSH only)",
+          "description": "ZaaS - Ping and SSH Only - Production",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 6,
+          "name": "Zenoss As A Service (Zaas)  - Production",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "modified_by": {
+          "id": 3,
+          "username": "jaykumar",
+          "first_name": "Jay",
+          "last_name": "Kumar"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 56,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 58,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 57,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-03-21T18:08:22.490Z",
+            "id": 14140
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-21T16:19:12.291Z",
+            "id": 14132
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-21T12:09:25.486Z",
+            "id": 14118
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-21T11:24:57.947Z",
+            "id": 14109
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-20T06:33:51.176Z",
+            "id": 11542
+          },
+          {
+            "status": "failed",
+            "finished": "2017-12-18T01:44:07.095Z",
+            "id": 6637
+          },
+          {
+            "status": "failed",
+            "finished": "2017-12-08T07:51:42.145Z",
+            "id": 5996
+          },
+          {
+            "status": "failed",
+            "finished": "2017-12-06T05:31:33.356Z",
+            "id": 5813
+          },
+          {
+            "status": "successful",
+            "finished": "2017-12-06T05:24:39.432Z",
+            "id": 5809
+          }
+        ]
+      },
+      "created": "2017-08-12T17:03:22.427Z",
+      "modified": "2018-03-22T12:19:06.189Z",
+      "name": "Zenoss As a Service - Add Device - Network and System Availability (Ping and SSH only)",
+      "description": "ZaaS - Ping and SSH Only - Production",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 6,
+      "playbook": "Network_Availability_Only_Ping_SSH.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-03-21T18:08:22.490718Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 10,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/10/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "modified_by": "/api/v1/users/3/",
+        "labels": "/api/v1/job_templates/10/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/6/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/13503/",
+        "notification_templates_error": "/api/v1/job_templates/10/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/10/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/10/jobs/",
+        "object_roles": "/api/v1/job_templates/10/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/10/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/10/access_list/",
+        "launch": "/api/v1/job_templates/10/launch/",
+        "schedules": "/api/v1/job_templates/10/schedules/",
+        "activity_stream": "/api/v1/job_templates/10/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/10/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 13503,
+          "name": "Zenoss As a Service - Add Device - Network Availability (Ping only)",
+          "description": "ZaaS - Ping - Production",
+          "finished": "2018-03-14T22:16:22.555Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 13503,
+          "name": "Zenoss As a Service - Add Device - Network Availability (Ping only)",
+          "description": "ZaaS - Ping - Production",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 6,
+          "name": "Zenoss As A Service (Zaas)  - Production",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "modified_by": {
+          "id": 3,
+          "username": "jaykumar",
+          "first_name": "Jay",
+          "last_name": "Kumar"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 59,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 61,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 60,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-03-14T22:16:22.555Z",
+            "id": 13503
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-08T11:21:46.331Z",
+            "id": 12943
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-08T11:18:05.787Z",
+            "id": 12941
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-07T17:10:34.160Z",
+            "id": 12885
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-07T17:05:57.804Z",
+            "id": 12883
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-21T08:22:13.141Z",
+            "id": 11670
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-14T10:39:11.935Z",
+            "id": 11118
+          },
+          {
+            "status": "failed",
+            "finished": "2018-01-24T02:14:30.010Z",
+            "id": 9389
+          },
+          {
+            "status": "failed",
+            "finished": "2018-01-23T08:59:25.307Z",
+            "id": 9340
+          },
+          {
+            "status": "failed",
+            "finished": "2018-01-23T07:36:46.069Z",
+            "id": 9310
+          }
+        ]
+      },
+      "created": "2017-08-12T17:08:25.715Z",
+      "modified": "2018-03-22T12:18:28.711Z",
+      "name": "Zenoss As a Service - Add Device - Network Availability (Ping only)",
+      "description": "ZaaS - Ping - Production",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 6,
+      "playbook": "Network_Availability_Only_Ping.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-03-14T22:16:22.555174Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 8,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/8/",
+      "related": {
+        "created_by": "/api/v1/users/1/",
+        "labels": "/api/v1/job_templates/8/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/6/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/15557/",
+        "notification_templates_error": "/api/v1/job_templates/8/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/8/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/8/jobs/",
+        "object_roles": "/api/v1/job_templates/8/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/8/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/8/access_list/",
+        "launch": "/api/v1/job_templates/8/launch/",
+        "schedules": "/api/v1/job_templates/8/schedules/",
+        "activity_stream": "/api/v1/job_templates/8/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/8/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 15557,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring",
+          "description": "ZaaS - Standard Monitoring - Production",
+          "finished": "2018-04-02T15:35:19.557Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 15557,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring",
+          "description": "ZaaS - Standard Monitoring - Production",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 6,
+          "name": "Zenoss As A Service (Zaas)  - Production",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "System",
+          "last_name": "Administrator"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 53,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 55,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 54,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-04-02T15:35:19.557Z",
+            "id": 15557
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T14:00:40.809Z",
+            "id": 15555
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T13:38:27.333Z",
+            "id": 15553
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-28T11:06:12.815Z",
+            "id": 15007
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-28T09:50:36.356Z",
+            "id": 15002
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-28T09:46:39.139Z",
+            "id": 15000
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-28T06:50:13.798Z",
+            "id": 14985
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-27T10:32:38.225Z",
+            "id": 14905
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-26T10:56:56.284Z",
+            "id": 14769
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-26T04:17:31.834Z",
+            "id": 14713
+          }
+        ]
+      },
+      "created": "2017-08-12T09:03:10.065Z",
+      "modified": "2018-04-02T15:35:04.055Z",
+      "name": "Zenoss As a Service - Add Device - Standard Monitoring",
+      "description": "ZaaS - Standard Monitoring - Production",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 6,
+      "playbook": "Standard_Monitoring_IT_Operations_Default.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-04-02T15:35:19.557451Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 25,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/25/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "modified_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/25/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/24/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/13227/",
+        "notification_templates_error": "/api/v1/job_templates/25/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/25/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/25/jobs/",
+        "object_roles": "/api/v1/job_templates/25/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/25/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/25/access_list/",
+        "launch": "/api/v1/job_templates/25/launch/",
+        "schedules": "/api/v1/job_templates/25/schedules/",
+        "activity_stream": "/api/v1/job_templates/25/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/25/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 13227,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring - AWS",
+          "description": "AWS Add Standard Monitoring (feature-aws_server)",
+          "finished": "2018-03-12T06:15:15.862Z",
+          "status": "failed",
+          "failed": true
+        },
+        "last_update": {
+          "id": 13227,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring - AWS",
+          "description": "AWS Add Standard Monitoring (feature-aws_server)",
+          "status": "failed",
+          "failed": true
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 24,
+          "name": "Zenoss As A Service (Zaas)  - feature-prerequisite-awx",
+          "description": "Feature feature-prerequisite-awx",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "modified_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 157,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 159,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 158,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "failed",
+            "finished": "2018-03-12T06:15:15.862Z",
+            "id": 13227
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-12T05:37:53.876Z",
+            "id": 13222
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-08T11:49:12.781Z",
+            "id": 12947
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-23T21:30:45.090Z",
+            "id": 11919
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-23T18:22:35.481Z",
+            "id": 11907
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-23T18:11:54.296Z",
+            "id": 11904
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-23T17:56:53.662Z",
+            "id": 11901
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-23T17:27:59.750Z",
+            "id": 11898
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-23T17:05:06.621Z",
+            "id": 11895
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-23T16:56:28.321Z",
+            "id": 11892
+          }
+        ]
+      },
+      "created": "2017-11-06T22:11:44.458Z",
+      "modified": "2018-03-12T08:27:26.092Z",
+      "name": "Zenoss As a Service - Add Device - Standard Monitoring - AWS",
+      "description": "AWS Add Standard Monitoring (feature-aws_server)",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 24,
+      "playbook": "Standard_Monitoring_IT_Operations_Default.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-03-12T06:15:15.862382Z",
+      "last_job_failed": true,
+      "next_job_run": null,
+      "status": "failed",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 42,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/42/",
+      "related": {
+        "created_by": "/api/v1/users/65/",
+        "labels": "/api/v1/job_templates/42/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/41/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/12741/",
+        "notification_templates_error": "/api/v1/job_templates/42/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/42/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/42/jobs/",
+        "object_roles": "/api/v1/job_templates/42/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/42/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/42/access_list/",
+        "launch": "/api/v1/job_templates/42/launch/",
+        "schedules": "/api/v1/job_templates/42/schedules/",
+        "activity_stream": "/api/v1/job_templates/42/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/42/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 12741,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring - AWS - Hotfix  AWS collector",
+          "description": "AWS Add Standard Monitoring (hotfix-AD-DC-change)",
+          "finished": "2018-03-06T07:22:00.673Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 12741,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring - AWS - Hotfix  AWS collector",
+          "description": "AWS Add Standard Monitoring (hotfix-AD-DC-change)",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 41,
+          "name": "HotFix Add Maintenance Window",
+          "description": "HotFix Add Maintenance Window",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 65,
+          "username": "ajas",
+          "first_name": "Ajay",
+          "last_name": "Singh"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 262,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 264,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 263,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-03-06T07:22:00.673Z",
+            "id": 12741
+          }
+        ]
+      },
+      "created": "2018-03-06T07:15:04.506Z",
+      "modified": "2018-03-06T07:21:48.130Z",
+      "name": "Zenoss As a Service - Add Device - Standard Monitoring - AWS - Hotfix  AWS collector",
+      "description": "AWS Add Standard Monitoring (hotfix-AD-DC-change)",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 41,
+      "playbook": "Standard_Monitoring_IT_Operations_Default.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-03-06T07:22:00.673964Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 29,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/29/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "modified_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/29/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/6/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/12749/",
+        "notification_templates_error": "/api/v1/job_templates/29/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/29/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/29/jobs/",
+        "object_roles": "/api/v1/job_templates/29/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/29/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/29/access_list/",
+        "launch": "/api/v1/job_templates/29/launch/",
+        "schedules": "/api/v1/job_templates/29/schedules/",
+        "activity_stream": "/api/v1/job_templates/29/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/29/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 12749,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring - Network",
+          "description": "Add Network Devices  (Production)",
+          "finished": "2018-03-06T08:21:40.295Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 12749,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring - Network",
+          "description": "Add Network Devices  (Production)",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 6,
+          "name": "Zenoss As A Service (Zaas)  - Production",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "modified_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 190,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 192,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 191,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-03-06T08:21:40.295Z",
+            "id": 12749
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-06T08:19:43.492Z",
+            "id": 12747
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-06T06:43:17.113Z",
+            "id": 12732
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-06T06:34:25.258Z",
+            "id": 12730
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-06T06:33:26.144Z",
+            "id": 12728
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-05T06:23:41.403Z",
+            "id": 12626
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-05T06:07:29.943Z",
+            "id": 12620
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-21T07:06:41.117Z",
+            "id": 11662
+          },
+          {
+            "status": "successful",
+            "finished": "2018-02-21T07:04:09.501Z",
+            "id": 11660
+          },
+          {
+            "status": "failed",
+            "finished": "2018-02-21T06:56:47.809Z",
+            "id": 11648
+          }
+        ]
+      },
+      "created": "2017-12-20T04:19:45.802Z",
+      "modified": "2018-03-06T08:31:14.345Z",
+      "name": "Zenoss As a Service - Add Device - Standard Monitoring - Network",
+      "description": "Add Network Devices  (Production)",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 6,
+      "playbook": "Standard_Monitoring_Network_Operations.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 4,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-03-06T08:21:40.295158Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 38,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/38/",
+      "related": {
+        "created_by": "/api/v1/users/65/",
+        "labels": "/api/v1/job_templates/38/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/37/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/12156/",
+        "notification_templates_error": "/api/v1/job_templates/38/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/38/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/38/jobs/",
+        "object_roles": "/api/v1/job_templates/38/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/38/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/38/access_list/",
+        "launch": "/api/v1/job_templates/38/launch/",
+        "schedules": "/api/v1/job_templates/38/schedules/",
+        "activity_stream": "/api/v1/job_templates/38/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/38/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 12156,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring Windows Pre_prod",
+          "description": "ZaaS - Standard Monitoring - Production Windows Pre_prod(ajas)",
+          "finished": "2018-02-27T07:17:58.442Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 12156,
+          "name": "Zenoss As a Service - Add Device - Standard Monitoring Windows Pre_prod",
+          "description": "ZaaS - Standard Monitoring - Production Windows Pre_prod(ajas)",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 37,
+          "name": "Zenoss As A Service(Zaas)- windows-preprod-bugfix",
+          "description": "To make changes for device status as pre_production",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 65,
+          "username": "ajas",
+          "first_name": "Ajay",
+          "last_name": "Singh"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 243,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 245,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 244,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-02-27T07:17:58.442Z",
+            "id": 12156
+          }
+        ]
+      },
+      "created": "2018-02-27T05:10:15.578Z",
+      "modified": "2018-02-27T05:12:07.098Z",
+      "name": "Zenoss As a Service - Add Device - Standard Monitoring Windows Pre_prod",
+      "description": "ZaaS - Standard Monitoring - Production Windows Pre_prod(ajas)",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 37,
+      "playbook": "Standard_Monitoring_IT_Operations_Default.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-02-27T07:17:58.442779Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 11,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/11/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/11/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/6/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/15252/",
+        "notification_templates_error": "/api/v1/job_templates/11/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/11/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/11/jobs/",
+        "object_roles": "/api/v1/job_templates/11/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/11/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/11/access_list/",
+        "launch": "/api/v1/job_templates/11/launch/",
+        "schedules": "/api/v1/job_templates/11/schedules/",
+        "activity_stream": "/api/v1/job_templates/11/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/11/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 15252,
+          "name": "Zenoss  As A Service - Add Maintenance Window",
+          "description": "ZaaS - Add Maintenance Window - Production",
+          "finished": "2018-03-30T20:11:01.721Z",
+          "status": "failed",
+          "failed": true
+        },
+        "last_update": {
+          "id": 15252,
+          "name": "Zenoss  As A Service - Add Maintenance Window",
+          "description": "ZaaS - Add Maintenance Window - Production",
+          "status": "failed",
+          "failed": true
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 6,
+          "name": "Zenoss As A Service (Zaas)  - Production",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 62,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 64,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 63,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "failed",
+            "finished": "2018-03-30T20:11:01.721Z",
+            "id": 15252
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-30T20:10:47.601Z",
+            "id": 15251
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-30T20:08:20.024Z",
+            "id": 15249
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-30T20:05:58.697Z",
+            "id": 15247
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-29T21:06:04.089Z",
+            "id": 15156
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-22T23:21:57.957Z",
+            "id": 14263
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-22T22:51:06.511Z",
+            "id": 14261
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T10:39:27.199Z",
+            "id": 13688
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T06:46:11.555Z",
+            "id": 13613
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T06:43:18.415Z",
+            "id": 13611
+          }
+        ]
+      },
+      "created": "2017-08-12T17:16:57.638Z",
+      "modified": "2018-03-30T20:10:48.150Z",
+      "name": "Zenoss  As A Service - Add Maintenance Window",
+      "description": "ZaaS - Add Maintenance Window - Production",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 6,
+      "playbook": "add_maintenance_window.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-03-30T20:11:01.721408Z",
+      "last_job_failed": true,
+      "next_job_run": null,
+      "status": "failed",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 43,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/43/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/43/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/41/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/13684/",
+        "notification_templates_error": "/api/v1/job_templates/43/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/43/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/43/jobs/",
+        "object_roles": "/api/v1/job_templates/43/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/43/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/43/access_list/",
+        "launch": "/api/v1/job_templates/43/launch/",
+        "schedules": "/api/v1/job_templates/43/schedules/",
+        "activity_stream": "/api/v1/job_templates/43/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/43/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 13684,
+          "name": "Zenoss  As A Service - Add Maintenance Window - Hotfix-add_maintenance_window",
+          "description": "ZaaS - Add Maintenance Window -  hotfix-add_maintenance_window",
+          "finished": "2018-03-16T10:28:57.518Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 13684,
+          "name": "Zenoss  As A Service - Add Maintenance Window - Hotfix-add_maintenance_window",
+          "description": "ZaaS - Add Maintenance Window -  hotfix-add_maintenance_window",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 41,
+          "name": "HotFix Add Maintenance Window",
+          "description": "HotFix Add Maintenance Window",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 266,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 268,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 267,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-03-16T10:28:57.518Z",
+            "id": 13684
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T10:22:46.990Z",
+            "id": 13681
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T10:17:33.354Z",
+            "id": 13678
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T10:11:45.000Z",
+            "id": 13669
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T09:30:12.583Z",
+            "id": 13661
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T09:24:08.512Z",
+            "id": 13658
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T08:50:11.871Z",
+            "id": 13652
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-16T08:44:14.204Z",
+            "id": 13649
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-16T08:41:14.100Z",
+            "id": 13646
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-16T08:29:19.730Z",
+            "id": 13643
+          }
+        ]
+      },
+      "created": "2018-03-16T08:05:00.627Z",
+      "modified": "2018-03-16T10:28:43.492Z",
+      "name": "Zenoss  As A Service - Add Maintenance Window - Hotfix-add_maintenance_window",
+      "description": "ZaaS - Add Maintenance Window -  hotfix-add_maintenance_window",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 41,
+      "playbook": "add_maintenance_window.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 4,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-03-16T10:28:57.518196Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 12,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/12/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/12/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/6/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/15574/",
+        "notification_templates_error": "/api/v1/job_templates/12/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/12/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/12/jobs/",
+        "object_roles": "/api/v1/job_templates/12/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/12/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/12/access_list/",
+        "launch": "/api/v1/job_templates/12/launch/",
+        "schedules": "/api/v1/job_templates/12/schedules/",
+        "activity_stream": "/api/v1/job_templates/12/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/12/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 15574,
+          "name": "Zenoss As a Service - Decommission Device",
+          "description": "Zenoss As a Service - Decommission Device - Production",
+          "finished": "2018-04-02T20:24:49.461Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 15574,
+          "name": "Zenoss As a Service - Decommission Device",
+          "description": "Zenoss As a Service - Decommission Device - Production",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 6,
+          "name": "Zenoss As A Service (Zaas)  - Production",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 67,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 69,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 68,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-04-02T20:24:49.461Z",
+            "id": 15574
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T10:00:14.534Z",
+            "id": 15516
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T09:51:07.026Z",
+            "id": 15514
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:14:57.822Z",
+            "id": 15455
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:05:54.285Z",
+            "id": 15447
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:03:07.038Z",
+            "id": 15445
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T05:00:25.609Z",
+            "id": 15443
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T04:55:39.835Z",
+            "id": 15441
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T04:49:29.159Z",
+            "id": 15439
+          },
+          {
+            "status": "successful",
+            "finished": "2018-04-02T04:45:53.906Z",
+            "id": 15437
+          }
+        ]
+      },
+      "created": "2017-08-16T07:24:28.892Z",
+      "modified": "2018-04-02T20:24:06.816Z",
+      "name": "Zenoss As a Service - Decommission Device",
+      "description": "Zenoss As a Service - Decommission Device - Production",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 6,
+      "playbook": "Delete-Zenoss-Device.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-04-02T20:24:49.461906Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 14,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/14/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/14/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/13/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/12918/",
+        "notification_templates_error": "/api/v1/job_templates/14/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/14/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/14/jobs/",
+        "object_roles": "/api/v1/job_templates/14/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/14/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/14/access_list/",
+        "launch": "/api/v1/job_templates/14/launch/",
+        "schedules": "/api/v1/job_templates/14/schedules/",
+        "activity_stream": "/api/v1/job_templates/14/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/14/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 12918,
+          "name": "Zenoss As a Service - Decommission Device - feature-add_decommission_issue12",
+          "description": "",
+          "finished": "2018-03-08T04:52:51.641Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 12918,
+          "name": "Zenoss As a Service - Decommission Device - feature-add_decommission_issue12",
+          "description": "",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 13,
+          "name": "Zenoss As A Service - Automation - feature-add_decommission_issue12",
+          "description": "Zenoss As A Service - Automation -  Add Production State Decommission (For Analytics)",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 75,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 77,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 76,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-03-08T04:52:51.641Z",
+            "id": 12918
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-07T07:51:57.680Z",
+            "id": 12839
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-07T07:29:33.180Z",
+            "id": 12834
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-07T06:26:43.714Z",
+            "id": 12818
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-07T06:00:54.140Z",
+            "id": 12815
+          },
+          {
+            "status": "failed",
+            "finished": "2018-03-07T05:56:22.227Z",
+            "id": 12812
+          }
+        ]
+      },
+      "created": "2017-08-18T03:54:26.932Z",
+      "modified": "2018-03-07T05:59:56.307Z",
+      "name": "Zenoss As a Service - Decommission Device - feature-add_decommission_issue12",
+      "description": "",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 13,
+      "playbook": "Delete-Zenoss-Device.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-03-08T04:52:51.641735Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 30,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/30/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/30/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/28/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/6797/",
+        "notification_templates_error": "/api/v1/job_templates/30/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/30/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/30/jobs/",
+        "object_roles": "/api/v1/job_templates/30/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/30/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/30/access_list/",
+        "launch": "/api/v1/job_templates/30/launch/",
+        "schedules": "/api/v1/job_templates/30/schedules/",
+        "activity_stream": "/api/v1/job_templates/30/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/30/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 6797,
+          "name": "Zenoss As a Service - Decommission Device  - feature-Network_Device",
+          "description": "",
+          "finished": "2017-12-20T05:43:43.043Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 6797,
+          "name": "Zenoss As a Service - Decommission Device  - feature-Network_Device",
+          "description": "",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 28,
+          "name": "Zenoss As A Service (Zaas)  - feature-Network_devices",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 193,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 195,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 194,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2017-12-20T05:43:43.043Z",
+            "id": 6797
+          },
+          {
+            "status": "canceled",
+            "finished": "2017-12-20T05:39:04.557Z",
+            "id": 6794
+          }
+        ]
+      },
+      "created": "2017-12-20T05:28:31.706Z",
+      "modified": "2017-12-20T05:30:12.363Z",
+      "name": "Zenoss As a Service - Decommission Device  - feature-Network_Device",
+      "description": "",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 28,
+      "playbook": "Delete-Zenoss-Device.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2017-12-20T05:43:43.043135Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 27,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/27/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/27/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/26/",
+        "credential": "/api/v1/credentials/3/",
+        "notification_templates_error": "/api/v1/job_templates/27/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/27/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/27/jobs/",
+        "object_roles": "/api/v1/job_templates/27/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/27/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/27/access_list/",
+        "launch": "/api/v1/job_templates/27/launch/",
+        "schedules": "/api/v1/job_templates/27/schedules/",
+        "activity_stream": "/api/v1/job_templates/27/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/27/survey_spec/"
+      },
+      "summary_fields": {
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 26,
+          "name": "Zenoss As A Service (Zaas)  - hotfix-change_zenoss_url",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 175,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 177,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 176,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": []
+      },
+      "created": "2017-11-27T09:36:58.584Z",
+      "modified": "2017-11-27T10:52:07.659Z",
+      "name": "Zenoss As a Service - Decommission Device -  hotfix-change_url",
+      "description": "Hotfix Change URL",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 26,
+      "playbook": "Delete-Zenoss-Device.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2017-11-27T10:53:51.130749Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    },
+    {
+      "id": 16,
+      "type": "job_template",
+      "url": "/api/v1/job_templates/16/",
+      "related": {
+        "created_by": "/api/v1/users/2/",
+        "labels": "/api/v1/job_templates/16/labels/",
+        "inventory": "/api/v1/inventories/2/",
+        "project": "/api/v1/projects/6/",
+        "credential": "/api/v1/credentials/3/",
+        "last_job": "/api/v1/jobs/15545/",
+        "notification_templates_error": "/api/v1/job_templates/16/notification_templates_error/",
+        "notification_templates_success": "/api/v1/job_templates/16/notification_templates_success/",
+        "jobs": "/api/v1/job_templates/16/jobs/",
+        "object_roles": "/api/v1/job_templates/16/object_roles/",
+        "notification_templates_any": "/api/v1/job_templates/16/notification_templates_any/",
+        "access_list": "/api/v1/job_templates/16/access_list/",
+        "launch": "/api/v1/job_templates/16/launch/",
+        "schedules": "/api/v1/job_templates/16/schedules/",
+        "activity_stream": "/api/v1/job_templates/16/activity_stream/",
+        "survey_spec": "/api/v1/job_templates/16/survey_spec/"
+      },
+      "summary_fields": {
+        "last_job": {
+          "id": 15545,
+          "name": "Zenoss As a Service -  IP Reset - Production",
+          "description": "ZaaS - Feature - IP Reset",
+          "finished": "2018-04-02T12:22:01.987Z",
+          "status": "successful",
+          "failed": false
+        },
+        "last_update": {
+          "id": 15545,
+          "name": "Zenoss As a Service -  IP Reset - Production",
+          "description": "ZaaS - Feature - IP Reset",
+          "status": "successful",
+          "failed": false
+        },
+        "inventory": {
+          "id": 2,
+          "name": "localhost",
+          "description": "",
+          "has_active_failures": false,
+          "total_hosts": 1,
+          "hosts_with_active_failures": 0,
+          "total_groups": 1,
+          "groups_with_active_failures": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0
+        },
+        "credential": {
+          "id": 3,
+          "name": "zaas-vault",
+          "description": "",
+          "kind": "ssh",
+          "cloud": false
+        },
+        "project": {
+          "id": 6,
+          "name": "Zenoss As A Service (Zaas)  - Production",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git"
+        },
+        "created_by": {
+          "id": 2,
+          "username": "ashukaul",
+          "first_name": "Ashutosh",
+          "last_name": "Kaul"
+        },
+        "object_roles": {
+          "admin_role": {
+            "id": 91,
+            "description": "Can manage all aspects of the job template",
+            "name": "Admin"
+          },
+          "execute_role": {
+            "id": 93,
+            "description": "May run the job template",
+            "name": "Execute"
+          },
+          "read_role": {
+            "id": 92,
+            "description": "May view settings for the job template",
+            "name": "Read"
+          }
+        },
+        "user_capabilities": {
+          "edit": true,
+          "start": true,
+          "copy": true,
+          "schedule": true,
+          "delete": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "survey": {
+          "description": "",
+          "title": ""
+        },
+        "recent_jobs": [
+          {
+            "status": "successful",
+            "finished": "2018-04-02T12:22:01.987Z",
+            "id": 15545
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-30T08:36:54.966Z",
+            "id": 15204
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-28T15:55:17.297Z",
+            "id": 15018
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-24T16:58:22.507Z",
+            "id": 14424
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-23T17:43:05.470Z",
+            "id": 14355
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-23T17:39:45.393Z",
+            "id": 14353
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-22T22:11:39.003Z",
+            "id": 14259
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-21T17:23:50.261Z",
+            "id": 14136
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-21T11:30:38.668Z",
+            "id": 14111
+          },
+          {
+            "status": "successful",
+            "finished": "2018-03-20T03:22:52.615Z",
+            "id": 13985
+          }
+        ]
+      },
+      "created": "2017-09-01T06:41:18.007Z",
+      "modified": "2018-04-02T12:21:46.401Z",
+      "name": "Zenoss As a Service -  IP Reset - Production",
+      "description": "ZaaS - Feature - IP Reset",
+      "job_type": "run",
+      "inventory": 2,
+      "project": 6,
+      "playbook": "ipreset.yml",
+      "credential": 3,
+      "cloud_credential": null,
+      "network_credential": null,
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "last_job_run": "2018-04-02T12:22:01.987130Z",
+      "last_job_failed": false,
+      "next_job_run": null,
+      "status": "successful",
+      "host_config_key": "",
+      "ask_variables_on_launch": false,
+      "ask_limit_on_launch": false,
+      "ask_tags_on_launch": false,
+      "ask_skip_tags_on_launch": false,
+      "ask_job_type_on_launch": false,
+      "ask_inventory_on_launch": false,
+      "ask_credential_on_launch": false,
+      "survey_enabled": true,
+      "become_enabled": false,
+      "allow_simultaneous": false
+    }
+  ]
+}
