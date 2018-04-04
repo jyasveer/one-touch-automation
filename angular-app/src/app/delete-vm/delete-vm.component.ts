@@ -28,6 +28,7 @@ export class DeleteVmComponent implements OnInit {
   showSubmit = true;
   private deleteVmLaunchId: string;
   private deleteVmJobId: string;
+  private setIntervalReference: any;
 
   constructor(
     private router: Router,
@@ -96,6 +97,7 @@ export class DeleteVmComponent implements OnInit {
   }
 
   pollForJobStatus() {
+    // for now the interval is 10 sec
     setInterval(this.getJobStatus, 10000);
   }
 
@@ -113,6 +115,7 @@ export class DeleteVmComponent implements OnInit {
                 this.isVmDeleted = true;
                 this.isVmDeleting = false;
                 this.isVmDeleteError = false;
+                this.clearIntervalReference();
               } else if (status === 'pending' || status === 'running') {
                 this.isVmDeleted = false;
                 this.isVmDeleting = true;
@@ -121,6 +124,7 @@ export class DeleteVmComponent implements OnInit {
                 this.isVmDeleted = false;
                 this.isVmDeleting = false;
                 this.isVmDeleteError = true;
+                this.clearIntervalReference();
               }
             }
           }
@@ -131,5 +135,9 @@ export class DeleteVmComponent implements OnInit {
         this.isVmDeleted = false;
         this.isVmDeleteError = true;
       });
+  }
+
+  private clearIntervalReference() {
+    clearInterval(this.setIntervalReference);
   }
 }

@@ -57,6 +57,7 @@ export class CreateVmComponent implements OnInit {
     private interfaceTypeData: any = null;
     private createVmLaunchId: string;
     private createVmJobId: string;
+    private setIntervalReference: any;
 
     constructor(
         private router: Router,
@@ -191,7 +192,8 @@ export class CreateVmComponent implements OnInit {
     }
 
     pollForJobStatus() {
-        setInterval(this.getJobStatus, 10000);
+        // for now the interval is 10 sec
+        this.setIntervalReference = setInterval(this.getJobStatus, 10000);
     }
 
     getJobStatus() {
@@ -208,6 +210,7 @@ export class CreateVmComponent implements OnInit {
                             this.isVmCreated = true;
                             this.isVmCreating = false;
                             this.isVmCreateError = false;
+                            this.clearIntervalReference();
                         } else if (status === 'pending' || status === 'running') {
                             this.isVmCreated = false;
                             this.isVmCreating = true;
@@ -216,6 +219,7 @@ export class CreateVmComponent implements OnInit {
                             this.isVmCreated = false;
                             this.isVmCreating = false;
                             this.isVmCreateError = true;
+                            this.clearIntervalReference();
                         }
                     }
                 }
@@ -409,5 +413,9 @@ export class CreateVmComponent implements OnInit {
                 this.interfaceArray = this.interfaceTypeData ? this.interfaceTypeData : [];
             }
         }
+    }
+
+    private clearIntervalReference() {
+        clearInterval(this.setIntervalReference);
     }
 }
