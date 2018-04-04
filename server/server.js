@@ -171,34 +171,6 @@ app.get('/data/:location', (req, res) => {
   });
 });
 
-// app.post('/create-vm2', (req, res) => {
-//   var vm = req.body.vm;
-//   console.log('vm object', vm);
-//   curl.request({
-//     url: 'https://p-ansible-tower01.juniper.net/api/v1/job_templates/32/launch/',
-//     data: vm,
-//     user: 'admin:f22raptor',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     insecure: true,
-//     silent: true,
-//     request: 'POST'
-//   }, function (err, stdout, stderr) {
-//     console.log('/create-vm err', err);
-//     console.log('/create-vm stdout', stdout);
-//     console.log('/create-vm stderr', stderr);
-//     if (err) {
-//       res.status(400).send({err});
-//     } else {
-//       res.send({
-//         message: 'vm is created',
-//         data: vm
-//       });
-//     }
-//   });
-// });
-
 app.get('/create-vm/id', (req, res) => {
   var curl_username = process.env.ansibletower_userid;
   var curl_password = process.env.ansibletower_password;
@@ -206,9 +178,9 @@ app.get('/create-vm/id', (req, res) => {
   var url = " https://p-ansible-tower01.juniper.net/";
   var api = "api/v1/job_templates/";
   var str = "One Touch Automation - Provision - feature-Ubuntu16";
-  var res = cmd + url + api;
+  var curl_req = cmd + url + api;
 
-  exec(res, function (err, reply) {
+  exec(curl_req, function (err, reply) {
     if (err) {
       res.status(400).send({
         err
@@ -241,9 +213,9 @@ app.get('/delete-vm/id', (req, res) => {
   var url = " https://p-ansible-tower01.juniper.net/";
   var api = "api/v1/job_templates/";
   var str = "One Touch Automation - Delete Instance - feature-Ubuntu16";
-  var res = cmd + url + api;
+  var curl_req = cmd + url + api;
 
-  exec(res, function (err, reply) {
+  exec(curl_req, function (err, reply) {
     if (err) {
       res.status(400).send({
         err
@@ -278,6 +250,7 @@ app.post('/create-vm', (req, res) => {
   var url = " https://p-ansible-tower01.juniper.net/api/v1/job_templates/" + id + "/launch/";
   var obj = ' -d  \'' + vm + '\'';
   var curl_req = curl_cmd_post + obj + url;
+
   exec(curl_req, function (err, stdout, stderr) {
     console.log('/create-vm err', err);
     console.log('/create-vm stdout', stdout);
@@ -304,6 +277,7 @@ app.post('/delete-vm', (req, res) => {
   var url = " https://p-ansible-tower01.juniper.net/api/v1/job_templates/" + id + "/launch/";
   var obj = ' -d  \'' + vm + '\'';
   var curl_req = curl_cmd_post + obj + url;
+
   exec(curl_req, function (err, stdout, stderr) {
     console.log('/delete-vm err', err);
     console.log('/delete-vm stdout', stdout);
@@ -328,9 +302,9 @@ app.get('/job/status/:id', (req, res) => {
   var cmd = "curl -s -k -u " + curl_username + ":" + curl_password + " -X GET -H \'Content-Type: application/json\'";
   var url = " https://p-ansible-tower01.juniper.net/";
   var api = "api/v1/jobs/";
-  var res = cmd + url + api + id;
+  var curl_req = cmd + url + api + id;
 
-  exec(res, function (err, stdout) {
+  exec(curl_req, function (err, stdout) {
     if (err) {
       res.status(400).send({
         err
