@@ -98,7 +98,7 @@ export class DeleteVmComponent implements OnInit {
 
   pollForJobStatus() {
     // for now the interval is 10 sec
-    setInterval(this.getJobStatus, 10000);
+    this.setIntervalReference = setInterval(this.getJobStatus.bind(this), 10000);
   }
 
   getJobStatus() {
