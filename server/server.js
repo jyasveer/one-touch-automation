@@ -173,11 +173,11 @@ app.get('/data/:location', (req, res) => {
 
 app.get('/create-vm/id', (req, res) => {
   var curl_username = process.env.ansibletower_userid;
-  var curl_password = process.env.ansibletower_password;
+  var curl_password = process.env.ansibletower_password_awx;
   var cmd = "curl -s -k -u " + curl_username + ":" + curl_password + " -X GET -H \'Content-Type: application/json\'";
-  var url = " https://p-ansible-tower01.juniper.net/";
+  var url = " http://p-bng-opseng-awx01.juniper.net/";
   var api = "api/v1/job_templates/";
-  var str = "One Touch Automation - Provision - feature-Ubuntu16";
+  var str = "One Touch Automation-Provision Instance";
   var curl_req = cmd + url + api;
 
   exec(curl_req, function (err, reply) {
@@ -186,33 +186,36 @@ app.get('/create-vm/id', (req, res) => {
         err
       });
     }
+    if (reply) {
+      reply = JSON.parse(reply);
+    }
+    var data = null;
     if (reply.results) {
       reply.results.forEach((item) => {
+        console.log(str);
+        console.log(item.name, item.type);
         if (item.name === str && item.type === 'job_template') {
-          res.send({
-            message: 'job id for creating vm',
-            data: {
+            data = {
               id: item.id,
               url: item.url
             }
-          });
         }
       });
     }
     res.send({
-      message: 'job id for creating vm not found',
-      err: true
+      message: 'launch id for creating vm',
+      data: data
     });
   });
 });
 
 app.get('/delete-vm/id', (req, res) => {
   var curl_username = process.env.ansibletower_userid;
-  var curl_password = process.env.ansibletower_password;
+  var curl_password = process.env.ansibletower_password_awx;
   var cmd = "curl -s -k -u " + curl_username + ":" + curl_password + " -X GET -H \'Content-Type: application/json\'";
-  var url = " https://p-ansible-tower01.juniper.net/";
+  var url = " http://p-bng-opseng-awx01.juniper.net/";
   var api = "api/v1/job_templates/";
-  var str = "One Touch Automation - Delete Instance - feature-Ubuntu16";
+  var str = "One Touch Automation - Deletion instance";
   var curl_req = cmd + url + api;
 
   exec(curl_req, function (err, reply) {
@@ -221,22 +224,23 @@ app.get('/delete-vm/id', (req, res) => {
         err
       });
     }
+    if (reply) {
+      reply = JSON.parse(reply);
+    }
+    var data = null;
     if (reply.results) {
       reply.results.forEach((item) => {
         if (item.name === str && item.type === 'job_template') {
-          res.send({
-            message: 'job id for deleting vm',
-            data: {
+            data = {
               id: item.id,
               url: item.url
             }
-          });
         }
       });
     }
     res.send({
-      message: 'job id for deleting vm not found',
-      err: true
+      message: 'launch id for deleting vm',
+      data: data
     });
   });
 });

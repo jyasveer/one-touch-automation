@@ -398,7 +398,8 @@ var CreateVmComponent = (function () {
         });
     };
     CreateVmComponent.prototype.pollForJobStatus = function () {
-        setInterval(this.getJobStatus, 10000);
+        // for now the interval is 10 sec
+        this.setIntervalReference = setInterval(this.getJobStatus.bind(this), 10000);
     };
     CreateVmComponent.prototype.getJobStatus = function () {
         var _this = this;
@@ -415,6 +416,7 @@ var CreateVmComponent = (function () {
                             _this.isVmCreated = true;
                             _this.isVmCreating = false;
                             _this.isVmCreateError = false;
+                            _this.clearIntervalReference();
                         }
                         else if (status === 'pending' || status === 'running') {
                             _this.isVmCreated = false;
@@ -425,6 +427,7 @@ var CreateVmComponent = (function () {
                             _this.isVmCreated = false;
                             _this.isVmCreating = false;
                             _this.isVmCreateError = true;
+                            _this.clearIntervalReference();
                         }
                     }
                 }
@@ -607,6 +610,9 @@ var CreateVmComponent = (function () {
                 this.interfaceArray = this.interfaceTypeData ? this.interfaceTypeData : [];
             }
         }
+    };
+    CreateVmComponent.prototype.clearIntervalReference = function () {
+        clearInterval(this.setIntervalReference);
     };
     return CreateVmComponent;
 }());
@@ -796,7 +802,8 @@ var DeleteVmComponent = (function () {
         });
     };
     DeleteVmComponent.prototype.pollForJobStatus = function () {
-        setInterval(this.getJobStatus, 10000);
+        // for now the interval is 10 sec
+        this.setIntervalReference = setInterval(this.getJobStatus.bind(this), 10000);
     };
     DeleteVmComponent.prototype.getJobStatus = function () {
         var _this = this;
@@ -813,6 +820,7 @@ var DeleteVmComponent = (function () {
                             _this.isVmDeleted = true;
                             _this.isVmDeleting = false;
                             _this.isVmDeleteError = false;
+                            _this.clearIntervalReference();
                         }
                         else if (status === 'pending' || status === 'running') {
                             _this.isVmDeleted = false;
@@ -823,6 +831,7 @@ var DeleteVmComponent = (function () {
                             _this.isVmDeleted = false;
                             _this.isVmDeleting = false;
                             _this.isVmDeleteError = true;
+                            _this.clearIntervalReference();
                         }
                     }
                 }
@@ -833,6 +842,9 @@ var DeleteVmComponent = (function () {
             _this.isVmDeleted = false;
             _this.isVmDeleteError = true;
         });
+    };
+    DeleteVmComponent.prototype.clearIntervalReference = function () {
+        clearInterval(this.setIntervalReference);
     };
     return DeleteVmComponent;
 }());
