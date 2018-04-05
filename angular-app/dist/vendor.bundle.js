@@ -1199,9 +1199,9 @@ var BsModalService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modal_component__ = __webpack_require__("../../../../ngx-bootstrap/modal/modal.component.js");
 /* unused harmony reexport ModalDirective */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modal_module__ = __webpack_require__("../../../../ngx-bootstrap/modal/modal.module.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_4__modal_module__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_4__modal_module__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bs_modal_service__ = __webpack_require__("../../../../ngx-bootstrap/modal/bs-modal.service.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_5__bs_modal_service__["a"]; });
+/* unused harmony reexport BsModalService */
 
 
 

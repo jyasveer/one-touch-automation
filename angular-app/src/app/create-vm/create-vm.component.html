@@ -8,7 +8,7 @@
     <alert type="danger" *ngIf="isVmCreateError">
         <strong>Error in creating VM.</strong>
     </alert>
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <form class="form-horizontal" role="form" #vmForm="ngForm">
             <div class="form-group">
                 <label class="col-sm-4 control-label">* VM Name
@@ -47,10 +47,9 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label">* VC Name</label>
                 <div class="col-sm-8">
-                    <select name="select-vc" class="form-control" required [(ngModel)]="selectedVc" (change)="getDataCenters(formModal)" *ngIf="!isPreview"
-                        name="vcName" #vcName="ngModel" [disabled]="selectedRegion === ''">
+                    <select name="select-vc" class="form-control" required [(ngModel)]="selectedVc" (change)="getDataCenters()" *ngIf="!isPreview"
+                        name="vcName" #vcName="ngModel">
                         <option value="">SELECT-VC NAME</option>
-                        <option value="create-new-vc">Create VC</option>
                         <option *ngFor="let vc of vcNameArray" [value]="vc">{{ vc }}</option>
                     </select>
                     <div *ngIf="isPreview">{{ selectedVc ? selectedVc : '---' }}</div>
@@ -160,24 +159,5 @@
                 </div>
             </div>
         </form>
-        <ng-template #formModal>
-            <div class="modal-header">
-                <h4 class="modal-title pull-left">Create VC</h4>
-                <button type="button" class="close pull-right" aria-label="Close" (click)="formModalRef.hide()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Please enter a VC name:</label>
-                    <input type="text" class="form-control" [(ngModel)]="newVcName" (ngModelChange)="checkIfVcNameExists()">
-                    <div class="text-muted" *ngIf="isVcNamePresent">VC name already present. Please enter a different name</div>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-default" [disabled]="isVcNamePresent || newVcName === ''" (click)="createVc()">Create</button>
-                    <button class="btn btn-default" (click)="formModalRef.hide()">Cancel</button>
-                </div>
-            </div>
-        </ng-template>
     </div>
 </div>

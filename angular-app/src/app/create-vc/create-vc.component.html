@@ -1,0 +1,43 @@
+<div class="container">
+  <alert type="success" *ngIf="isVcAdded">
+    <strong>New VC <b>{{ newVcName }}</b> added successfully.</strong>
+  </alert>
+  <alert type="danger" *ngIf="isVcAddError">
+    <strong>Error in adding VC.</strong>
+  </alert>
+  <div class="col-sm-6">
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">* Region Name</label>
+        <div class="col-sm-8">
+          <select name="select-region" class="form-control" required (change)="getDataForRegion()" [(ngModel)]="selectedRegion" *ngIf="!isPreview"
+            name="region" #region="ngModel">
+            <option value="">SELECT-REGION</option>
+            <option value="bng">Bangalore</option>
+            <option value="svl">Sunnyvale</option>
+            <option value="qnc">QNC</option>
+          </select>
+          <div *ngIf="isPreview">{{ selectedRegion ? selectedRegion : '---' }}</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label">New VC name:</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [(ngModel)]="newVcName" (ngModelChange)="checkIfVcNameExists()" name="vc-name" *ngIf="!isPreview"
+            [disabled]="selectedRegion === ''">
+          <div class="text-muted" *ngIf="isVcNamePresent">VC name already present. Please enter a different name</div>
+          <div *ngIf="isPreview">{{ newVcName ? newVcName : '---' }}</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <button type="button" class="btn btn-default" *ngIf="! isPreview" (click)="isPreview = true" [disabled]="isButtonDisabled">Next</button>
+        </div>
+        <div class="col-sm-offset-4 col-sm-8">
+          <button type="button" class="btn btn-default" *ngIf="isPreview && showSubmit" (click)="createVc()">Create</button>
+          <button type="button" class="btn btn-default" style="margin-left: 10px" *ngIf="isPreview && showSubmit" (click)="isPreview = false">Back</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
