@@ -6,7 +6,6 @@ import {
 import {
     Router
 } from '@angular/router';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 import {
     AppService
@@ -19,7 +18,6 @@ import { VmModel } from '../shared/model/app.models';
     templateUrl: './create-vm.component.html'
 })
 export class CreateVmComponent implements OnInit {
-    formModalRef: BsModalRef;
     machineName = '';
     selectedOs = '';
     selectedRegion = '';
@@ -30,7 +28,6 @@ export class CreateVmComponent implements OnInit {
     selectedResourcePool = '';
     selectedInterfaceType = '';
     selectedInterface = '';
-    newVcName: '';
     osNameArray: Array < string > = [];
     vcNameArray: Array < string > = [];
     dcNameArray: Array < string > = [];
@@ -46,7 +43,6 @@ export class CreateVmComponent implements OnInit {
     isVmCreating = false;
     isVmCreated = false;
     isVmCreateError = false;
-    isVcNamePresent = false;
     showSubmit = true;
 
     private regionData: any = null;
@@ -61,12 +57,11 @@ export class CreateVmComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private modalService: BsModalService,
         private service: AppService) {}
 
     ngOnInit() {
         if (this.service.loggedInUser && this.service.loggedInUser.username) {
-            this.userEmail = this.service.loggedInUser.username;    
+            this.userEmail = this.service.loggedInUser.username;
         } else {
             this.router.navigate(['login']);
         }
@@ -97,11 +92,7 @@ export class CreateVmComponent implements OnInit {
     getDataCenters(formModalRef: TemplateRef<any>) {
         this.resetForVC();
         console.log(this.selectedVc);
-        if (this.selectedVc === 'create-new-vc') {
-            this.openModal(formModalRef);
-        } else {
-            this.extractDcList();
-        }
+        this.extractDcList();
     }
 
     getBussinessUnits() {
@@ -230,51 +221,6 @@ export class CreateVmComponent implements OnInit {
             this.isVmCreated = false;
             this.isVmCreateError = true;
         });
-    }
-
-    openModal(template: TemplateRef<any>) {
-        this.newVcName = '';
-        if (this.selectedVc === 'create-new-vc') {
-            this.formModalRef = this.modalService.show(template);
-        }
-    }
-
-    checkIfVcNameExists() {
-        if (this.newVcName) {
-            this.isVcNamePresent = false;
-            if (this.regionData && (this.regionData['vcenters'] as Array<string>).indexOf(this.newVcName) !== -1) {
-                this.isVcNamePresent = true;
-            }
-        } else {
-            this.isVcNamePresent = false;
-        }
-    }
-
-    createVc() {
-        this.formModalRef.hide();
-        let regionData = this.regionData;
-        if (regionData) {
-            regionData['vcenters'].push(this.newVcName);
-        } else {
-            regionData = {
-                vcenters: []
-            };
-            regionData.vcenters.push(this.newVcName);
-        }
-        const payload = JSON.stringify(regionData);
-        this.service.createVc(this.selectedRegion, payload)
-            .subscribe((response) => {
-                const data = JSON.parse(response.json()['data']['data']);
-                if (this.regionData) {
-                    this.regionData['vcenters'] = data['vcenters'];
-                } else {
-                    this.regionData = {
-                        vcenters: []
-                    };
-                    this.regionData.vcenters.push(this.newVcName);
-                }
-                this.selectedVc = this.newVcName;
-            });
     }
 
     private resetForRegion() {
