@@ -4,7 +4,6 @@ const fs = require('fs');
 const cors = require('cors');
 const redis = require('redis');
 const exec = require('child_process').exec;
-const curl = require('curlrequest');
 const ldap = require('ldapjs');
 
 const redisClient = redis.createClient();
@@ -82,123 +81,25 @@ app.post('/authenticate', function (req, res) {
     res.on('end', function (result) {
       console.log('status: ' + result.status);
       if (result.status === 0) {
-        res.status(400).send({
-          message: 'Please enter username and password',
+        res.send({
+          message: 'login successful',
           data: {
+            key: 'login-success',
+            username: username,
+            password: password
+          }
+        });
+      } else {
+        res.send({
+          message: 'login unsuccessful',
+          data: {
+            key: 'login-failure',
             username: username,
             password: password
           }
         });
       }
     });
-  });
-});
-
-app.post('/authenticate2', function (req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-  if (!username || !password) {
-    res.status(400).send({
-      message: 'Please enter username and password',
-      data: {
-        username: username,
-        password: password
-      }
-    });
-  }
-  redisClient.llen('usernames', function (err, reply) {
-    if (err) {
-      res.status(400).send({
-        err
-      });
-    }
-    if (reply > 0) {
-      console.log('user list exists');
-      redisClient.lrange('usernames', 0, reply, function (err, reply) {
-        if (err) {
-          res.status(400).send({
-            err
-          });
-        }
-        if (reply.indexOf(username) != -1) {
-          redisClient.hget('users', username, function (err, reply) {
-            if (err) {
-              res.status(400).send({
-                err
-              });
-            }
-            if (reply === password) {
-              res.send({
-                message: 'login successful',
-                data: {
-                  key: 'login-success',
-                  username: username,
-                  password: password
-                }
-              });
-            } else {
-              res.send({
-                message: 'login unsuccessful',
-                data: {
-                  key: 'login-failure',
-                  username: username,
-                  password: password
-                }
-              });
-            }
-          });
-        } else {
-          redisClient.rpush('usernames', username, function (err, reply) {
-            if (err) {
-              res.status(400).send({
-                err
-              });
-            }
-            console.log(reply);
-            redisClient.hset('users', username, password, function (err, reply) {
-              if (err) {
-                res.status(400).send({
-                  err
-                });
-              }
-              res.send({
-                message: 'user created',
-                data: {
-                  key: 'user-created',
-                  username: username,
-                  password: password
-                }
-              });
-            });
-          });
-        }
-      });
-    } else {
-      console.log('user list doesn\'t exist');
-      redisClient.rpush('usernames', username, function (err, reply) {
-        if (err) {
-          res.status(400).send({
-            err
-          });
-        }
-        console.log(reply);
-        redisClient.hset('users', username, password, function (err, reply) {
-          if (err) {
-            res.status(400).send({
-              err
-            });
-          }
-          res.send({
-            message: 'user created',
-            data: {
-              key: 'user-created',
-              username: username,
-              password: password
-            }
-          });
-        });
-      });
-    }
   });
 });
 
