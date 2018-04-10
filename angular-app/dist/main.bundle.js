@@ -1397,10 +1397,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var AppService = (function () {
+    // private host = 'http://localhost:8082';
     function AppService(http) {
         this.http = http;
-        // private host = 'http://bng-infra-automation.juniper.net:8082';
-        this.host = 'http://localhost:8082';
+        this.host = 'http://bng-infra-automation.juniper.net:8082';
     }
     AppService.prototype.authenticate = function (username, password) {
         var loginObj = {
