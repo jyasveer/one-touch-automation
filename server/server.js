@@ -44,7 +44,7 @@ app.post('/authenticate', function (req, res) {
   var password = req.body.password;
   if (!username || !password) {
     res.status(400).send({
-      message: 'Please enter username and password',
+      message: 'Username or Password is empty. Please enter.',
       data: {
         username: username,
         password: password
@@ -53,9 +53,16 @@ app.post('/authenticate', function (req, res) {
   }
 
   username = `${username}@juniper.net`;
-  var ldapClient = ldap.createClient({
-    url: 'ldaps://ldap.jnpr.net'
-  });
+  try {
+    var ldapClient = ldap.createClient({
+      url: 'ldaps://ldap.jnpr.net'
+    });
+  } catch (err) {
+    res.status(500).send({
+      err
+    });
+  }
+
   var userids = 'vemulan'
   var base_dn = 'DC=jnpr,DC=net';
 
@@ -64,6 +71,23 @@ app.post('/authenticate', function (req, res) {
     attributes: ['sAMAccountName']
   };
 
+  ldapClient.bind(username, password, function (err, res) {
+    if (req.dn.toString() !== username || req.credentials !== password) {
+      res.status(401).send({
+        message: 'Please enter correct username and password',
+        err: new ldap.InvalidCredentialsError()
+      });
+    } else {
+      res.send({
+        message: 'login successful',
+        data: {
+          key: 'login-success',
+          username: username,
+          password: password
+        }
+      });
+    }
+  });
   ldapClient.search(base_dn, options, function (err, res) {
     assert.ifError(err);
 
@@ -75,21 +99,9 @@ app.post('/authenticate', function (req, res) {
     });
     res.on('error', function (err) {
       console.error('error: ' + err.message);
-      res.status(400).send({
-        err
-      });
     });
     res.on('end', function (result) {
       console.log('status: ' + result.status);
-      if (result.status === 0) {
-        res.status(400).send({
-          message: 'Please enter username and password',
-          data: {
-            username: username,
-            password: password
-          }
-        });
-      }
     });
   });
 });
