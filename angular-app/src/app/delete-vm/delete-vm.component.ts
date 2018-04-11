@@ -22,7 +22,9 @@ export class DeleteVmComponent implements OnInit {
   email = '';
   userEmail = '';
   isPreview = false;
-  isVmDeleting = false;
+  isVmTriggered = false;
+  isVmPending = false;
+  isVmRunning = false;
   isVmDeleted = false;
   isVmDeleteError = false;
   showSubmit = true;
@@ -44,7 +46,9 @@ export class DeleteVmComponent implements OnInit {
 
   onSubmit() {
     this.showSubmit = false;
-    this.isVmDeleting = true;
+    this.isVmTriggered = true;
+    this.isVmPending = false;
+    this.isVmRunning = false;
     this.isVmDeleted = false;
     this.isVmDeleteError = false;
     this.service.getDeleteVmLaunchId()
@@ -58,9 +62,11 @@ export class DeleteVmComponent implements OnInit {
           }
         }
       }, (error: Response) => {
-        console.log('error in fetch delete launch id', error.json());
+        console.log('error in fetch delete launch id', error);
+        this.isVmTriggered = false;
+        this.isVmPending = false;
+        this.isVmRunning = false;
         this.isVmDeleted = false;
-        this.isVmDeleting = false;
         this.isVmDeleteError = true;
       });
   }
@@ -81,17 +87,24 @@ export class DeleteVmComponent implements OnInit {
       .subscribe((response) => {
         if (response) {
           const resJson = response.json();
-          const data = resJson['data'];
+          let data = resJson['data'];
           if (data) {
+            data = JSON.parse(data);
             this.deleteVmJobId = data['job'];
             this.pollForJobStatus();
           }
+          this.isVmTriggered = true;
+          this.isVmPending = false;
+          this.isVmRunning = false;
+          this.isVmDeleted = false;
+          this.isVmDeleteError = false;
         }
-        this.isVmDeleting = true;
       }, (error: Response) => {
-        console.log('error in delete vm', error.json());
+        console.log('error in delete vm', error);
+        this.isVmTriggered = false;
+        this.isVmPending = false;
+        this.isVmRunning = false;
         this.isVmDeleted = false;
-        this.isVmDeleting = false;
         this.isVmDeleteError = true;
       });
   }
@@ -112,17 +125,29 @@ export class DeleteVmComponent implements OnInit {
             if (status) {
               status = status.toLowerCase();
               if (status === 'successful') {
+                this.isVmTriggered = false;
+                this.isVmPending = false;
+                this.isVmRunning = false;
                 this.isVmDeleted = true;
-                this.isVmDeleting = false;
                 this.isVmDeleteError = false;
                 this.clearIntervalReference();
-              } else if (status === 'pending' || status === 'running') {
+              } else if (status === 'pending') {
+                this.isVmTriggered = false;
+                this.isVmPending = true;
+                this.isVmRunning = false;
                 this.isVmDeleted = false;
-                this.isVmDeleting = true;
+                this.isVmDeleteError = false;
+              } else if (status === 'running') {
+                this.isVmTriggered = false;
+                this.isVmPending = false;
+                this.isVmRunning = true;
+                this.isVmDeleted = false;
                 this.isVmDeleteError = false;
               } else if (status === 'failed') {
+                this.isVmTriggered = false;
+                this.isVmPending = false;
+                this.isVmRunning = false;
                 this.isVmDeleted = false;
-                this.isVmDeleting = false;
                 this.isVmDeleteError = true;
                 this.clearIntervalReference();
               }
@@ -130,8 +155,10 @@ export class DeleteVmComponent implements OnInit {
           }
         }
       }, (error: Response) => {
-        console.log('error in fetch job status for create vm', error.json());
-        this.isVmDeleting = false;
+        console.log('error in fetch job status for create vm', error);
+        this.isVmTriggered = false;
+        this.isVmPending = false;
+        this.isVmRunning = false;
         this.isVmDeleted = false;
         this.isVmDeleteError = true;
       });

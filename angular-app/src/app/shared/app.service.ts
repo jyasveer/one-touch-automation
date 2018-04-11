@@ -31,10 +31,10 @@ export class AppService {
         return this.http.get(this.host + '/data/os');
     }
 
-    createVc(location, data): Observable < any > {
+    createVc(location, newVcName): Observable < any > {
         const obj = {
-            location,
-            data
+            location: location,
+            vcname: newVcName
         };
         return this.http.post( this.host + '/create-vc', obj);
     }

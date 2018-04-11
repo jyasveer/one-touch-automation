@@ -14,6 +14,7 @@ export class CreateVcComponent implements OnInit {
   selectedRegion = '';
   showSubmit = true;
   isVcAdded = false;
+  isVcAdding = false;
   isVcAddError = false;
 
   private regionData: any = null;
@@ -61,25 +62,29 @@ export class CreateVcComponent implements OnInit {
   createVc() {
     this.showSubmit = false;
     this.isVcAdded = false;
+    this.isVcAdding = true;
     this.isVcAddError = false;
-    let regionData = this.regionData;
-    if (regionData) {
-      regionData['vcenters'].push(this.newVcName);
-    } else {
-      regionData = {
-        vcenters: []
-      };
-      regionData.vcenters.push(this.newVcName);
-    }
-    const payload = JSON.stringify(regionData);
-    this.service.createVc(this.selectedRegion, payload)
-      .subscribe((response) => {
-        const data = JSON.parse(response.json()['data']['data']);
-        this.isVcAdded = true;
-        this.isVcAddError = false;
+    this.service.createVc(this.selectedRegion, this.newVcName)
+      .subscribe((response: Response) => {
+        const resJson = response.json();
+        let data = resJson['data'];
+        if (data) {
+          data = JSON.parse(data);
+          if (data['data']['key'] === 'add-vc-error' || data['data']['key'] === 'cons-vc-error') {
+            this.isVcAdded = false;
+            this.isVcAdding = false;
+            this.isVcAddError = true;
+          }
+          if (data['data']['key'] === 'vc-create-success') {
+            this.isVcAdded = true;
+            this.isVcAdding = false;
+            this.isVcAddError = false;
+          }
+        }
       }, (error: Response) => {
         console.log('error in adding vc', error);
         this.isVcAdded = false;
+        this.isVcAdding = false;
         this.isVcAddError = true;
       });
   }
