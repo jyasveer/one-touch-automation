@@ -1446,7 +1446,7 @@ var AppService = (function () {
         return this.http.post(this.host + '/delete-vm', payload);
     };
     AppService.prototype.getJobStatus = function (jobId) {
-        return this.http.get(this.host + 'job/status/' + jobId);
+        return this.http.get(this.host + '/job/status/' + jobId);
     };
     AppService.prototype.extractData = function (response) {
         var body = response.json() || {};
