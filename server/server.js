@@ -400,13 +400,13 @@ app.post('/create-vc', (req, res) => {
 
   // add vc start
   var add_url = 'http://bng-infra-automation:5004/addvc/'; //To add vc
-  var total_url_add = add_url + location + vcname + server;
+  var total_url_add = add_url + location + '/' + vcname + '/' + server;
   var curl_request_add = "curl -X GET " + total_url_add;
   // ad vc end
 
   // consolidate vc start
   var cons_url = 'http://bng-infra-automation:5003/consolidate/'; //To consolidate the service
-  var total_url_cons = cons_url + location + vcname + server;
+  var total_url_cons = cons_url + location + '/' + vcname + '/' + server;
   var curl_request_cons = "curl -X GET " + total_url_cons;
   // consolidate vc end
 
@@ -416,7 +416,7 @@ app.post('/create-vc', (req, res) => {
         err
       });
     }
-    if (reply !== null) {
+    if (typeof reply === 'string' && reply.trim() !== 'null') {
       res.send({
         message: 'error in add vc request',
         data: {
@@ -431,7 +431,7 @@ app.post('/create-vc', (req, res) => {
             err
           });
         }
-        if (reply !== null) {
+        if (typeof reply === 'string' && reply.trim() !== 'null') {
           res.send({
             message: 'error in vc consolidation',
             data: {
