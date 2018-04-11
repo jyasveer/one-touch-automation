@@ -392,21 +392,63 @@ app.get('/job/status/:id', (req, res) => {
 });
 
 app.post('/create-vc', (req, res) => {
-  var data = req.body.data;
+  var vcname = req.body.vcname;
   var location = req.body.location;
-  redisClient.set(location, data, function (err, reply) {
+  console.log('create-vc input values:', vcname, location);
+
+  var server = 'bng-infra-automation/';
+
+  // add vc start
+  var add_url = 'http://bng-infra-automation:5004/addvc/'; //To add vc
+  var total_url_add = add_url + location + vcname + server;
+  var curl_request_add = "curl -X GET " + total_url_add;
+  // ad vc end
+
+  // consolidate vc start
+  var cons_url = 'http://bng-infra-automation:5003/consolidate/'; //To consolidate the service
+  var total_url_cons = cons_url + location + vcname + server;
+  var curl_request_cons = "curl -X GET " + total_url_cons;
+  // consolidate vc end
+
+  exec(curl_request_add, function(err, reply) {
     if (err) {
       res.status(400).send({
         err
       });
     }
-    res.send({
-      message: 'data for `' + location + '` is updated.',
-      data: {
-        reply,
-        data
-      }
-    });
+    if (reply !== null) {
+      res.send({
+        message: 'error in add vc request',
+        data: {
+          key: 'add-vc-error',
+          data: reply
+        }
+      });
+    } else {
+      exec(curl_request_cons, function(err, reply) {
+        if (err) {
+          res.status(400).send({
+            err
+          });
+        }
+        if (reply !== null) {
+          res.send({
+            message: 'error in vc consolidation',
+            data: {
+              key: 'cons-vc-error',
+              data: reply
+            }
+          });
+        } else {
+          res.send({
+            message: 'VC created successfully',
+            data: {
+              key: 'vc-create-success'
+            }
+          });
+        }
+      });
+    }
   });
 });
 

@@ -198,7 +198,7 @@ AppModule = __decorate([
 /***/ "../../../../../src/app/create-vc/create-vc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <alert type=\"success\" *ngIf=\"isVcAdded\">\n    <strong>New VC <b>{{ newVcName }}</b> added successfully.</strong>\n  </alert>\n  <alert type=\"danger\" *ngIf=\"isVcAddError\">\n    <strong>Error in adding VC.</strong>\n  </alert>\n  <div class=\"col-sm-6\">\n    <form class=\"form-horizontal\" role=\"form\">\n      <div class=\"form-group\">\n        <label class=\"col-sm-4 control-label\">* Region Name</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select-region\" class=\"form-control\" required (change)=\"getDataForRegion()\" [(ngModel)]=\"selectedRegion\" *ngIf=\"!isPreview\"\n            name=\"region\" #region=\"ngModel\">\n            <option value=\"\">SELECT-REGION</option>\n            <option value=\"bng\">Bangalore</option>\n            <option value=\"svl\">Sunnyvale</option>\n            <option value=\"qnc\">QNC</option>\n          </select>\n          <div *ngIf=\"isPreview\">{{ selectedRegion ? selectedRegion : '---' }}</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label class=\"col-sm-4 control-label\">New VC name:</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"newVcName\" (ngModelChange)=\"checkIfVcNameExists()\" name=\"vc-name\" *ngIf=\"!isPreview\"\n            [disabled]=\"selectedRegion === ''\">\n          <div class=\"text-muted\" *ngIf=\"isVcNamePresent\">VC name already present. Please enter a different name</div>\n          <div *ngIf=\"isPreview\">{{ newVcName ? newVcName : '---' }}</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <div class=\"col-sm-offset-4 col-sm-8\">\n          <button type=\"button\" class=\"btn btn-default\" *ngIf=\"! isPreview\" (click)=\"isPreview = true\" [disabled]=\"isButtonDisabled\">Next</button>\n        </div>\n        <div class=\"col-sm-offset-4 col-sm-8\">\n          <button type=\"button\" class=\"btn btn-default\" *ngIf=\"isPreview && showSubmit\" (click)=\"createVc()\">Create</button>\n          <button type=\"button\" class=\"btn btn-default\" style=\"margin-left: 10px\" *ngIf=\"isPreview && showSubmit\" (click)=\"isPreview = false\">Back</button>\n        </div>\n      </div>\n    </form>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <alert type=\"success\" *ngIf=\"isVcAdded\">\n    <strong>New VC <b>{{ newVcName }}</b> added successfully.</strong>\n  </alert>\n  <alert type=\"info\" *ngIf=\"isVcAdding\">\n    <strong>New VC <b>{{ newVcName }}</b> is being added.</strong>\n  </alert>\n  <alert type=\"danger\" *ngIf=\"isVcAddError\">\n    <strong>Error in adding VC.</strong>\n  </alert>\n  <div class=\"col-sm-6\">\n    <form class=\"form-horizontal\" role=\"form\">\n      <div class=\"form-group\">\n        <label class=\"col-sm-4 control-label\">* Region Name</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select-region\" class=\"form-control\" required (change)=\"getDataForRegion()\" [(ngModel)]=\"selectedRegion\" *ngIf=\"!isPreview\"\n            name=\"region\" #region=\"ngModel\">\n            <option value=\"\">SELECT-REGION</option>\n            <option value=\"bng\">Bangalore</option>\n            <option value=\"svl\">Sunnyvale</option>\n            <option value=\"qnc\">QNC</option>\n          </select>\n          <div *ngIf=\"isPreview\">{{ selectedRegion ? selectedRegion : '---' }}</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label class=\"col-sm-4 control-label\">New VC name:</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"newVcName\" (ngModelChange)=\"checkIfVcNameExists()\" name=\"vc-name\" *ngIf=\"!isPreview\"\n            [disabled]=\"selectedRegion === ''\">\n          <div class=\"text-muted\" *ngIf=\"isVcNamePresent\">VC name already present. Please enter a different name</div>\n          <div *ngIf=\"isPreview\">{{ newVcName ? newVcName : '---' }}</div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <div class=\"col-sm-offset-4 col-sm-8\">\n          <button type=\"button\" class=\"btn btn-default\" *ngIf=\"! isPreview\" (click)=\"isPreview = true\" [disabled]=\"isButtonDisabled\">Next</button>\n        </div>\n        <div class=\"col-sm-offset-4 col-sm-8\">\n          <button type=\"button\" class=\"btn btn-default\" *ngIf=\"isPreview && showSubmit\" (click)=\"createVc()\">Create</button>\n          <button type=\"button\" class=\"btn btn-default\" style=\"margin-left: 10px\" *ngIf=\"isPreview && showSubmit\" (click)=\"isPreview = false\">Back</button>\n        </div>\n      </div>\n    </form>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -249,6 +249,7 @@ var CreateVcComponent = (function () {
         this.selectedRegion = '';
         this.showSubmit = true;
         this.isVcAdded = false;
+        this.isVcAdding = false;
         this.isVcAddError = false;
         this.regionData = null;
         this.vcNameArray = [];
@@ -291,26 +292,29 @@ var CreateVcComponent = (function () {
         var _this = this;
         this.showSubmit = false;
         this.isVcAdded = false;
+        this.isVcAdding = true;
         this.isVcAddError = false;
-        var regionData = this.regionData;
-        if (regionData) {
-            regionData['vcenters'].push(this.newVcName);
-        }
-        else {
-            regionData = {
-                vcenters: []
-            };
-            regionData.vcenters.push(this.newVcName);
-        }
-        var payload = JSON.stringify(regionData);
-        this.service.createVc(this.selectedRegion, payload)
+        this.service.createVc(this.selectedRegion, this.newVcName)
             .subscribe(function (response) {
-            var data = JSON.parse(response.json()['data']['data']);
-            _this.isVcAdded = true;
-            _this.isVcAddError = false;
+            var resJson = response.json();
+            var data = resJson['data'];
+            if (data) {
+                data = JSON.parse(data);
+                if (data['data']['key'] === 'add-vc-error' || data['data']['key'] === 'cons-vc-error') {
+                    _this.isVcAdded = false;
+                    _this.isVcAdding = false;
+                    _this.isVcAddError = true;
+                }
+                if (data['data']['key'] === 'vc-create-success') {
+                    _this.isVcAdded = true;
+                    _this.isVcAdding = false;
+                    _this.isVcAddError = false;
+                }
+            }
         }, function (error) {
             console.log('error in adding vc', error);
             _this.isVcAdded = false;
+            _this.isVcAdding = false;
             _this.isVcAddError = true;
         });
     };
@@ -856,7 +860,7 @@ CreateVmModule = __decorate([
 /***/ "../../../../../src/app/delete-vm/delete-vm.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <alert type=\"success\" *ngIf=\"isVmDeleted\">\n      <strong>VM is deleted successfully.</strong>\n  </alert>\n  <alert type=\"info\" *ngIf=\"isVmDeleting\">\n      <strong>VM is being deleted.</strong>\n  </alert>\n  <alert type=\"danger\" *ngIf=\"isVmDeleteError\">\n      <strong>Error in deleting VM.</strong>\n  </alert>\n  <div class=\"col-sm-6\">\n      <form class=\"form-horizontal\" role=\"form\" #vmForm=\"ngForm\">\n          <div class=\"form-group\">\n              <label class=\"col-sm-4 control-label\">* VM Name\n              </label>\n              <div class=\"col-sm-8\">\n                  <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL MACHINE NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"machineName\"\n                      name=\"name\" #name=\"ngModel\">\n                  <div *ngIf=\"isPreview\">{{ machineName || '---' }}</div>\n              </div>\n          </div>\n          <div class=\"form-group\">\n              <label class=\"col-sm-4 control-label\">* VC Name</label>\n              <div class=\"col-sm-8\">\n                <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL CENTER NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"vcName\"\n                    name=\"vcNameInput\" #vcNameInput=\"ngModel\">\n                <div *ngIf=\"isPreview\">{{ vcName || '---' }}</div>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n              <label class=\"col-sm-4 control-label\">Email Address </label>\n              <div class=\"col-sm-8\">\n                  <input type=\"text\" class=\"form-control\" placeholder=\"EMAIL\" [(ngModel)]=\"email\" *ngIf=\"!isPreview\" name=\"emailString\" #emailString=\"ngModel\">\n                  <div *ngIf=\"isPreview\">\n                    {{ userEmail }}\n                    <span *ngIf=\"email !== ''\">\n                        , {{ this.email }}\n                    </span>\n                </div>\n                <div class=\"text-muted\" *ngIf=\"!isPreview\">User's email :- {{ userEmail }}</div>\n              </div>\n          </div>\n          <div class=\"form-group\">\n              <div class=\"col-sm-offset-4 col-sm-8\">\n                  <button type=\"button\" class=\"btn btn-default\" *ngIf=\"! isPreview\" (click)=\"isPreview = true\" [disabled]=\"vmForm.invalid\">Next</button>\n              </div>\n              <div class=\"col-sm-offset-4 col-sm-8\">\n                  <button type=\"button\" class=\"btn btn-default\" *ngIf=\"isPreview && showSubmit\" (click)=\"onSubmit()\">Submit</button>\n                  <button type=\"button\" class=\"btn btn-default\" style=\"margin-left: 10px\" *ngIf=\"isPreview && showSubmit\"\n                      (click)=\"isPreview = false\">Back</button>\n              </div>\n          </div>\n      </form>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n    <alert type=\"success\" *ngIf=\"isVmDeleted\">\n        <strong>VM is deleted successfully.</strong>\n    </alert>\n    <alert type=\"info\" *ngIf=\"isVmTriggered\">\n        <strong>VM is triggered for deletion.</strong>\n    </alert>\n    <alert type=\"info\" *ngIf=\"isVmPending\">\n        <strong>VM deletion is pending.</strong>\n    </alert>\n    <alert type=\"info\" *ngIf=\"isVmRunning\">\n        <strong>VM deletion is running.</strong>\n    </alert>\n    <alert type=\"danger\" *ngIf=\"isVmDeleteError\">\n        <strong>Error in deleting VM.</strong>\n    </alert>\n    <div class=\"col-sm-6\">\n        <form class=\"form-horizontal\" role=\"form\" #vmForm=\"ngForm\">\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* VM Name\n                </label>\n                <div class=\"col-sm-8\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL MACHINE NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"machineName\"\n                        name=\"name\" #name=\"ngModel\">\n                    <div *ngIf=\"isPreview\">{{ machineName || '---' }}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">* VC Name</label>\n                <div class=\"col-sm-8\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"VIRTUAL CENTER NAME\" required *ngIf=\"!isPreview\" [(ngModel)]=\"vcName\"\n                        name=\"vcNameInput\" #vcNameInput=\"ngModel\">\n                    <div *ngIf=\"isPreview\">{{ vcName || '---' }}</div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label class=\"col-sm-4 control-label\">Email Address </label>\n                <div class=\"col-sm-8\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"EMAIL\" [(ngModel)]=\"email\" *ngIf=\"!isPreview\" name=\"emailString\" #emailString=\"ngModel\">\n                    <div *ngIf=\"isPreview\">\n                        {{ userEmail }}\n                        <span *ngIf=\"email !== ''\">\n                            , {{ this.email }}\n                        </span>\n                    </div>\n                    <div class=\"text-muted\" *ngIf=\"!isPreview\">User's email :- {{ userEmail }}</div>\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <div class=\"col-sm-offset-4 col-sm-8\">\n                    <button type=\"button\" class=\"btn btn-default\" *ngIf=\"! isPreview\" (click)=\"isPreview = true\" [disabled]=\"vmForm.invalid\">Next</button>\n                </div>\n                <div class=\"col-sm-offset-4 col-sm-8\">\n                    <button type=\"button\" class=\"btn btn-default\" *ngIf=\"isPreview && showSubmit\" (click)=\"onSubmit()\">Submit</button>\n                    <button type=\"button\" class=\"btn btn-default\" style=\"margin-left: 10px\" *ngIf=\"isPreview && showSubmit\" (click)=\"isPreview = false\">Back</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -907,7 +911,9 @@ var DeleteVmComponent = (function () {
         this.email = '';
         this.userEmail = '';
         this.isPreview = false;
-        this.isVmDeleting = false;
+        this.isVmTriggered = false;
+        this.isVmPending = false;
+        this.isVmRunning = false;
         this.isVmDeleted = false;
         this.isVmDeleteError = false;
         this.showSubmit = true;
@@ -923,7 +929,9 @@ var DeleteVmComponent = (function () {
     DeleteVmComponent.prototype.onSubmit = function () {
         var _this = this;
         this.showSubmit = false;
-        this.isVmDeleting = true;
+        this.isVmTriggered = true;
+        this.isVmPending = false;
+        this.isVmRunning = false;
         this.isVmDeleted = false;
         this.isVmDeleteError = false;
         this.service.getDeleteVmLaunchId()
@@ -937,9 +945,11 @@ var DeleteVmComponent = (function () {
                 }
             }
         }, function (error) {
-            console.log('error in fetch delete launch id', error.json());
+            console.log('error in fetch delete launch id', error);
+            _this.isVmTriggered = false;
+            _this.isVmPending = false;
+            _this.isVmRunning = false;
             _this.isVmDeleted = false;
-            _this.isVmDeleting = false;
             _this.isVmDeleteError = true;
         });
     };
@@ -963,15 +973,22 @@ var DeleteVmComponent = (function () {
                 var resJson = response.json();
                 var data = resJson['data'];
                 if (data) {
+                    data = JSON.parse(data);
                     _this.deleteVmJobId = data['job'];
                     _this.pollForJobStatus();
                 }
+                _this.isVmTriggered = true;
+                _this.isVmPending = false;
+                _this.isVmRunning = false;
+                _this.isVmDeleted = false;
+                _this.isVmDeleteError = false;
             }
-            _this.isVmDeleting = true;
         }, function (error) {
-            console.log('error in delete vm', error.json());
+            console.log('error in delete vm', error);
+            _this.isVmTriggered = false;
+            _this.isVmPending = false;
+            _this.isVmRunning = false;
             _this.isVmDeleted = false;
-            _this.isVmDeleting = false;
             _this.isVmDeleteError = true;
         });
     };
@@ -991,19 +1008,32 @@ var DeleteVmComponent = (function () {
                     if (status) {
                         status = status.toLowerCase();
                         if (status === 'successful') {
+                            _this.isVmTriggered = false;
+                            _this.isVmPending = false;
+                            _this.isVmRunning = false;
                             _this.isVmDeleted = true;
-                            _this.isVmDeleting = false;
                             _this.isVmDeleteError = false;
                             _this.clearIntervalReference();
                         }
-                        else if (status === 'pending' || status === 'running') {
+                        else if (status === 'pending') {
+                            _this.isVmTriggered = false;
+                            _this.isVmPending = true;
+                            _this.isVmRunning = false;
                             _this.isVmDeleted = false;
-                            _this.isVmDeleting = true;
+                            _this.isVmDeleteError = false;
+                        }
+                        else if (status === 'running') {
+                            _this.isVmTriggered = false;
+                            _this.isVmPending = false;
+                            _this.isVmRunning = true;
+                            _this.isVmDeleted = false;
                             _this.isVmDeleteError = false;
                         }
                         else if (status === 'failed') {
+                            _this.isVmTriggered = false;
+                            _this.isVmPending = false;
+                            _this.isVmRunning = false;
                             _this.isVmDeleted = false;
-                            _this.isVmDeleting = false;
                             _this.isVmDeleteError = true;
                             _this.clearIntervalReference();
                         }
@@ -1011,8 +1041,10 @@ var DeleteVmComponent = (function () {
                 }
             }
         }, function (error) {
-            console.log('error in fetch job status for create vm', error.json());
-            _this.isVmDeleting = false;
+            console.log('error in fetch job status for create vm', error);
+            _this.isVmTriggered = false;
+            _this.isVmPending = false;
+            _this.isVmRunning = false;
             _this.isVmDeleted = false;
             _this.isVmDeleteError = true;
         });
@@ -1441,10 +1473,10 @@ var AppService = (function () {
     AppService.prototype.getOsData = function () {
         return this.http.get(this.host + '/data/os');
     };
-    AppService.prototype.createVc = function (location, data) {
+    AppService.prototype.createVc = function (location, newVcName) {
         var obj = {
             location: location,
-            data: data
+            vcname: newVcName
         };
         return this.http.post(this.host + '/create-vc', obj);
     };

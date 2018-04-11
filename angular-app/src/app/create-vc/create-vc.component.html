@@ -2,6 +2,9 @@
   <alert type="success" *ngIf="isVcAdded">
     <strong>New VC <b>{{ newVcName }}</b> added successfully.</strong>
   </alert>
+  <alert type="info" *ngIf="isVcAdding">
+    <strong>New VC <b>{{ newVcName }}</b> is being added.</strong>
+  </alert>
   <alert type="danger" *ngIf="isVcAddError">
     <strong>Error in adding VC.</strong>
   </alert>
