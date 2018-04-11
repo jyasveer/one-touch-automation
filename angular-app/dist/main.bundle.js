@@ -576,6 +576,7 @@ var CreateVmComponent = (function () {
                 var resJson = response.json();
                 var data = resJson['data'];
                 if (data) {
+                    data = JSON.parse(data);
                     _this.createVmJobId = data['job'];
                     _this.pollForJobStatus();
                 }
