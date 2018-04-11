@@ -167,8 +167,9 @@ export class CreateVmComponent implements OnInit {
         .subscribe((response) => {
             if (response) {
                 const resJson = response.json();
-                const data = resJson['data'];
+                let data = resJson['data'];
                 if (data) {
+                    data = JSON.parse(data);
                     this.createVmJobId = data['job'];
                     this.pollForJobStatus();
                 }
