@@ -374,7 +374,7 @@ app.get('/job/status/:id', (req, res) => {
   var cmd = "curl -s -k -u " + curl_username + ":" + curl_password + " -X GET -H \'Content-Type: application/json\'";
   var url = " https://p-ansible-tower01.juniper.net/";
   var api = "api/v1/jobs/";
-  var curl_req = cmd + url + api + id;
+  var curl_req = cmd + url + api + id + '/';
 
   exec(curl_req, function (err, stdout) {
     if (err) {

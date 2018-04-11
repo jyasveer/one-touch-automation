@@ -2,8 +2,14 @@
     <alert type="success" *ngIf="isVmCreated">
         <strong>VM is created successfully.</strong>
     </alert>
-    <alert type="info" *ngIf="isVmCreating">
-        <strong>VM is being created.</strong>
+    <alert type="info" *ngIf="isVmTriggered">
+        <strong>VM is triggered for creation.</strong>
+    </alert>
+    <alert type="info" *ngIf="isVmPending">
+        <strong>VM creation is pending.</strong>
+    </alert>
+    <alert type="info" *ngIf="isVmRunning">
+        <strong>VM creation is running.</strong>
     </alert>
     <alert type="danger" *ngIf="isVmCreateError">
         <strong>Error in creating VM.</strong>
