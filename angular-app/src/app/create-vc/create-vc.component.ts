@@ -67,15 +67,14 @@ export class CreateVcComponent implements OnInit {
     this.service.createVc(this.selectedRegion, this.newVcName)
       .subscribe((response: Response) => {
         const resJson = response.json();
-        let data = resJson['data'];
+        const data = resJson['data'];
         if (data) {
-          data = JSON.parse(data);
-          if (data['data']['key'] === 'add-vc-error' || data['data']['key'] === 'cons-vc-error') {
+          if (data['key'] === 'add-vc-error' || data['key'] === 'cons-vc-error') {
             this.isVcAdded = false;
             this.isVcAdding = false;
             this.isVcAddError = true;
           }
-          if (data['data']['key'] === 'vc-create-success') {
+          if (data['key'] === 'vc-create-success') {
             this.isVcAdded = true;
             this.isVcAdding = false;
             this.isVcAddError = false;
