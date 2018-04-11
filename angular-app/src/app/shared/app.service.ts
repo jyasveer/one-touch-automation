@@ -70,7 +70,7 @@ export class AppService {
     }
 
     getJobStatus(jobId: string) {
-        return this.http.get(this.host + 'job/status/' + jobId);
+        return this.http.get(this.host + '/job/status/' + jobId);
     }
 
     private extractData(response: Response): any {
