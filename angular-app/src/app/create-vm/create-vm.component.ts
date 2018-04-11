@@ -40,7 +40,9 @@ export class CreateVmComponent implements OnInit {
     userEmail: string;
     incNumber: string;
     isPreview = false;
-    isVmCreating = false;
+    isVmTriggered = false;
+    isVmPending = false;
+    isVmRunning = false;
     isVmCreated = false;
     isVmCreateError = false;
     showSubmit = true;
@@ -122,7 +124,9 @@ export class CreateVmComponent implements OnInit {
     onSubmit() {
         this.showSubmit = false;
         this.isVmCreated = false;
-        this.isVmCreating = true;
+        this.isVmTriggered = true;
+        this.isVmPending = false;
+        this.isVmRunning = false;
         this.isVmCreateError = false;
         this.service.getCreateVmLaunchId()
         .subscribe((response) => {
@@ -135,9 +139,11 @@ export class CreateVmComponent implements OnInit {
                 }
             }
         }, (error: Response) => {
-            console.log('error in fetching create vm launch id', error.json());
-            this.isVmCreating = false;
+            console.log('error in fetching create vm launch id', error);
             this.isVmCreated = false;
+            this.isVmTriggered = false;
+            this.isVmPending = false;
+            this.isVmRunning = false;
             this.isVmCreateError = true;
         });
     }
@@ -174,11 +180,17 @@ export class CreateVmComponent implements OnInit {
                     this.pollForJobStatus();
                 }
             }
-            this.isVmCreating = true;
+            this.isVmCreated = false;
+            this.isVmTriggered = true;
+            this.isVmPending = false;
+            this.isVmRunning = false;
+            this.isVmCreateError = false;
         }, (error: Response) => {
             console.log('error in create vm', error.json());
-            this.isVmCreating = false;
             this.isVmCreated = false;
+            this.isVmTriggered = false;
+            this.isVmPending = false;
+            this.isVmRunning = false;
             this.isVmCreateError = true;
         });
     }
@@ -193,23 +205,36 @@ export class CreateVmComponent implements OnInit {
         .subscribe((response) => {
             if (response) {
                 const resJson = response.json();
-                const data = resJson['data'];
+                let data = resJson['data'];
                 if (data) {
+                    data = JSON.parse(data);
                     let status: string = data['status'];
                     if (status) {
                         status = status.toLowerCase();
                         if (status === 'successful') {
                             this.isVmCreated = true;
-                            this.isVmCreating = false;
+                            this.isVmTriggered = false;
+                            this.isVmPending = false;
+                            this.isVmRunning = false;
                             this.isVmCreateError = false;
                             this.clearIntervalReference();
-                        } else if (status === 'pending' || status === 'running') {
+                        } else if (status === 'pending') {
                             this.isVmCreated = false;
-                            this.isVmCreating = true;
+                            this.isVmTriggered = false;
+                            this.isVmPending = true;
+                            this.isVmRunning = false;
+                            this.isVmCreateError = false;
+                        } else if (status === 'running') {
+                            this.isVmCreated = false;
+                            this.isVmTriggered = false;
+                            this.isVmPending = false;
+                            this.isVmRunning = true;
                             this.isVmCreateError = false;
                         } else if (status === 'failed') {
                             this.isVmCreated = false;
-                            this.isVmCreating = false;
+                            this.isVmTriggered = false;
+                            this.isVmPending = false;
+                            this.isVmRunning = false;
                             this.isVmCreateError = true;
                             this.clearIntervalReference();
                         }
@@ -217,9 +242,11 @@ export class CreateVmComponent implements OnInit {
                 }
             }
         }, (error: Response) => {
-            console.log('error in fetch job status for create vm', error.json());
-            this.isVmCreating = false;
+            console.log('error in fetch job status for create vm', error);
             this.isVmCreated = false;
+            this.isVmTriggered = false;
+            this.isVmPending = false;
+            this.isVmRunning = false;
             this.isVmCreateError = true;
         });
     }
