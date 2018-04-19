@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppService } from '../shared/app.service';
@@ -8,7 +8,7 @@ import { AppService } from '../shared/app.service';
     styleUrls: ['./login.component.scss'],
     templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     username: string;
     password: string;
     isCredentialsWrong = false;
@@ -16,6 +16,12 @@ export class LoginComponent {
 
     constructor(private router: Router,
         private service: AppService) {}
+
+    ngOnInit() {
+        if (this.service.loggedInUser && !this.service.loggedInUser.username) {
+            this.router.navigate(['login']);
+        }
+    }
 
     submit() {
         this.service.authenticate(this.username, this.password)
@@ -39,6 +45,11 @@ export class LoginComponent {
         }, (error: Response) => {
             console.log(error.json());
             this.isLoginError = true;
+            const user = {
+                username: undefined,
+                isLoggedIn: false
+            };
+            this.service.loggedInUser = user;
         });
     }
 }

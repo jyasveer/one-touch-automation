@@ -299,13 +299,12 @@ var CreateVcComponent = (function () {
             var resJson = response.json();
             var data = resJson['data'];
             if (data) {
-                data = JSON.parse(data);
-                if (data['data']['key'] === 'add-vc-error' || data['data']['key'] === 'cons-vc-error') {
+                if (data['key'] === 'add-vc-error' || data['key'] === 'cons-vc-error') {
                     _this.isVcAdded = false;
                     _this.isVcAdding = false;
                     _this.isVcAddError = true;
                 }
-                if (data['data']['key'] === 'vc-create-success') {
+                if (data['key'] === 'vc-create-success') {
                     _this.isVcAdded = true;
                     _this.isVcAdding = false;
                     _this.isVcAddError = false;
@@ -1344,6 +1343,11 @@ var LoginComponent = (function () {
         this.isCredentialsWrong = false;
         this.isLoginError = false;
     }
+    LoginComponent.prototype.ngOnInit = function () {
+        if (this.service.loggedInUser && !this.service.loggedInUser.username) {
+            this.router.navigate(['login']);
+        }
+    };
     LoginComponent.prototype.submit = function () {
         var _this = this;
         this.service.authenticate(this.username, this.password)
@@ -1368,6 +1372,11 @@ var LoginComponent = (function () {
         }, function (error) {
             console.log(error.json());
             _this.isLoginError = true;
+            var user = {
+                username: undefined,
+                isLoggedIn: false
+            };
+            _this.service.loggedInUser = user;
         });
     };
     return LoginComponent;
